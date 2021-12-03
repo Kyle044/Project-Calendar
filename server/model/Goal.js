@@ -6,11 +6,18 @@ const goalSchema = new Schema(
   {
     Subject: String,
     Description: String,
-    StartDate: Date,
-    DueDate: Date,
+    StartDate: String,
+    DueDate: String,
     Status: String,
     Priority: String,
     percentageComplete: Number,
+    Files: [
+      {
+        FileName: String,
+        Directory: String,
+        Size: Number
+      }
+    ],
     Tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
     Owner: String
   },

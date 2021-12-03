@@ -6,8 +6,8 @@ const taskSchema = new Schema(
   {
     Subject: String,
     Description: String,
-    startDate: Date,
-    dueDate: Date,
+    startDate: String,
+    dueDate: String,
     Handler: String,
     Status: String
   },

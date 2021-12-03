@@ -22,10 +22,14 @@ const adminRouter = require("./routes/AdminRouter");
 const registrarRouter = require("./routes/registrarClientRouter");
 const studentRouter = require("./routes/StudentRouter");
 const goalRouter = require("./routes/goalRouter");
+const fileRouter = require("./routes/FileRouter");
+const reqRouter = require("./routes/requestRouter");
 app.use("/api", adminRouter);
 app.use("/api", studentRouter);
 app.use("/api", registrarRouter);
 app.use("/api", goalRouter);
+app.use("/api", fileRouter);
+app.use("/api", reqRouter);
 app.listen(port, () => {
   console.log("Server Runs on Port : " + port);
 });

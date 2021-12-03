@@ -13,31 +13,35 @@ exports.Register = (req, res) => {
   const year = req.body.Year;
 
   if (!Email || !Password || !FullName || !schoolnum || !course || !year) {
-    res.status(422).json({ msg: "Please Enter All Fields" });
-  }
-  Student.findOne({ Email: Email })
-    .then((Student) => {
-      if (Student) {
-        res.json({ msg: "There is an Existing Account" });
-      }
-    })
-    .catch((err) => res.status(400).json("The Error is : " + err));
-  bcrypt.hash(Password, 12).then((hashedpassword) => {
-    const newAdmin = new Student({
-      Email,
-      Password: hashedpassword,
-      Fullname: FullName,
-      SchoolIDNumber: schoolnum,
-      Course: course,
-      Year: year
+    return res.status(422).json({ msg: "Please Enter All Fields" });
+  } else {
+    Student.findOne({ Email: Email })
+      .then((Student) => {
+        if (Student) {
+          return res.json({ msg: "There is an Existing Account" });
+        }
+      })
+      .catch((err) => {
+        return res.status(400).json("The Error is : " + err);
+      });
+
+    bcrypt.hash(Password, 12).then((hashedpassword) => {
+      const newAdmin = new Student({
+        Email: Email,
+        Password: hashedpassword,
+        Fullname: FullName,
+        SchoolIDNumber: schoolnum,
+        Course: course,
+        Year: year
+      });
+      newAdmin
+        .save()
+        .then((reg) => res.json({ msg: "Student Added", data: reg }))
+        .catch((err) =>
+          res.status(400).json({ msg: "Error Posting a Data : " + err })
+        );
     });
-    newAdmin
-      .save()
-      .then((reg) => res.json({ msg: "Student Added", data: reg }))
-      .catch((err) =>
-        res.status(400).json({ msg: "Error Posting a Data : " + err })
-      );
-  });
+  }
 };
 
 exports.protected = (req, res) => {
@@ -50,7 +54,7 @@ exports.Signin = (req, res) => {
   Student.findOne({ Email: Email })
     .then((reg) => {
       if (!reg) {
-        res.status(402).json("Please Enter The Right Email");
+        return res.status(402).json("Please Enter The Right Email");
       }
       bcrypt
         .compare(Password, reg.Password)

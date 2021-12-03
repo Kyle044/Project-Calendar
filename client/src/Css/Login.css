@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: hidden;
+  background-color: #ff5c58;
 }
 
 .loginDiv {
@@ -17,8 +19,11 @@
   justify-content: space-evenly;
   align-items: center;
   transition: 0.5s ease;
+  background-color: #eeeeee;
 }
-
+.loginDiv input {
+  width: 16rem;
+}
 .goToRegister {
   transform: translateX(100vw);
 }
@@ -27,6 +32,7 @@
 }
 .btn {
   display: flex;
+  flex-wrap: wrap;
 }
 .btn button {
   margin: 4px;
@@ -37,20 +43,35 @@
   -webkit-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
   -moz-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
   border-radius: 20px;
-  height: 70%;
-  width: 40%;
+  height: 90%;
+  width: 80%;
   display: flex;
-  flex-direction: column;
+
   justify-content: space-evenly;
   align-items: center;
   transition: 0.5s ease;
   left: -100vw;
+  background-color: #eeeeee;
+}
+.regDiv img {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+.regDiv .form {
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
+}
+.regDiv .form h3 {
+  padding-left: 1em;
 }
 .regDiv input {
   padding: 10px;
 }
 .showReg {
-  left: 28vw;
+  left: 10vw;
 }
 .prof {
   display: flex;
@@ -71,10 +92,120 @@
 }
 .cont {
   display: flex;
+  flex-wrap: wrap;
 }
 .btnDiv {
   display: flex;
+  padding-left: 0.5em;
 }
 .btnDiv button {
   margin: 5px;
+}
+@media (max-width: 839px) {
+  .loginDiv input {
+    width: 10rem;
+  }
+  .btn {
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 515px) {
+  .loginDiv input {
+    width: 7rem;
+  }
+  .loginDiv .p {
+    font-size: 5em;
+  }
+  .btn {
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 442px) {
+  .loginDiv {
+    width: 25rem;
+  }
+  .loginDiv input {
+    width: 20rem;
+  }
+}
+@media (max-width: 1013px) {
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form {
+    width: 35rem;
+  }
+  .regDiv .form h3 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 483px) {
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50rem;
+  }
+  .regDiv .form {
+    width: 20rem;
+  }
+  .regDiv .form button {
+    width: 9rem;
+    font-size: 0.7em;
+  }
+  .regDiv .form input {
+    width: 17rem;
+  }
+  .regDiv .form h3 {
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 579px) {
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 53rem;
+
+    overflow: hidden;
+  }
+  .regDiv .form {
+    width: 35rem;
+  }
+  .regDiv .form h3 {
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

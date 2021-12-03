@@ -1,0 +1,60 @@
+.Footer {
+  background: #ff5c58;
+  display: flex;
+  height: auto;
+  padding: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color: black;
+  font-weight: 600;
+}
+
+.Footer div {
+  display: flex;
+  width: 30%;
+  min-width: 300px;
+  margin: 1rem;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+}
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+}
+
+.about h3 {
+  color: #ffe331;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px #000000;
+  padding: 5px;
+}
+
+.contact h3 {
+  color: #ffe331;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 5px;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.about p {
+  padding: 5px;
+}
+
+.contact p {
+  padding: 5px;
+}
+.bottomSection {
+  width: 100%;
+  background-color: #ffe331;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.bottomSection h4 {
+  font-weight: bolder;
+}

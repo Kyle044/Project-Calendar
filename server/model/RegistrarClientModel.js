@@ -8,7 +8,8 @@ const registrarSchema = new Schema(
     Password: String,
     Fullname: String,
     SchoolIDNumber: String,
-    Tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }]
+    Tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
+    Auth: { type: String, default: "registrar" }
   },
   { timestamps: true }
 );

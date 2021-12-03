@@ -9,7 +9,8 @@ const studentSchema = new Schema(
     Fullname: String,
     SchoolIDNumber: String,
     Course: String,
-    Year: String
+    Year: String,
+    Auth: { type: String, default: "student" }
   },
   { timestamps: true }
 );

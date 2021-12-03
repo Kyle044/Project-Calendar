@@ -8,6 +8,7 @@ const adminSchema = new Schema(
     Password: String,
     Fullname: String,
     SchoolIDNumber: String,
+    Auth: { type: String, default: "admin" }
   },
   { timestamps: true }
 );
