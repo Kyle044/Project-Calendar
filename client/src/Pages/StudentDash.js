@@ -116,7 +116,14 @@ function StudentDash({ history }) {
                 <h3>Frequently Asked Questions</h3>
               </div>
               <div className="cardBtn">
-                <Button danger>Read</Button>
+                <Button
+                  danger
+                  onClick={() => {
+                    history.push("/FAQStudPage");
+                  }}
+                >
+                  Read
+                </Button>
               </div>
             </div>
             <div className="card">
@@ -127,7 +134,14 @@ function StudentDash({ history }) {
                 <h3>Forms To Download</h3>
               </div>
               <div className="cardBtn">
-                <Button danger>Download</Button>
+                <Button
+                  danger
+                  onClick={() => {
+                    history.push("/FormStudPage");
+                  }}
+                >
+                  Preview
+                </Button>
               </div>
             </div>
 

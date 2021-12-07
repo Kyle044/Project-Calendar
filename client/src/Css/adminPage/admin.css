@@ -1,0 +1,35 @@
+.chartDiv {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #ff5c58;
+}
+
+.chartDiv div {
+  width: 25%;
+  height: 25%;
+  min-width: 230px;
+}
+.chartDiv div h1 {
+  font-weight: bold;
+}
+
+.chartDiv div p {
+  font-weight: bold;
+}
+
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.schedDiv {
+  padding: 1rem;
+  height: 50vh;
+  width: 100vw;
+}
+
+.schedDiv,
+.fc-media-screen {
+}

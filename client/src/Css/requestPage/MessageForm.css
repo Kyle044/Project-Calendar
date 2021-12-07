@@ -1,0 +1,22 @@
+form {
+  display: flex;
+  justify-content: center;
+
+  flex-direction: column;
+}
+label {
+  margin: 5px;
+}
+input {
+  padding: 5px;
+  width: 80%;
+}
+textarea {
+  padding: 5px;
+  width: 80%;
+}
+
+button[type="submit"] {
+  margin-top: 5px;
+  width: 80%;
+}

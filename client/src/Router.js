@@ -5,6 +5,8 @@ import StudentDash from "./Pages/StudentDash";
 import Request from "./Pages/RequestForm";
 import Admin from "./Pages/Admin";
 import RequestPage from "./Pages/RequestPage";
+import FAQStud from "./Pages/FAQStud";
+import FormStud from "./Pages/FormStud";
 function Router() {
   return (
     <BrowserRouter>
@@ -14,6 +16,8 @@ function Router() {
         <Route path="/AdminDash" exact component={Admin} />
         <Route path="/Request" exact component={Request} />
         <Route path="/RequestPage" exact component={RequestPage} />
+        <Route path="/FAQStudPage" exact component={FAQStud} />
+        <Route path="/FormStudPage" exact component={FormStud} />
       </Switch>
     </BrowserRouter>
   );

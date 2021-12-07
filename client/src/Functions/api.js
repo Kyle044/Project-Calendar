@@ -26,3 +26,14 @@ export var verifyAdminToken = (token) => {
       return "There is an Error";
     });
 };
+
+export var deleteFile = (file) => {
+  return axios
+    .delete(`${process.env.REACT_APP_KEY}/deleteFile`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return "There is an Error";
+    });
+};

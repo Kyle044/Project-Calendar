@@ -27,3 +27,31 @@ exports.InsertFile = (req, res, next) => {
     bool: true
   });
 };
+
+exports.deleteFile = (req, res, next) => {
+  res.json("Deleted Successfully");
+};
+exports.InsertSingleFile = (req, res, next) => {
+  const newFile = new File({
+    FileName: req.file.filename,
+    Directory: req.file.path,
+    Size: req.file.size
+  });
+  newFile
+    .save()
+    .then((file) => {})
+    .catch((err) => {
+      res.json({
+        msg: "Failed",
+        error: "Error : " + err,
+        bool: false
+      });
+      next();
+    });
+
+  res.json({
+    msg: "Success",
+    file: req.file,
+    bool: true
+  });
+};

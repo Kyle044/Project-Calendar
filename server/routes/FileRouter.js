@@ -3,7 +3,11 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const multer = require("multer");
-const { InsertFile } = require("../controller/FileController");
+const {
+  InsertFile,
+  deleteFile,
+  InsertSingleFile
+} = require("../controller/FileController");
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "../client/public/uploads");
@@ -19,5 +23,7 @@ const upload = multer({
 });
 
 router.post("/insertMultipleFile", upload.array("files", 12), InsertFile);
+router.post("/insertFile", upload.single("file"), InsertSingleFile);
+router.delete("/deleteFile", deleteFile);
 
 module.exports = router;

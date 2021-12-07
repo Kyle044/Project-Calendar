@@ -194,7 +194,7 @@ function InsertGoal(props) {
   }, [refresh]);
   return (
     <div>
-      <Button type="primary" onClick={showGoalModal}>
+      <Button danger onClick={showGoalModal}>
         Add Goal
       </Button>
       <Modal
