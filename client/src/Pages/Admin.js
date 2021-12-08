@@ -1,13 +1,17 @@
 import { Skeleton } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 import OnGoingCalendar from "../Components/OnGoingCalendar";
 import { verifyAdminToken } from "../Functions/api";
+import FaqFrom from "../Components/FaqForm";
 import { Modal, Button } from "antd";
 import { Pie } from "@ant-design/charts";
 import InsertGoal from "../Components/InsertGoal";
 import _ from "lodash";
-function Admin() {
+import FileForm from "../Components/FileForm";
+import "../Css/adminPage/admin.css";
+function Admin({ history }) {
   const [admin, setAdmin] = useState(null);
   const [request, setRequest] = useState();
   const [requestCount, setRequestCount] = useState();
@@ -125,7 +129,7 @@ function Admin() {
       content: "{value}",
       style: {
         textAlign: "center",
-        fontSize: 14
+        fontSize: 18
       }
     },
     interactions: [
@@ -142,7 +146,8 @@ function Admin() {
         style: {
           whiteSpace: "pre-wrap",
           overflow: "hidden",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          fontSize: 12
         },
         content: `Goal : ${goalCount}`
       }
@@ -181,7 +186,7 @@ function Admin() {
       content: "{value}",
       style: {
         textAlign: "center",
-        fontSize: 14
+        fontSize: 18
       }
     },
     interactions: [
@@ -198,7 +203,8 @@ function Admin() {
         style: {
           whiteSpace: "pre-wrap",
           overflow: "hidden",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          fontSize: 12
         },
         content: `Requests : ${requestCount}`
       }
@@ -211,11 +217,96 @@ function Admin() {
     <div>
       {admin ? (
         <div>
-          <h1>Admin Dash</h1>
-          <Pie {...config} />
-          <Pie {...confige} />
-          <InsertGoal setGoal={setGoal} setGoalCount={setGoalCount} />
-          <OnGoingCalendar goal={goal} />
+          <div className="chartDiv">
+            <div className="adminContainer">
+              <h1>Hello Admin</h1>
+              <p>Good Morning and have a nice day!</p>
+            </div>
+            <Pie {...config} autoFit={true} />
+            <Pie {...confige} autoFit={true} />
+          </div>
+
+          <div className="section3">
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/document.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Goal Schedule</h3>
+              </div>
+              <div className="cardBtn">
+                <InsertGoal setGoal={setGoal} setGoalCount={setGoalCount} />
+              </div>
+            </div>
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/light-bulb.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Requests</h3>
+              </div>
+              <div className="cardBtn">
+                <Button
+                  danger
+                  onClick={() => {
+                    history.push("/RequestPage");
+                  }}
+                >
+                  Preview
+                </Button>
+              </div>
+            </div>
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/downloadfile.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Request & Goal History</h3>
+              </div>
+              <div className="cardBtn">
+                <Button danger>Download</Button>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/school.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Post Advisory</h3>
+              </div>
+              <div className="cardBtn">
+                <Button danger>Read</Button>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/guide.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Post Form</h3>
+              </div>
+              <div className="cardBtn">
+                <FileForm />
+              </div>
+            </div>
+            <div className="card">
+              <div className="cardHeader">
+                <img src="./images/cabinet.png" alt="" />
+              </div>
+              <div className="cardDescript">
+                <h3>Post Frequently Asked Question</h3>
+              </div>
+              <div className="cardBtn">
+                <FaqFrom />
+              </div>
+            </div>
+          </div>
+          <div className="schedDiv">
+            <OnGoingCalendar goal={goal} />
+          </div>
+
           <div></div>
         </div>
       ) : (
@@ -225,4 +316,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default withRouter(Admin);
