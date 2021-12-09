@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Skeleton } from "antd";
 import { Collapse } from 'antd';
+import { Button } from 'antd';
 import "../pCss/FAQStud.css";
 // import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
@@ -24,20 +25,27 @@ function callback(key) {
 }
   return (
     <div className="MC">
+
+
       <div className="mHeader">
-       
-        <img src="./images/school.png" alt=""className="imglogo"/> 
-      
+
+
+     
+        {/* <img src="./images/logotry.png" alt=""style={{maxHeight: "10%", maxWidth: "10%",objectFit:"contain"}}/>  */}
+        
         <div className="CC2">
-            <p style={{color:"white", fontSize:"0.8em",}}>Eulogio "Amang" Rodriguez Institute of Science and Technology </p>      
+            <p className="School">Eulogio "Amang" Rodriguez Institute of Science and Technology </p>      
            <h2 className="title">OFFICE OF THE REGISTRAR</h2>
-           <p style={{color:"white", marginTop:"-1rem",fontSize:"0.7em"}}>General Mariano Alvarez, Cavite </p>      
+           <p className="address">General Mariano Alvarez, Cavite </p>      
         </div>
     
       </div>
-      <h2 className="header"><b>FAQ</b> Frequently asked questions to the Office of the Registrar.</h2>
+
+
+
+      <h2 className="header"><span style={{fontWeight:"bold",fontSize:"2rem"}}>FAQ</span><span style={{color:"grey", fontWeight:"bold"}}> Frequently asked questions to the Office of the Registrar</span>.</h2>
 <div className="cd">
-      
+    
       {faq ? (
         <div  className="FAQ">
           <Collapse defaultActiveKey={['1']} onChange={callback}>
@@ -62,11 +70,31 @@ function callback(key) {
       ) : (
         <Skeleton />
       )}
-       
        </div>
-       {/* <div className="leftsidebar">
+    
+       <div className="mainContainer2">
+         <div className="div1">
+           <div className="MD">
+        
+         <img src="./images/guide.png" alt="" style={{width:"7%"}}/>
+       
+         <h3 className="text">Request Guide</h3>
+        
+       
+         </div>
+         <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
+         <div>
+           <Button>Request now</Button>
+         </div>
+         </div>
+
+
+
+         <div className="div2">b</div>
+         <div className="div3">c</div>
+       </div>
+     
       
-      </div> */}
     </div>
   );
 }
