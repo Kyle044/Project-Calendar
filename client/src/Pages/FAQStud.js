@@ -42,8 +42,9 @@ function callback(key) {
       </div>
 
 
-
-      <h2 className="header"><span style={{fontWeight:"bold",fontSize:"2rem"}}>FAQ</span><span style={{color:"grey", fontWeight:"bold"}}> Frequently asked questions to the Office of the Registrar</span>.</h2>
+<div style={{textAlign:"center"}}>
+      <h2 className="header"><span className="spanfaq">FAQ</span><span style={{color:"grey", fontWeight:"bold"}}> Frequently asked questions to the Office of the Registrar</span>.</h2>
+      </div>
 <div className="cd">
     
       {faq ? (
@@ -73,10 +74,12 @@ function callback(key) {
        </div>
     
        <div className="mainContainer2">
+
+
          <div className="div1">
            <div className="MD">
         
-         <img src="./images/guide.png" alt="" style={{width:"7%"}}/>
+         <img src="./images/guide.png" alt="" style={{width:"50px"}}/>
        
          <h3 className="text">Request Guide</h3>
         
@@ -90,8 +93,34 @@ function callback(key) {
 
 
 
-         <div className="div2">b</div>
-         <div className="div3">c</div>
+         <div className="div2">
+         <div className="MD">
+        
+        <img src="./images/document.png" alt="" style={{width:"50px"}}/>
+      
+        <h3 className="text">Online Request Student Records</h3>
+       
+      
+        </div>
+        <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
+        <div>
+          <Button>Request now</Button>
+        </div>
+         </div>
+         <div className="div3">
+         <div className="MD">
+        
+        <img src="./images/school.png" alt="" style={{width:"50px"}}/>
+      
+        <h3 className="text">About the registrar</h3>
+       
+      
+        </div>
+        <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
+        <div>
+          <Button>Request now</Button>
+        </div>
+         </div>
        </div>
      
       
