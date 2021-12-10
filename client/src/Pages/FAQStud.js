@@ -96,9 +96,9 @@ function callback(key) {
          <div className="div2">
          <div className="MD">
         
-        <img src="./images/document.png" alt="" style={{width:"50px"}}/>
+        <img src="./images/document.png" alt="" style={{width:"50px"}} className="ddd"/>
       
-        <h3 className="text">Online Request Student Records</h3>
+        <h3 className="text">Request Student Records</h3>
        
       
         </div>
