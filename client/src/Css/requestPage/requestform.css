@@ -1,0 +1,20 @@
+.formdiv {
+  width: 95%;
+  /* background-color: brown; */
+  margin: auto;
+  margin-top: 2rem;
+  border: 1px solid black;
+}
+.headerTitle {
+  text-align: center;
+}
+.mainContainer {
+  /* background-color: chartreuse; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+/* .name {
+  width: 95%;
+} */

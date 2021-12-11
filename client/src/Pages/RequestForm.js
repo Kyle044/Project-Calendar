@@ -4,6 +4,8 @@ import axios from "axios";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { verifyToken } from "../Functions/api";
+import "../Css/requestPage/requestform.css";
+import Footer from "../Components/studentdashComponents/Footer";
 function Request() {
   const { TextArea } = Input;
 
@@ -78,13 +80,13 @@ function Request() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div className="mainContainer">
       {state.sender ? (
-        <div>
-          <h4>
+        <div className="formdiv">
+          <h2 className="headerTitle">
             Request includes the validation of school number so it is required
             to send a picture of an Identification Card.
-          </h4>
+          </h2>
           <form
             onSubmit={(e) => {
               formSubmit(e);
@@ -112,6 +114,9 @@ function Request() {
       ) : (
         <Skeleton />
       )}
+      
+      <Footer />
+      
     </div>
   );
 }
