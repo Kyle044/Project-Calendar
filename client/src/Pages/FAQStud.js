@@ -3,10 +3,13 @@ import axios from "axios";
 import { Skeleton } from "antd";
 import { Collapse } from 'antd';
 import { Button } from 'antd';
+import { withRouter } from 'react-router-dom';
 import "../pCss/FAQStud.css";
+import Header from "../Components/studentdashComponents/header";
+import Footer from "../Components/studentdashComponents/Footer";
 // import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
-function FAQStud() {
+function FAQStud({ history }) {
   const [faq, setFaq] = useState(null);
   useEffect(() => {
     axios
@@ -26,21 +29,9 @@ function callback(key) {
   return (
     <div className="MC">
 
-
-      <div className="mHeader">
-
-
-     
-        {/* <img src="./images/logotry.png" alt=""style={{maxHeight: "10%", maxWidth: "10%",objectFit:"contain"}}/>  */}
-        
-        <div className="CC2">
-            <p className="School">Eulogio "Amang" Rodriguez Institute of Science and Technology </p>      
-           <h2 className="title">OFFICE OF THE REGISTRAR</h2>
-           <p className="address">General Mariano Alvarez, Cavite </p>      
-        </div>
-    
-      </div>
-
+<div>
+<Header />
+</div>
 
 <div style={{textAlign:"center"}}>
       <h2 className="header"><span className="spanfaq">FAQ</span><span style={{color:"grey", fontWeight:"bold"}}> Frequently asked questions to the Office of the Registrar</span>.</h2>
@@ -87,7 +78,7 @@ function callback(key) {
          </div>
          <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
          <div>
-           <Button>Request now</Button>
+           <Button >Request now</Button>
          </div>
          </div>
 
@@ -104,7 +95,10 @@ function callback(key) {
         </div>
         <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
         <div>
-          <Button>Request now</Button>
+          <Button  danger
+                  onClick={() => {
+                    history.push("/Request");
+                  }}>Request now</Button>
         </div>
          </div>
          <div className="div3">
@@ -123,7 +117,7 @@ function callback(key) {
          </div>
        </div>
      
-      
+      <Footer />
     </div>
   );
 }

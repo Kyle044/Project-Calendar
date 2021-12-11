@@ -11,6 +11,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
+      
         <Route path="/" exact component={Home} />
         <Route path="/StudentDash" exact component={StudentDash} />
         <Route path="/AdminDash" exact component={Admin} />
