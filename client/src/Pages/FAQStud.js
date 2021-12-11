@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Skeleton } from "antd";
+import { Collapse } from 'antd';
 function FAQStud() {
   const [faq, setFaq] = useState(null);
   useEffect(() => {
@@ -13,18 +14,29 @@ function FAQStud() {
         console.log(err);
       });
   }, []);
+  const { Panel } = Collapse;
+
+function callback(key) {
+  console.log(key);
+}
   return (
     <div>
       {faq ? (
         <div>
+          <Collapse defaultActiveKey={['1']} onChange={callback}>
           {faq.map((f) => {
             return (
-              <div>
-                <p>Question : {f.Question}</p>
+
+
+              <Panel header={f.Question} key={f._id}>
+              
                 <p>Answer : {f.Answer}</p>
-              </div>
+              </Panel>
+
+
             );
           })}
+          </Collapse>
         </div>
       ) : (
         <Skeleton />
