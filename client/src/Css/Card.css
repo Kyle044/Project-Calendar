@@ -1,41 +1,10 @@
-.mainStud {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-  overflow-x: hidden;
-}
-.mainStud .title {
-  margin: 1rem;
-}
-.formStudContainer {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  position: relative;
-  grid-template-columns: 40% 40%;
-  grid-template-rows: repeat(auto-fill, 100px);
-  width: 100vw;
+.section3 {
   height: auto;
-  min-height: 400px;
-  background-color: #ff5c58;
-}
-.title {
-  color: black;
-}
-.formStudCard {
-  border: 3px solid white;
-  padding: 0.5rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 0.5rem;
-  border-radius: 6px;
-}
-.formStudCard h4 {
-  color: white;
-  transform: translateY(0.2em);
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .card {
