@@ -6,6 +6,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { verifyToken } from "../Functions/api";
 import "../Css/requestPage/requestform.css";
 import Footer from "../Components/studentdashComponents/Footer";
+import Header from "../Components/studentdashComponents/header";
 function Request() {
   const { TextArea } = Input;
 
@@ -81,6 +82,7 @@ function Request() {
   }, []);
   return (
     <div className="mainContainer">
+      <Header />
       {state.sender ? (
         <div className="formdiv">
           <h2 className="headerTitle">
