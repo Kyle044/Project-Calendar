@@ -27,7 +27,7 @@ function AdvisoryForm() {
   return (
     <div>
       <Button danger onClick={showModal}>
-        Add
+        Input Advisory
       </Button>
       <Modal
         title="Advisory"
