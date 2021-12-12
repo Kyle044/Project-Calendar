@@ -40,7 +40,7 @@ function FAQTable() {
   }
   return (
     <div>
-      <table className="mainTable">
+      <table className="Classtable">
         <tr>
           <th>Question</th>
           <th>Answer</th>

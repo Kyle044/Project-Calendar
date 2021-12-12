@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, Modal, Button } from "antd";
+import axios from "axios";
 function AdvisoryForm() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -7,14 +8,24 @@ function AdvisoryForm() {
     setIsModalVisible(true);
   };
   const handleOk = () => {
-    setIsModalVisible(false);
+    axios
+      .post(`${process.env.REACT_APP_KEY}/insertAdvisory`, {
+        data: state
+      })
+      .then((res) => {
+        alert(res.data.msg);
+        setIsModalVisible(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleCancel = () => {
     setIsModalVisible(false);
   };
   const { TextArea } = Input;
   var initialState = {
-    Advisory: ""
+    Description: ""
   };
   const [state, setState] = useState(initialState);
   function handleChange(e) {
@@ -23,11 +34,13 @@ function AdvisoryForm() {
       return { [name]: value };
     });
   }
-
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   return (
     <div>
       <Button danger onClick={showModal}>
-        Input Advisory
+        Add
       </Button>
       <Modal
         title="Advisory"
@@ -38,7 +51,7 @@ function AdvisoryForm() {
         <form action="">
           <TextArea
             rows={4}
-            name="Advisory"
+            name="Description"
             value={state.Advisory}
             onChange={handleChange}
           />

@@ -27,6 +27,7 @@ const reqRouter = require("./routes/requestRouter");
 const messRouter = require("./routes/messageRouter");
 const faqRouter = require("./routes/faqRouter");
 const formRouter = require("./routes/formRouter");
+const advisoryRouter = require("./routes/advisoryRouter");
 app.use("/api", formRouter);
 app.use("/api", adminRouter);
 app.use("/api", studentRouter);
@@ -36,7 +37,7 @@ app.use("/api", fileRouter);
 app.use("/api", reqRouter);
 app.use("/api", messRouter);
 app.use("/api", faqRouter);
-
+app.use("/api", advisoryRouter);
 app.listen(port, () => {
   console.log("Server Runs on Port : " + port);
 });
