@@ -3,7 +3,7 @@
   /* background-color: brown; */
   margin: auto;
   margin-top: 2rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .headerTitle {
   text-align: center;
@@ -18,3 +18,8 @@
 /* .name {
   width: 95%;
 } */
+@media only screen and (max-width: 360px) {
+  .headerTitle {
+    font-size: 1rem;
+  }
+}
