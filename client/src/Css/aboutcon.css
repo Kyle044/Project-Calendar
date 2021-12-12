@@ -1,0 +1,22 @@
+.mainCT {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 1rem;
+}
+h2 {
+  font-weight: bold;
+}
+@media only screen and (max-width: 360px) {
+  .mainCT {
+    flex-wrap: wrap;
+  }
+}
+.div1 {
+  border-radius: 1rem;
+}
+.div2 {
+  border-radius: 1rem;
+}
+.div3 {
+  border-radius: 1rem;
+}
