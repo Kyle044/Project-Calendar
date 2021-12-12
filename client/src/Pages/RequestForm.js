@@ -4,6 +4,8 @@ import axios from "axios";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { verifyToken } from "../Functions/api";
+import "../Css/requestPage/requestform.css";
+import Footer from "../Components/studentdashComponents/Footer";
 function Request() {
   const { TextArea } = Input;
 
@@ -78,22 +80,23 @@ function Request() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div className="mainContainer">
       {state.sender ? (
-        <div>
-          <h4>
+        <div className="formdiv">
+          <h2 className="headerTitle">
             Request includes the validation of school number so it is required
             to send a picture of an Identification Card.
-          </h4>
+          </h2>
           <form
             onSubmit={(e) => {
               formSubmit(e);
             }}
           >
-            <label for="title">Title</label>
+            <label for="title" style={{fontSize:"1rem", fontWeight:"bold"}}>Title</label>
             <Input id="title" name="title" onChange={handleChange} />
-            <label for="description">Description</label>
+            <label for="description" style={{fontSize:"1rem", fontWeight:"bold"}}>Description</label>
             <Input
+            style={{height:"120px"}}
               id="description"
               name="description"
               onChange={handleChange}
@@ -106,12 +109,18 @@ function Request() {
               multiple
               onChange={fileChange}
             />
-            <button type="submit">Submit</button>
+            <button type="submit" 
+            style={{width:"150px", margin:"auto"
+            ,fontSize:"1.1rem", borderRadius:"30px",padding:"5px 0px",
+            backgroundColor:"#FF5C58",border:"1px solid black",marginBottom:"1rem"}}>Submit</button>
           </form>
         </div>
       ) : (
         <Skeleton />
       )}
+      
+      <Footer />
+      
     </div>
   );
 }
