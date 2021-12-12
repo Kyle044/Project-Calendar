@@ -11,7 +11,7 @@ function Header() {
 
 <div className="CC2">
     <p className="School">Eulogio "Amang" Rodriguez Institute of Science and Technology </p>      
-   <h2 className="title">OFFICE OF THE REGISTRAR</h2>
+   <h2 className="title" style={{color:"#ffe431"}}>OFFICE OF THE REGISTRAR</h2>
    <p className="address">General Mariano Alvarez, Cavite </p>      
 </div>
 
