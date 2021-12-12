@@ -20,3 +20,12 @@ exports.getFAQ = (req, res) => {
       res.json({ msg: "There was an error", error: err });
     });
 };
+exports.deleteFAQ = (req, res) => {
+  FAQ.findByIdAndDelete(req.body.id)
+    .then((result) => {
+      res.json({ msg: "Success deleting faq", data: result });
+    })
+    .catch((err) => {
+      res.json({ msg: "There was an error", error: err });
+    });
+};

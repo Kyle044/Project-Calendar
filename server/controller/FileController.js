@@ -1,5 +1,7 @@
 let File = require("../model/File");
 var _ = require("lodash");
+
+var fs = require("fs");
 exports.InsertFile = (req, res, next) => {
   var fileArray = [];
   _.forEach(req.files, (value, key) => {
@@ -29,7 +31,17 @@ exports.InsertFile = (req, res, next) => {
 };
 
 exports.deleteFile = (req, res, next) => {
-  res.json("Deleted Successfully");
+  if (fs.existsSync(req.body.path.substr(16))) {
+    //   fs.unlink(req.body.path, (err) => {
+    //     if (err) {
+    //       res.json("Deleted Unsuccessfully");
+    //     }
+    //     res.json("Deleted Successfully");
+    //   });
+    res.json("File exists");
+  } else {
+    res.json("File does not exists");
+  }
 };
 exports.InsertSingleFile = (req, res, next) => {
   const newFile = new File({
