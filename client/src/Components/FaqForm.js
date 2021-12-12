@@ -43,7 +43,7 @@ function FaqForm() {
   return (
     <div>
       <Button danger onClick={showModal}>
-        Post FAQ
+        Add
       </Button>
       <Modal
         title="Post a FAQ"

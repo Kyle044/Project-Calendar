@@ -60,6 +60,14 @@ function CardAdmin({ setGoalCount, setGoal, history }) {
           </div>
           <div className="cardBtn">
             <AdvisoryForm />
+            <Button
+              danger
+              onClick={() => {
+                history.push("/FAQTable");
+              }}
+            >
+              Preview
+            </Button>
           </div>
         </div>
 
@@ -72,6 +80,14 @@ function CardAdmin({ setGoalCount, setGoal, history }) {
           </div>
           <div className="cardBtn">
             <FileForm />
+            <Button
+              danger
+              onClick={() => {
+                history.push("/FAQTable");
+              }}
+            >
+              Preview
+            </Button>
           </div>
         </div>
         <div className="card">
