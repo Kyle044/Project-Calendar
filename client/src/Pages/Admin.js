@@ -11,6 +11,7 @@ import InsertGoal from "../Components/InsertGoal";
 import _ from "lodash";
 import FileForm from "../Components/FileForm";
 import "../Css/adminPage/admin.css";
+import AdminCard from "../Components/CardAdmin";
 function Admin({ history }) {
   const [admin, setAdmin] = useState(null);
   const [request, setRequest] = useState();
@@ -225,84 +226,7 @@ function Admin({ history }) {
             <Pie {...config} autoFit={true} />
             <Pie {...confige} autoFit={true} />
           </div>
-
-          <div className="section3">
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/document.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Goal Schedule</h3>
-              </div>
-              <div className="cardBtn">
-                <InsertGoal setGoal={setGoal} setGoalCount={setGoalCount} />
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/light-bulb.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Requests</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/RequestPage");
-                  }}
-                >
-                  Preview
-                </Button>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/downloadfile.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Request & Goal History</h3>
-              </div>
-              <div className="cardBtn">
-                <Button danger>Download</Button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/school.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Post Advisory</h3>
-              </div>
-              <div className="cardBtn">
-                <Button danger>Read</Button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/guide.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Post Form</h3>
-              </div>
-              <div className="cardBtn">
-                <FileForm />
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/cabinet.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Post Frequently Asked Question</h3>
-              </div>
-              <div className="cardBtn">
-                <FaqFrom />
-              </div>
-            </div>
-          </div>
+          <AdminCard setGoal={setGoal} setGoalCount={setGoalCount} />
           <div className="schedDiv">
             <OnGoingCalendar goal={goal} />
           </div>
