@@ -21,3 +21,13 @@ exports.getForm = (req, res, next) => {
       res.status(422).json({ msg: "There was an error", error: err });
     });
 };
+
+exports.deleteForm = (req, res, next) => {
+  Form.findById(req.body.id)
+    .then((result) => {
+      res.json({ msg: "Success Deleting Data", data: result });
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
+    });
+};
