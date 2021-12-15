@@ -5,6 +5,7 @@ import { Collapse } from 'antd';
 import { Button } from 'antd';
 import { withRouter } from 'react-router-dom';
 import "../pCss/FAQStud.css";
+import Card from "../Components/Card";
 import Header from "../Components/studentdashComponents/header";
 import Footer from "../Components/studentdashComponents/Footer";
 // import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -66,8 +67,8 @@ function callback(key) {
     
        <div className="mainContainer2">
 
-
-         <div className="div1">
+<Card />
+         {/* <div className="div1">
            <div className="MD">
         
          <img src="./images/guide.png" alt="" style={{width:"50px"}}/>
@@ -114,7 +115,7 @@ function callback(key) {
         <div>
           <Button>Request now</Button>
         </div>
-         </div>
+         </div> */}
        </div>
      
       <Footer />

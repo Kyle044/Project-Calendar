@@ -22,9 +22,9 @@ function FormStud({ history }) {
   return (
     <div className="mainStud">
       <Nav />
-      <h3 className="title">
+      <h1 className="title">
         The Forms to Download in The Office Of Registrar.
-      </h3>
+      </h1>
       {form ? (
         <div className="formStudContainer">
           {form.map((f) => {
