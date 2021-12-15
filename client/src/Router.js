@@ -8,6 +8,7 @@ import RequestPage from "./Pages/RequestPage";
 import FAQStud from "./Pages/FAQStud";
 import FormStud from "./Pages/FormStud";
 import FAQTable from "./Pages/FAQTable";
+import AboutReg from "./Pages/AboutReg";
 import advisoryTable from "./Pages/AdvisoryTable";
 import formTable from "./Pages/FormTable";
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/AboutReg" exact component={AboutReg} />
         <Route path="/StudentDash" exact component={StudentDash} />
         <Route path="/AdminDash" exact component={Admin} />
         <Route path="/Request" exact component={Request} />
