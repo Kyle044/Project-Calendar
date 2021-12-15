@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Css/table.css";
 import { Button } from "antd";
 import axios from "axios";
+
 function FAQTable() {
   var initialState = [];
   const [state, setState] = useState(initialState);
