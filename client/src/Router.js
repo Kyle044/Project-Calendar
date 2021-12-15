@@ -9,6 +9,9 @@ import FAQStud from "./Pages/FAQStud";
 import FormStud from "./Pages/FormStud";
 import FAQTable from "./Pages/FAQTable";
 import AboutReg from "./Pages/AboutReg";
+import advisoryTable from "./Pages/AdvisoryTable";
+import formTable from "./Pages/FormTable";
+
 function Router() {
   return (
     <BrowserRouter>
@@ -22,6 +25,8 @@ function Router() {
         <Route path="/FAQStudPage" exact component={FAQStud} />
         <Route path="/FormStudPage" exact component={FormStud} />
         <Route path="/FAQTable" exact component={FAQTable} />
+        <Route path="/advisoryTable" exact component={advisoryTable} />
+        <Route path="/formTable" exact component={formTable} />
       </Switch>
     </BrowserRouter>
   );

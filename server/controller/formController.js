@@ -1,5 +1,7 @@
 let Form = require("../model/Form");
 var _ = require("lodash");
+var fs = require("fs");
+
 exports.InsertFile = (req, res, next) => {
   const newForm = new Form(req.body);
 
@@ -23,8 +25,15 @@ exports.getForm = (req, res, next) => {
 };
 
 exports.deleteForm = (req, res, next) => {
-  Form.findById(req.body.id)
+  Form.findByIdAndDelete(req.body.id)
     .then((result) => {
+      // fs.unlink("../" + result.File.path, (err) => {
+      //   if (err) {
+      //     res.json({ msg: "Failed Deleting Data", data: result });
+      //   } else {
+      //     res.json({ msg: "Success Deleting Data", data: result });
+      //   }
+      // });
       res.json({ msg: "Success Deleting Data", data: result });
     })
     .catch((err) => {
