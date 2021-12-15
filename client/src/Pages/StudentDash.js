@@ -7,20 +7,22 @@ import Footer from "../Components/studentdashComponents/Footer";
 import { Skeleton, Carousel, Button } from "antd";
 import { verifyToken } from "../Functions/api";
 import "../Css/student/StudentDash.css";
+import axios from "axios";
 function StudentDash({ history }) {
   const [info, setInfo] = useState();
 
-  const [announce, setAnnounce] = useState([
-    {
-      name: "Random Name #1",
-      description: "Probably the most random thing you have ever seen!"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!"
-    }
-  ]);
+  const [announce, setAnnounce] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_KEY}/getAdvisory`)
+      .then((res) => {
+        setAnnounce(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   function request() {
     history.push("/Request");
   }
@@ -79,9 +81,7 @@ function StudentDash({ history }) {
               {announce.map((a) => {
                 return (
                   <div>
-                    <h3 style={contentStyle}>
-                      Advisory {a.name} : {a.description}
-                    </h3>
+                    <h3 style={contentStyle}>{a.Description}</h3>
                     <p></p>
                   </div>
                 );
