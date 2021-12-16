@@ -3,20 +3,34 @@ import "../Css/aboutcon.css";
 function AboutReg() {
   return (
     <div>
-        <h1 style={{textAlign:"center", fontWeight:"bold"}}>R E G I S T R A R' S</h1>
+        <h1 className="header">OFFICE OF THE REGISTRAR</h1>
         <div  className="mainCT">
         
         <div className="div1">
-            <h2>Mssion</h2>
-            <p className="">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum error rem nulla hic cum facere.</p>
+    
+            <p className="text1">The Student Admission, Promotions, and Records Management Services (SARMS also known as Office of the Registrar) is the repository of all students records. It serves as the main frontline service of the Institute as far as curricular and academic matters are concerned. Thus the Office of the Registrar handles curricular and academic information, students admissions, registration, evaluation, accreditation, graduation, management of students records, and other allied services.</p>
         </div>
         <div className="div2">
-            <h2>Vission</h2>
-            <p className="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi repudiandae quia hic dolorum cum quam ducimus odit maiores necessitatibus ipsum.</p>
-        </div>
-        <div className="div3">
-            <h2>Goal</h2>
-            <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem similique tenetur inventore.</p>
+      
+            <p className="text2">The now Student Admission and Records Management Service (SARMS) are composed of the following services :</p>
+            <ul className="list">
+              <li>Admission and Registration</li>
+              <ul className="contentlist">
+                <li>Receiving and Releasing Section</li>
+                <li>ID Section</li>
+                <li>Information and Registration Section</li>
+              </ul>
+              <li>Programming and Promotions Sections</li>
+              <ul className="contentlist">
+                <li>Promotional records/credit evaluators</li>
+              </ul>
+              <li>Records Management Sections</li>
+              <ul className="contentlist">
+                <li>Transcript and Certificate Production Section</li>
+                <li>Certificates and Diploma Section</li>
+                <li>Data Banking Section</li>
+              </ul>
+            </ul>
         </div>
         </div>
     </div>

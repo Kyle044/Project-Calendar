@@ -3,6 +3,10 @@ import "../Css/table.css";
 import { Button } from "antd";
 import axios from "axios";
 
+import Header from "../Components/studentdashComponents/header";
+import Footer from "../Components/studentdashComponents/Footer";
+import "../Css/adminPage/faqtable.css";
+
 function FAQTable() {
   var initialState = [];
   const [state, setState] = useState(initialState);
@@ -40,18 +44,20 @@ function FAQTable() {
       });
   }
   return (
-    <div>
+    <div className="MainContainer">
+    <Header />
+    <h1 className="HEADER">FAQ Preview</h1>
       <table className="Classtable">
         <tr>
-          <th>Question</th>
-          <th>Answer</th>
-          <th>Options</th>
+        <th className="thName">Question</th>
+          <th className="thans">Answer</th>
+          <th className="thOpt">Options</th>
         </tr>
         {state.map((faq) => {
           return (
             <tr key={faq._id}>
-              <td>{faq.Question}</td>
-              <td>{faq.Answer}</td>
+              <td className="tdDes">{faq.Question}</td>
+              <td className="tdDes">{faq.Answer}</td>
               <td>
                 <Button
                   danger
@@ -71,6 +77,7 @@ function FAQTable() {
           );
         })}
       </table>
+      <Footer />
     </div>
   );
 }
