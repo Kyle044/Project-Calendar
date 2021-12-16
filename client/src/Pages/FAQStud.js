@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Skeleton } from "antd";
-import { Collapse } from 'antd';
-import { Button } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { Collapse } from "antd";
+import { Button } from "antd";
+import { withRouter } from "react-router-dom";
 import "../pCss/FAQStud.css";
 import Card from "../Components/Card";
 import Header from "../Components/studentdashComponents/header";
@@ -24,51 +24,55 @@ function FAQStud({ history }) {
   }, []);
   const { Panel } = Collapse;
 
-function callback(key) {
-  console.log(key);
-}
+  function callback(key) {
+    console.log(key);
+  }
   return (
     <div className="MC">
-
-<div>
-<Header />
-</div>
-
-<div style={{textAlign:"center"}}>
-      <h2 className="header"><span className="spanfaq">FAQ</span><span style={{color:"grey", fontWeight:"bold"}}> Frequently asked questions to the Office of the Registrar</span>.</h2>
+      <div>
+        <Header />
       </div>
-<div className="cd">
-    
-      {faq ? (
-        <div  className="FAQ">
-          <Collapse defaultActiveKey={['1']} onChange={callback}>
-          {faq.map((f) => {
-            return (
 
+      <div style={{ textAlign: "center" }}>
+        <h2 className="header">
+          <span className="spanfaq">FAQ</span>
+          <span style={{ color: "grey", fontWeight: "bold" }}>
+            {" "}
+            Frequently asked questions to the Office of the Registrar
+          </span>
+          .
+        </h2>
+      </div>
+      <div className="cd">
+        {faq ? (
+          <div className="FAQ">
+            <Collapse defaultActiveKey={["1"]} onChange={callback}>
+              {faq.map((f) => {
+                return (
+                  <Panel header={f.Question} key={f._id} className="Panel">
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        color: "#DAAD2A",
+                        fontSize: "1rem"
+                      }}
+                    >
+                      Answer :{" "}
+                    </p>
+                    <p style={{ fontWeight: "normal" }}>{f.Answer}</p>
+                  </Panel>
+                );
+              })}
+            </Collapse>
+          </div>
+        ) : (
+          <Skeleton />
+        )}
+      </div>
 
-             <Panel header={f.Question} key={f._id} className="Panel"> 
-              
-                <p style={{fontWeight:"bold", color:"#DAAD2A", fontSize:"1rem"}}>Answer : </p>
-                <p style={{fontWeight:"normal"}}>{f.Answer}</p>
-              </Panel>
-             
-
-            );
-          })}
-          </Collapse>
-     
-        </div>
-        
-        
-      ) : (
-        <Skeleton />
-      )}
-       </div>
-    
-       <div className="mainContainer2">
-
-<Card />
-         {/* <div className="div1">
+      <div className="mainContainer2">
+        <Card />
+        {/* <div className="div1">
            <div className="MD">
         
          <img src="./images/guide.png" alt="" style={{width:"50px"}}/>
@@ -116,8 +120,8 @@ function callback(key) {
           <Button>Request now</Button>
         </div>
          </div> */}
-       </div>
-     
+      </div>
+
       <Footer />
     </div>
   );

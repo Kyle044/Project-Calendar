@@ -43,6 +43,7 @@ exports.InsertGoal = (req, res) => {
 
 exports.getGoal = (req, res, next) => {
   Goal.find()
+    .populate({ path: "Tasks", model: "Task" })
     .then((goal) => {
       res.json({ msg: "success get goal", data: goal });
     })
