@@ -153,10 +153,14 @@ function StudentDash({ history }) {
                 <h3>About the Registrar</h3>
               </div>
               <div className="cardBtn">
-                <Button danger onClick={() => {
+                <Button
+                  danger
+                  onClick={() => {
                     history.push("/AboutReg");
                   }}
-                >Read</Button>
+                >
+                  Read
+                </Button>
               </div>
             </div>
 

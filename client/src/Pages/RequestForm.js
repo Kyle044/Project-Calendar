@@ -94,11 +94,18 @@ function Request() {
               formSubmit(e);
             }}
           >
-            <label for="title" style={{fontSize:"1rem", fontWeight:"bold"}}>Title</label>
+            <label for="title" style={{ fontSize: "1rem", fontWeight: "bold" }}>
+              Title
+            </label>
             <Input id="title" name="title" onChange={handleChange} />
-            <label for="description" style={{fontSize:"1rem", fontWeight:"bold"}}>Description</label>
+            <label
+              for="description"
+              style={{ fontSize: "1rem", fontWeight: "bold" }}
+            >
+              Description
+            </label>
             <Input
-            style={{height:"120px"}}
+              style={{ height: "120px" }}
               id="description"
               name="description"
               onChange={handleChange}
@@ -111,18 +118,28 @@ function Request() {
               multiple
               onChange={fileChange}
             />
-            <button type="submit" 
-            style={{width:"150px", margin:"auto"
-            ,fontSize:"1.1rem", borderRadius:"30px",padding:"5px 0px",
-            backgroundColor:"#FF5C58",border:"1px solid black",marginBottom:"1rem"}}>Submit</button>
+            <button
+              type="submit"
+              style={{
+                width: "150px",
+                margin: "auto",
+                fontSize: "1.1rem",
+                borderRadius: "30px",
+                padding: "5px 0px",
+                backgroundColor: "#FF5C58",
+                border: "1px solid black",
+                marginBottom: "1rem"
+              }}
+            >
+              Submit
+            </button>
           </form>
         </div>
       ) : (
         <Skeleton />
       )}
-      
+
       <Footer />
-      
     </div>
   );
 }
