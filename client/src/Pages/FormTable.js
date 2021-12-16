@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import download from "../Functions/download";
 import { Button } from "antd";
+import Header from "../Components/studentdashComponents/header";
+import Footer from "../Components/studentdashComponents/Footer";
+import "../Css/adminPage/formtable.css";
 function FormTable() {
   const [state, setState] = useState([]);
   useEffect(() => {
@@ -15,19 +18,20 @@ function FormTable() {
       });
   }, []);
   return (
-    <div>
-      <h1>Form table</h1>
+    <div className="MainContainer">
+      <Header />
+      <h1 className="HEADER">Form table</h1>
 
       <table className="Classtable">
         <tr>
-          <th>Description</th>
-          <th>Options</th>
+        <th className="thName">Description</th>
+        <th className="thOpt">Options</th>
         </tr>
 
         {state.map((form) => {
           return (
             <tr>
-              <td>{form.Description}</td>
+              <td className="tdDes">{form.Description}</td>
               <td>
                 <Button
                   onClick={() => {
@@ -77,6 +81,7 @@ function FormTable() {
           );
         })}
       </table>
+      <Footer />
     </div>
   );
 }
