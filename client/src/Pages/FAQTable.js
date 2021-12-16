@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../Css/table.css";
 import { Button } from "antd";
 import axios from "axios";
+
 import Header from "../Components/studentdashComponents/header";
 import Footer from "../Components/studentdashComponents/Footer";
 import "../Css/adminPage/faqtable.css";
+
 function FAQTable() {
   var initialState = [];
   const [state, setState] = useState(initialState);

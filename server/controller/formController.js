@@ -27,14 +27,15 @@ exports.getForm = (req, res, next) => {
 exports.deleteForm = (req, res, next) => {
   Form.findByIdAndDelete(req.body.id)
     .then((result) => {
-      // fs.unlink("../" + result.File.path, (err) => {
-      //   if (err) {
-      //     res.json({ msg: "Failed Deleting Data", data: result });
-      //   } else {
-      //     res.json({ msg: "Success Deleting Data", data: result });
-      //   }
-      // });
-      res.json({ msg: "Success Deleting Data", data: result });
+      fs.unlink(result.File.destination + "/" + result.File.filename, (err) => {
+        if (err) {
+          res.json({ msg: "Failed Deleting Data", data: result });
+        } else {
+          res.json({ msg: "Success Deleting Data", data: result });
+        }
+      });
+
+      // res.json({ msg: "Success Deleting Data", data: result });
     })
     .catch((err) => {
       res.status(422).json({ msg: "There was an error", error: err });

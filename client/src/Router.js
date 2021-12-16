@@ -11,6 +11,7 @@ import FAQTable from "./Pages/FAQTable";
 import AboutReg from "./Pages/AboutReg";
 import advisoryTable from "./Pages/AdvisoryTable";
 import formTable from "./Pages/FormTable";
+
 function Router() {
   return (
     <BrowserRouter>
