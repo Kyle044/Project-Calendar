@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import axios from "axios";
+import Header from "../Components/studentdashComponents/header";
+import Footer from "../Components/studentdashComponents/Footer";
+import "../Css/adminPage/advisory.css";
 function AdvisoryTable() {
   var initialState = [];
   const [state, setState] = useState(initialState);
@@ -15,18 +18,19 @@ function AdvisoryTable() {
       });
   }, []);
   return (
-    <div>
-      <h1>Advisory Table</h1>
+    <div className="MainContainer">
+      <Header />
+      <h1 className="HEADER">Advisory Table</h1>
 
       <table className="Classtable">
         <tr>
-          <th>Description</th>
-          <th>Options</th>
+          <th className="thName">Description</th>
+          <th className="thOpt">Options</th>
         </tr>
         {state.map((advisory) => {
           return (
             <tr>
-              <td>{advisory.Description}</td>
+              <td className="tdDes">{advisory.Description}</td>
               <td>
                 <Button
                   danger
@@ -65,6 +69,8 @@ function AdvisoryTable() {
           );
         })}
       </table>
+     
+      <Footer />
     </div>
   );
 }

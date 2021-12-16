@@ -1,0 +1,30 @@
+.MainContainer {
+}
+.HEADER {
+  text-align: center;
+  font-family: "Lora", serif;
+}
+.tablediv {
+  width: 90%;
+}
+.Classtable {
+  width: 90%;
+  margin: auto;
+  border: 2px solid black;
+  margin-bottom: 2rem;
+}
+.thName {
+  background-color: #ff5c58;
+}
+.thOpt {
+  width: 30px;
+  background-color: #ffe331;
+}
+.tdDes {
+  background: rgb(222, 222, 222);
+  background: linear-gradient(
+    135deg,
+    rgba(222, 222, 222, 1) 4%,
+    rgba(246, 246, 246, 1) 4%
+  );
+}

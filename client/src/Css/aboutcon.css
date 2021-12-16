@@ -1,7 +1,7 @@
 .mainCT {
   display: flex;
-  flex-direction: row;
-  padding: 1rem 1rem;
+  flex-direction: column;
+  padding: 3rem 3rem;
 }
 h2 {
   font-weight: bold;
@@ -12,11 +12,61 @@ h2 {
   }
 }
 .div1 {
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
+  background: rgb(222, 222, 222);
+  background: linear-gradient(
+    135deg,
+    rgba(222, 222, 222, 1) 8%,
+    rgba(246, 246, 246, 1) 8%
+  );
 }
 .div2 {
-  border-radius: 1rem;
+  margin-top: 1rem;
+  background: rgb(222, 222, 222);
+  background: linear-gradient(
+    135deg,
+    rgba(222, 222, 222, 1) 8%,
+    rgba(246, 246, 246, 1) 8%
+  );
 }
 .div3 {
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
+}
+.text1 {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+.text2 {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+.header {
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 3rem;
+  font-family: "Lora", serif;
+}
+ul.list {
+  list-style-type: square;
+  font-size: 1rem;
+  margin-left: 2rem;
+}
+.contentlist {
+  margin-left: 4rem;
+}
+@media only screen and (max-width: 670px) {
+  .header {
+    font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .header {
+    font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 460px) {
+  .header {
+    font-size: 1.5rem;
+  }
 }
