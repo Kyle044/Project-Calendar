@@ -29,7 +29,11 @@
   height: 50vh;
   width: 100vw;
 }
+.admen {
+  display: flex;
+}
 
-.schedDiv,
-.fc-media-screen {
+.rightPane {
+  height: 100vh;
+  width: 100%;
 }

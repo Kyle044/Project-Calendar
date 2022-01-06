@@ -1,0 +1,42 @@
+.adBody {
+  padding: 0.3rem;
+  overflow-y: hidden;
+}
+.cardCoco {
+  height: 89vh;
+  overflow-y: scroll;
+  padding-right: 1px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box; /* So the width will be 100% + 17px */
+  display: flex;
+  flex-direction: column;
+}
+
+.cardCoco .cardBodya {
+  background-color: #ff5c58;
+  padding: 10px;
+  width: 98%;
+  height: auto;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.cardCoco::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+.btnBody {
+  display: flex;
+}
+.btnBody button {
+  transform: translateX(-10px);
+}
+
+.opts {
+  padding-left: 0.5rem;
+}
+.cardBodya {
+  border-radius: 10px;
+}
+
+.cardBodya h3 {
+  font-weight: bolder;
+}

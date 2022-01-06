@@ -19,7 +19,6 @@ function AdvisoryTable() {
   }, []);
   return (
     <div className="MainContainer">
-      <Header />
       <h1 className="HEADER">Advisory Table</h1>
 
       <table className="Classtable">
@@ -69,8 +68,6 @@ function AdvisoryTable() {
           );
         })}
       </table>
-     
-      <Footer />
     </div>
   );
 }

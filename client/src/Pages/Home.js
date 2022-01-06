@@ -4,15 +4,17 @@ import { Input } from "antd";
 import "../Css/Login.css";
 import axios from "axios";
 
-import { Button } from "antd";
+import { Button, Checkbox } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { login } from "../redux/actions/index";
 import validator from "validator";
+
 function Home({ history }) {
   const dispatch = useDispatch();
   const [acc, setacc] = useState({ Email: "", Password: "" });
   const userData = useSelector((state) => state.isLoggedReducer);
+  const [terms, setTerms] = useState(false);
   const [regState, setRegState] = useState({
     Email: "",
     Password: "",
@@ -115,31 +117,39 @@ function Home({ history }) {
    * Handle Register
    */
   function handleRegisterr() {
-    const data = {
-      Email: regState.Email,
-      Password: regState.Password,
-      FullName: regState.FullName,
-      schoolnum: regState.schoolNum,
-      Course: regState.Course,
-      Year: regState.Year
-    };
-    axios
-      .post(`http://localhost:5000/api/registerStud`, data)
-      .then((res) => {
-        alert(res.data.msg);
-        setRegState({
-          Email: "",
-          Password: "",
-          ConfrimPassword: "",
-          Course: "",
-          Year: "",
-          schoolNum: "",
-          FullName: ""
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!terms) {
+      alert("Please accept the EU Terms and Agreements.");
+    }
+    else if (regState.ConfrimPassword != regState.Password) {
+      alert("The Password Does not Match")
+    }
+    else {
+        const data = {
+          Email: regState.Email,
+          Password: regState.Password,
+          FullName: regState.FullName,
+          schoolnum: regState.schoolNum,
+          Course: regState.Course,
+          Year: regState.Year
+        };
+        axios
+          .post(`http://localhost:5000/api/registerStud`, data)
+          .then((res) => {
+            alert(res.data.msg);
+            setRegState({
+              Email: "",
+              Password: "",
+              ConfrimPassword: "",
+              Course: "",
+              Year: "",
+              schoolNum: "",
+              FullName: ""
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
   }
   /**
    * Back To Login
@@ -148,7 +158,9 @@ function Home({ history }) {
     loginRef.current.classList.toggle("goToRegister");
     regRef.current.classList.toggle("showReg");
   }
-
+  function onChangeCheck(e) {
+    setTerms(e.target.checked);
+  }
   return (
     <div className="mainDiv">
       <div ref={loginRef} className="loginDiv">
@@ -188,7 +200,21 @@ function Home({ history }) {
       </div>
 
       <div ref={regRef} className="regDiv">
-        <img src="./images/register.jpg" alt="" />
+        <div className="termsContainer">
+          <p>
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Laudantium culpa explicabo odio facilis officia nobis quod ad earum
+            saepe corporis quam, perferendis dolorem accusantium iusto
+            consequatur quisquam necessitatibus et quidem eos quasi assumenda
+            ducimus animi placeat magni. Aperiam commodi unde, alias dolorum
+            vitae aliquam possimus labore illo sed repellat magni Lorem, ipsum
+            dolor sit amet consectetur adipisicing elit. Voluptatibus quaerat
+            optio fuga nisi cum quae eius voluptates, libero mollitia corrupti!
+          </p>
+          <Checkbox onChange={onChangeCheck}>
+            EU Accept Terms & Agreements
+          </Checkbox>
+        </div>
         <div className="form">
           <h3>Register</h3>
           <div className="cont">
