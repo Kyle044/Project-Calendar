@@ -1,4 +1,9 @@
 .MainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: grey;
+  height: 10px;
 }
 .HEADER {
   text-align: center;

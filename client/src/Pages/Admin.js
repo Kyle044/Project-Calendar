@@ -6,10 +6,16 @@ import OnGoingCalendar from "../Components/OnGoingCalendar";
 import { verifyAdminToken } from "../Functions/api";
 import FaqFrom from "../Components/FaqForm";
 import { Modal, Button } from "antd";
-import { Pie } from "@ant-design/charts";
+
 import InsertGoal from "../Components/InsertGoal";
-import _ from "lodash";
+
 import FileForm from "../Components/FileForm";
+import LeftPane from "../Components/adminNav/AdminNav";
+import HomeComp from "../Components/adminComponents/HomeComp/Home";
+import AdvisoryComp from "../Components/adminComponents/AdvisoryComp/Advisory";
+import RequestComp from "../Components/adminComponents/RequestComp/Request";
+import FormComp from "../Components/adminComponents/FormComp/Form";
+import FAQComp from "../Components/adminComponents/FAQComp/FAQ";
 import "../Css/adminPage/admin.css";
 import AdminCard from "../Components/CardAdmin";
 function Admin({ history }) {
@@ -95,143 +101,73 @@ function Admin({ history }) {
       });
   }, []);
 
-  var completeCount = 0;
-  var ongoingCount = 0;
-
-  _.forEach(goal, (g) => {
-    if (g.Status == "Complete") {
-      completeCount++;
-    }
-    if (g.Status == "On Going") {
-      ongoingCount++;
-    }
-  });
-
-  const data = [
-    {
-      type: "On Going",
-      value: ongoingCount
-    },
-    {
-      type: "Complete",
-      value: completeCount
-    }
-  ];
-  const config = {
-    appendPadding: 10,
-    data,
-    angleField: "value",
-    colorField: "type",
-    radius: 1,
-    innerRadius: 0.6,
-    label: {
-      type: "inner",
-      offset: "-50%",
-      content: "{value}",
-      style: {
-        textAlign: "center",
-        fontSize: 18
-      }
-    },
-    interactions: [
-      {
-        type: "element-selected"
-      },
-      {
-        type: "element-active"
-      }
-    ],
-    statistic: {
-      title: false,
-      content: {
-        style: {
-          whiteSpace: "pre-wrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          fontSize: 12
-        },
-        content: `Goal : ${goalCount}`
-      }
-    }
+  var toggleState = {
+    Home: false,
+    Advisory: false,
+    Requests: false,
+    Forms: false,
+    FAQ: false
   };
-  var completereqCount = 0;
-  var ongoingreqCount = 0;
-  _.forEach(request, (r) => {
-    if (r.Status == "Complete") {
-      completereqCount++;
-    }
-    if (r.Status == "On Going") {
-      ongoingreqCount++;
-    }
+  const [toggle, setToggle] = useState({
+    Home: true,
+    Advisory: false,
+    Requests: false,
+    Forms: false,
+    FAQ: false
   });
-  const datae = [
-    {
-      type: "On Going",
-      value: ongoingreqCount
-    },
-    {
-      type: "Complete",
-      value: completereqCount
-    }
-  ];
-  const confige = {
-    appendPadding: 10,
-    data: datae,
-    angleField: "value",
-    colorField: "type",
-    radius: 1,
-    innerRadius: 0.6,
-    label: {
-      type: "inner",
-      offset: "-50%",
-      content: "{value}",
-      style: {
-        textAlign: "center",
-        fontSize: 18
-      }
-    },
-    interactions: [
-      {
-        type: "element-selected"
-      },
-      {
-        type: "element-active"
-      }
-    ],
-    statistic: {
-      title: false,
-      content: {
-        style: {
-          whiteSpace: "pre-wrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          fontSize: 12
-        },
-        content: `Requests : ${requestCount}`
-      }
-    }
-  };
-  useEffect(() => {
-    console.log("goal was updated");
-  }, [goal]);
+  function handleToggle(name) {
+    setToggle(toggleState);
+    setToggle((prev) => {
+      return { ...prev, [name]: true };
+    });
+  }
+
   return (
     <div>
       {admin ? (
         <div>
-          <div className="chartDiv">
-            <div className="adminContainer">
-              <h1>Hello Admin</h1>
-              <p>Good Morning and have a nice day!</p>
+          <div className="admen">
+            <LeftPane masterToggle={handleToggle} />
+
+            <div className="rightPane">
+              {/**
+               * HOMEEEEEEEEEEEEEEEE
+               */}
+              {toggle.Home && goal ? (
+                <HomeComp
+                  request={request}
+                  requestCount={requestCount}
+                  goal={goal}
+                  goalCount={goalCount}
+                  setGoal={setGoal}
+                  Owner={admin}
+                  setGoalCount={setGoalCount}
+                />
+              ) : null}
+              {/**
+               * ADVISORYYYYYYYYYYYY
+               */}
+              {toggle.Advisory ? <AdvisoryComp /> : null}
+              {/**
+               * FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ
+               */}
+              {toggle.FAQ ? <FAQComp /> : null}
+              {/**
+               * FORMSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+               */}
+              {toggle.Forms ? <FormComp /> : null}
+              {/**
+               * REQUESTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+               */}
+              {toggle.Requests ? <RequestComp /> : null}
             </div>
-            <Pie {...config} autoFit={true} />
-            <Pie {...confige} autoFit={true} />
-          </div>
-          <AdminCard setGoal={setGoal} setGoalCount={setGoalCount} />
-          <div className="schedDiv">
-            <OnGoingCalendar goal={goal} />
           </div>
 
-          <div></div>
+          {/* 
+
+          <AdminCard setGoal={setGoal} setGoalCount={setGoalCount} />
+
+          */}
         </div>
       ) : (
         <Skeleton />

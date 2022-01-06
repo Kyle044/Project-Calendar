@@ -19,13 +19,12 @@ function FormTable() {
   }, []);
   return (
     <div className="MainContainer">
-      <Header />
       <h1 className="HEADER">Form table</h1>
 
       <table className="Classtable">
         <tr>
-        <th className="thName">Description</th>
-        <th className="thOpt">Options</th>
+          <th className="thName">Description</th>
+          <th className="thOpt">Options</th>
         </tr>
 
         {state.map((form) => {
@@ -81,7 +80,6 @@ function FormTable() {
           );
         })}
       </table>
-      <Footer />
     </div>
   );
 }

@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DatePicker, Space, Button, Modal } from "antd";
+import { DatePicker, Space, Button, Modal, notification } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-
+import validator from "validator";
 import Task from "../Components/TaskList";
 import axios, { Axios } from "axios";
+
 function InsertGoal(props) {
   const { TextArea } = Input;
   const [refresh, setRefresh] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const fileRef = useRef();
   const [isGoalModalVisible, setIsGoalModalVisible] = useState(false);
+  const [stateDate, setStateDate] = useState(null);
   const [state, setState] = useState({
     Subject: "",
     Description: "",
@@ -30,9 +32,6 @@ function InsertGoal(props) {
     Handler: "N/A",
     Status: "On Going"
   });
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -115,9 +114,22 @@ function InsertGoal(props) {
   };
   const { RangePicker } = DatePicker;
   function onChange(date, dateString) {
-    setState((prev) => {
-      return { ...prev, StartDate: date[0]._d, DueDate: date[1]._d };
-    });
+    setStateDate(date);
+    if (date) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (date[0]._d < today) {
+        openNotification(
+          "The Date is Invalid",
+          "the date must must be greater than or equal to the present date."
+        );
+        setStateDate([]);
+      } else {
+        setState((prev) => {
+          return { ...prev, StartDate: date[0]._d, DueDate: date[1]._d };
+        });
+      }
+    }
   }
   function onChangeTaskDate(date, dateString) {
     setTask((prev) => {
@@ -156,7 +168,6 @@ function InsertGoal(props) {
     for (let i = 0; i < state.File.length; i++) {
       formData.append("files", state.File[i]);
     }
-
     var config = {
       method: "post",
       url: `${process.env.REACT_APP_KEY}/insertMultipleFile`,
@@ -192,11 +203,18 @@ function InsertGoal(props) {
         console.log("There was an error : " + err);
       });
   }, [refresh]);
+  const openNotification = (mess, des) => {
+    notification.open({
+      message: mess,
+      description: des,
+      onClick: () => {
+        console.log("Notification Clicked!");
+      }
+    });
+  };
   return (
     <div>
-      <Button danger onClick={showGoalModal}>
-        Add Goal
-      </Button>
+      <Button onClick={showGoalModal}>Add Goal</Button>
       <Modal
         title="Add Goal"
         visible={isGoalModalVisible}
@@ -219,7 +237,11 @@ function InsertGoal(props) {
               onChange={goalChange}
               value={state.Description}
             />
-            <RangePicker onChange={onChange} />
+            <RangePicker
+              onChange={onChange}
+              allowClear={true}
+              value={stateDate}
+            />
             <input
               ref={fileRef}
               type="file"

@@ -6,14 +6,14 @@ import "../Css/student/aboutreg.css";
 function AboutReg() {
   return (
     <div className="MainContainer">
-        <div>
-            <Header />
-            </div>
-            <div>
-                    <Content />
-           </div>
-        <div>
-      <Footer />
+      <div>
+        <Header />
+      </div>
+      <div>
+        <Content />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

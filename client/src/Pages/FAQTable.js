@@ -45,11 +45,10 @@ function FAQTable() {
   }
   return (
     <div className="MainContainer">
-    <Header />
-    <h1 className="HEADER">FAQ Preview</h1>
+      <h1 className="HEADER">FAQ Preview</h1>
       <table className="Classtable">
         <tr>
-        <th className="thName">Question</th>
+          <th className="thName">Question</th>
           <th className="thans">Answer</th>
           <th className="thOpt">Options</th>
         </tr>
@@ -77,7 +76,6 @@ function FAQTable() {
           );
         })}
       </table>
-      <Footer />
     </div>
   );
 }

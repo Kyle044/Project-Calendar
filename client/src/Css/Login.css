@@ -53,10 +53,9 @@
   left: -100vw;
   background-color: #eeeeee;
 }
-.regDiv img {
+.regDiv .termsContainer {
   width: 50%;
   height: auto;
-  border-radius: 10px;
 }
 .regDiv .form {
   display: flex;
@@ -208,4 +207,8 @@
     align-items: center;
     justify-content: center;
   }
+}
+
+.termsContainer {
+  text-align: justify;
 }
