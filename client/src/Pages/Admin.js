@@ -16,6 +16,7 @@ import AdvisoryComp from "../Components/adminComponents/AdvisoryComp/Advisory";
 import RequestComp from "../Components/adminComponents/RequestComp/Request";
 import FormComp from "../Components/adminComponents/FormComp/Form";
 import FAQComp from "../Components/adminComponents/FAQComp/FAQ";
+import SettingsComp from "../Components/adminComponents/SettingsComp/Settings";
 import "../Css/adminPage/admin.css";
 import AdminCard from "../Components/CardAdmin";
 function Admin({ history }) {
@@ -38,67 +39,71 @@ function Admin({ history }) {
     setIsModalVisible(false);
   };
   useEffect(() => {
-    /**
-     * get Admin Info
-     */
-    axios
-      .get(`${process.env.REACT_APP_KEY}/protected`, {
-        headers: { Authorization: localStorage.getItem("token") }
-      })
-      .then((res) => {
-        setAdmin(res.data);
-      })
+    if (localStorage.getItem("token")) {
+      /**
+       * get Admin Info
+       */
+      axios
+        .get(`${process.env.REACT_APP_KEY}/protected`, {
+          headers: { Authorization: localStorage.getItem("token") }
+        })
+        .then((res) => {
+          setAdmin(res.data);
+        })
 
-      .catch((err) => {
-        console.log(err);
-      });
+        .catch((err) => {
+          console.log(err);
+        });
 
-    /**
-     *  Goal Count
-     */
-    axios
-      .get(`${process.env.REACT_APP_KEY}/getGoalCount`)
-      .then((res) => {
-        setGoalCount(res.data.data);
-      })
-      .catch((err) => {
-        console.log("There was an error : " + err);
-      });
-    /**
-     *  Request Count
-     */
-    axios
-      .get(`${process.env.REACT_APP_KEY}/getRequestCount`)
-      .then((res) => {
-        setRequestCount(res.data.data);
-      })
-      .catch((err) => {
-        console.log("There was an error : " + err);
-      });
+      /**
+       *  Goal Count
+       */
+      axios
+        .get(`${process.env.REACT_APP_KEY}/getGoalCount`)
+        .then((res) => {
+          setGoalCount(res.data.data);
+        })
+        .catch((err) => {
+          console.log("There was an error : " + err);
+        });
+      /**
+       *  Request Count
+       */
+      axios
+        .get(`${process.env.REACT_APP_KEY}/getRequestCount`)
+        .then((res) => {
+          setRequestCount(res.data.data);
+        })
+        .catch((err) => {
+          console.log("There was an error : " + err);
+        });
 
-    /**
-     * Get Goal
-     */
-    axios
-      .get(`${process.env.REACT_APP_KEY}/getGoal`)
-      .then((res) => {
-        setGoal(res.data.data);
-      })
-      .catch((err) => {
-        console.log("There was an error : " + err);
-      });
+      /**
+       * Get Goal
+       */
+      axios
+        .get(`${process.env.REACT_APP_KEY}/getGoal`)
+        .then((res) => {
+          setGoal(res.data.data);
+        })
+        .catch((err) => {
+          console.log("There was an error : " + err);
+        });
 
-    /**
-     * Get Request
-     */
-    axios
-      .get(`${process.env.REACT_APP_KEY}/getRequest`)
-      .then((res) => {
-        setRequest(res.data.data);
-      })
-      .catch((err) => {
-        console.log("There was an error : " + err);
-      });
+      /**
+       * Get Request
+       */
+      axios
+        .get(`${process.env.REACT_APP_KEY}/getRequest`)
+        .then((res) => {
+          setRequest(res.data.data);
+        })
+        .catch((err) => {
+          console.log("There was an error : " + err);
+        });
+    } else {
+      history.push("/adminPortal");
+    }
   }, []);
 
   var toggleState = {
@@ -106,14 +111,16 @@ function Admin({ history }) {
     Advisory: false,
     Requests: false,
     Forms: false,
-    FAQ: false
+    FAQ: false,
+    Settings: false
   };
   const [toggle, setToggle] = useState({
     Home: true,
     Advisory: false,
     Requests: false,
     Forms: false,
-    FAQ: false
+    FAQ: false,
+    Settings: false
   });
   function handleToggle(name) {
     setToggle(toggleState);
@@ -160,14 +167,12 @@ function Admin({ history }) {
                * REQUESTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
                */}
               {toggle.Requests ? <RequestComp /> : null}
+              {/**
+               * SETTINGSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+               */}
+              {toggle.Settings ? <SettingsComp /> : null}
             </div>
           </div>
-
-          {/* 
-
-          <AdminCard setGoal={setGoal} setGoalCount={setGoalCount} />
-
-          */}
         </div>
       ) : (
         <Skeleton />

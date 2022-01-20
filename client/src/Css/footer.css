@@ -58,4 +58,10 @@
 }
 .bottomSection h4 {
   font-weight: bolder;
+  color: black;
+}
+
+.masterFooter {
+  position: relative;
+  bottom: 0;
 }

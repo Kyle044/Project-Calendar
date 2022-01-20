@@ -69,9 +69,7 @@ function Card({ goal, setGoal, setGoalCount }) {
       });
     // console.log(data);
   };
-  useEffect(() => {
-    console.log(goal);
-  }, [goal]);
+
   const colorCode = {
     red: "#ff5c58",
     green: "green",

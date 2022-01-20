@@ -10,7 +10,8 @@ import FormStud from "./Pages/FormStud";
 import FAQTable from "./Pages/FAQTable";
 import AboutReg from "./Pages/AboutReg";
 import advisoryTable from "./Pages/AdvisoryTable";
-import formTable from "./Pages/FormTable";
+import AppointmentHistory from "./Pages/AppointmentHistory/AppointmentHistory";
+import AdminPortal from "./Pages/PoralAdmin/PortalAdmin";
 
 function Router() {
   return (
@@ -26,7 +27,8 @@ function Router() {
         <Route path="/FormStudPage" exact component={FormStud} />
         <Route path="/FAQTable" exact component={FAQTable} />
         <Route path="/advisoryTable" exact component={advisoryTable} />
-        <Route path="/formTable" exact component={formTable} />
+        <Route path="/appHistory" exact component={AppointmentHistory} />
+        <Route path="/adminPortal" exact component={AdminPortal} />
       </Switch>
     </BrowserRouter>
   );

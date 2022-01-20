@@ -66,38 +66,6 @@ function Home({ history }) {
         .catch((err) => {
           if (err.response.status == 422) {
             alert("Invalid Email or Password");
-          } else if (err.response.status == 402) {
-            axios
-              .post(`${process.env.REACT_APP_KEY}/login`, acc)
-              .then((res) => {
-                console.log("this is the admin");
-
-                localStorage.setItem("token", res.data.token);
-                axios
-                  .get(`${process.env.REACT_APP_KEY}/protected`, {
-                    headers: { Authorization: res.data.token }
-                  })
-                  .then((res) => {
-                    dispatch(login(res.data));
-                    localStorage.setItem("info", res.data);
-                    history.push("/AdminDash");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              })
-              .catch((err) => {
-                if (err.response.status == 422) {
-                  alert("Invalid Email or Password");
-                } else if (err.response.status == 402) {
-                  axios
-                    .post(`${process.env.REACT_APP_KEY}/loginReg`, acc)
-                    .then((res) => {
-                      console.log(res.data + "This is the registrar client");
-                    })
-                    .catch((err) => {});
-                }
-              });
           }
         });
     } else {
@@ -119,36 +87,34 @@ function Home({ history }) {
   function handleRegisterr() {
     if (!terms) {
       alert("Please accept the EU Terms and Agreements.");
-    }
-    else if (regState.ConfrimPassword != regState.Password) {
-      alert("The Password Does not Match")
-    }
-    else {
-        const data = {
-          Email: regState.Email,
-          Password: regState.Password,
-          FullName: regState.FullName,
-          schoolnum: regState.schoolNum,
-          Course: regState.Course,
-          Year: regState.Year
-        };
-        axios
-          .post(`http://localhost:5000/api/registerStud`, data)
-          .then((res) => {
-            alert(res.data.msg);
-            setRegState({
-              Email: "",
-              Password: "",
-              ConfrimPassword: "",
-              Course: "",
-              Year: "",
-              schoolNum: "",
-              FullName: ""
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+    } else if (regState.ConfrimPassword != regState.Password) {
+      alert("The Password Does not Match");
+    } else {
+      const data = {
+        Email: regState.Email,
+        Password: regState.Password,
+        FullName: regState.FullName,
+        schoolnum: regState.schoolNum,
+        Course: regState.Course,
+        Year: regState.Year
+      };
+      axios
+        .post(`http://localhost:5000/api/registerStud`, data)
+        .then((res) => {
+          alert(res.data.msg);
+          setRegState({
+            Email: "",
+            Password: "",
+            ConfrimPassword: "",
+            Course: "",
+            Year: "",
+            schoolNum: "",
+            FullName: ""
           });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
   /**
@@ -202,14 +168,14 @@ function Home({ history }) {
       <div ref={regRef} className="regDiv">
         <div className="termsContainer">
           <p>
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Laudantium culpa explicabo odio facilis officia nobis quod ad earum
-            saepe corporis quam, perferendis dolorem accusantium iusto
-            consequatur quisquam necessitatibus et quidem eos quasi assumenda
-            ducimus animi placeat magni. Aperiam commodi unde, alias dolorum
-            vitae aliquam possimus labore illo sed repellat magni Lorem, ipsum
-            dolor sit amet consectetur adipisicing elit. Voluptatibus quaerat
-            optio fuga nisi cum quae eius voluptates, libero mollitia corrupti!
+            " By using this website you certify that you have read and reviewed
+            this Agreement and that you agree to comply with its terms. If you
+            do not want to be bound by the terms of this Agreement, you are
+            advised to leave the website accordingly hemel only grants see and
+            access of this website, its services to those who have accepted its
+            terms we do our best to provide a secure website where it cant be
+            hacked any causes that the data will be hacked then it will be the
+            users fault.
           </p>
           <Checkbox onChange={onChangeCheck}>
             EU Accept Terms & Agreements

@@ -4,7 +4,8 @@ import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import TaskViewer from "./TaskViewer/TaskViewer";
-function OnGoingCalendar({ goal }) {
+import "../Css/calendar.css";
+const OnGoingCalendar = React.forwardRef(({ goal, appointment }, ref) => {
   var randomColor = Math.floor(Math.random() * 16777215).toString(16);
   var events = [];
   const [toggle, setToggle] = useState({
@@ -29,7 +30,7 @@ function OnGoingCalendar({ goal }) {
     });
   }
   if (goal) {
-    events = goal.map((g) => {
+    var goalArray = goal.map((g) => {
       return {
         id: g._id,
         title: g.Subject,
@@ -38,11 +39,22 @@ function OnGoingCalendar({ goal }) {
         color: "#ff5c58"
       };
     });
+    var appointmentArray = appointment.map((a) => {
+      return {
+        id: a._id,
+        title: a.Status,
+        start: a.Date.substr(0, 10),
+        end: a.Date.substr(0, 10),
+        color: "#0D0D0D"
+      };
+    });
+    events = [...goalArray, ...appointmentArray];
   }
   return (
-    <div>
+    <div ref={ref}>
       {goal ? (
         <FullCalendar
+          className="cal"
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           events={events}
@@ -65,6 +77,6 @@ function OnGoingCalendar({ goal }) {
       )}
     </div>
   );
-}
+});
 
 export default OnGoingCalendar;

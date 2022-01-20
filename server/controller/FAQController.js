@@ -29,3 +29,18 @@ exports.deleteFAQ = (req, res) => {
       res.json({ msg: "There was an error", error: err });
     });
 };
+
+exports.searchFAQ = (req, res, next) => {
+  var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
+  FAQ.find({ Question: regex })
+    .then((data) => {
+      if (data.length == 0) {
+        res.json({ msg: "No Data", data: data });
+      } else {
+        res.json({ msg: "Success for finding form", data: data });
+      }
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
+    });
+};

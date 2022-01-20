@@ -1,0 +1,17 @@
+.heads {
+  margin-left: 0rem;
+}
+
+.Opt {
+  display: flex;
+  flex-direction: column;
+}
+
+.mez input,
+textarea {
+  margin-bottom: 10px;
+}
+
+.Owshee {
+  width: 87%;
+}

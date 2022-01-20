@@ -8,7 +8,8 @@ function AdminNav({ history, masterToggle }) {
     Advisory: false,
     Requests: false,
     Forms: false,
-    FAQ: false
+    FAQ: false,
+    Settings: false
   };
   const [toggle, setToggle] = useState(initialState);
   function handleToggle(name) {
@@ -20,8 +21,14 @@ function AdminNav({ history, masterToggle }) {
   }
   return (
     <nav>
-      <h4 className="logo">Admin</h4>
-
+      <div
+        className="navLogo"
+        onClick={() => {
+          handleToggle("Home");
+        }}
+      >
+        <img src="./images/LOGO1.png" alt="" /> <h4>Admin</h4>
+      </div>
       <ul>
         <li
           className={toggle.Home ? "active" : null}
@@ -64,7 +71,15 @@ function AdminNav({ history, masterToggle }) {
         >
           FAQ
         </li>
-        <li>Logout</li>
+        <li
+          className={toggle.Settings ? "active" : null}
+          name="Settings"
+          onClick={() => {
+            handleToggle("Settings");
+          }}
+        >
+          Settings
+        </li>
       </ul>
     </nav>
   );

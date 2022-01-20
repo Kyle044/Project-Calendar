@@ -8,7 +8,7 @@ exports.Register = (req, res) => {
   const Email = req.body.Email;
   const Password = req.body.Password;
   const FullName = req.body.FullName;
-  const schoolnum = req.body.schoolnum;
+  const schoolnum = req.body.SchoolIDNumber;
 
   if (!Email || !Password || !FullName || !schoolnum) {
     res.status(422).json({ msg: "Please Enter All Fields" });
@@ -63,37 +63,39 @@ exports.Signin = (req, res) => {
     .catch((err) => res.status(400).json("The Error is : " + err));
 };
 exports.updateAdmin = (req, res) => {
-  const { Email, Password, Fullname, schoolnum, id } = req.body;
-  if (!id) {
-    res.status(402).json("Please Input The Admin ID to Search");
-  }
-  Admin.findById(id)
-    .then((admin) => {
-      if (!Email) {
-      } else {
-        admin.Email = Email;
-      }
-      if (!Password) {
-      } else {
-        admin.Password = Password;
-      }
-      if (!Fullname) {
-      } else {
-        admin.Fullname = Fullname;
-      }
-      if (!schoolnum) {
-      } else {
-        admin.SchoolIDNumber = schoolnum;
-      }
+  const { Email, Password, FullName, SchoolIDNumber, id } = req.body;
+  bcrypt.hash(Password, 12).then((hashedpassword) => {
+    if (!id) {
+      res.status(402).json("Please Input The Admin ID to Search");
+    }
+    Admin.findById(id)
+      .then((admin) => {
+        if (!Email) {
+        } else {
+          admin.Email = Email;
+        }
+        if (!Password) {
+        } else {
+          admin.Password = hashedpassword;
+        }
+        if (!FullName) {
+        } else {
+          admin.Fullname = FullName;
+        }
+        if (!SchoolIDNumber) {
+        } else {
+          admin.SchoolIDNumber = SchoolIDNumber;
+        }
 
-      admin
-        .save()
-        .then((ad) => {
-          res.json({ msg: "Successfuly Updated", data: ad });
-        })
-        .catch((err) => res.status(400).json("Error : " + err));
-    })
-    .catch((err) => res.status(400).json("Error : " + err));
+        admin
+          .save()
+          .then((ad) => {
+            res.json({ msg: "Successfuly Updated", data: ad });
+          })
+          .catch((err) => res.status(400).json("Error : " + err));
+      })
+      .catch((err) => res.status(400).json("Error : " + err));
+  });
 };
 
 exports.getOneAdmin = (req, res) => {

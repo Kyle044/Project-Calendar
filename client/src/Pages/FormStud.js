@@ -7,6 +7,7 @@ import Cards from "../Components/Card";
 import "../Css/formDownloadPage/form.css";
 import Nav from "../Components/studentdashComponents/Nav";
 import Footer from "../Components/studentdashComponents/Footer";
+import Header from "../Components/studentdashComponents/header";
 function FormStud({ history }) {
   const [form, setForm] = useState(null);
   useEffect(() => {
@@ -21,7 +22,7 @@ function FormStud({ history }) {
   }, []);
   return (
     <div className="mainStud">
-      <Nav />
+      <Header />
       <h1 className="title">
         The Forms to Download in The Office Of Registrar.
       </h1>
