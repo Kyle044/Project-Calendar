@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
 import Card from "./Card";
 import { Button, Input, Badge, Empty } from "antd";
@@ -9,6 +9,10 @@ import axios from "axios";
 import "./home.css";
 import validator from "validator";
 import moment from "moment";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+import ReactToPrint from "react-to-print";
+
 function Home({
   goal,
   goalCount,
@@ -19,6 +23,23 @@ function Home({
   setGoalCount
 }) {
   const [search, setSearch] = useState({ Search: "" });
+  const [appointment, setAppointment] = useState({
+    Date: "",
+    From: "",
+    To: ""
+  });
+  const [appoint, setAppoint] = useState([]);
+  const getAppointment = () => {
+    axios
+      .get(`${process.env.REACT_APP_KEY}/getAppointment`)
+      .then((res) => {
+        setAppoint(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   var completeCount = 0;
   var ongoingCount = 0;
   const { Search } = Input;
@@ -166,14 +187,67 @@ function Home({
         console.log(err);
       });
   }, []);
+  useEffect(() => {
+    getAppointment();
+  }, []);
   const [today, setToday] = useState(moment(new Date()).format("MMMM Do YYYY"));
   useEffect(() => {
     setToday(moment(new Date()).format("MMMM Do YYYY"));
   }, [today]);
+
+  const downloadCalendar = (ref) => {
+    console.log(ref);
+  };
+  const componentRef = useRef();
+  const calendarRef = useRef();
+
+  const appChange = (e) => {
+    const { value, name } = e.target;
+    console.log(name + " : " + value);
+    setAppointment((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+  const appSubmit = () => {
+    if (moment(appointment.Date).isBefore(new Date())) {
+      alert("The input date is from the past");
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_KEY}/insertAppointment`, appointment)
+        .then((res) => {
+          alert(res.data);
+          setAppointment({
+            Date: "",
+            From: "",
+            To: ""
+          });
+          getAppointment();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleDeleteAppoint = (id) => {
+    if (window.confirm("Are you sure you want to delete this appointment")) {
+      axios
+        .delete(`${process.env.REACT_APP_KEY}/deleteAppointment`, {
+          data: { id: id }
+        })
+        .then((res) => {
+          alert("Sucessfully Deleted");
+          getAppointment();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+    }
+  };
   return (
     <div className="homeContainer">
-      <section className="home1">
-        <div className="dateContainer ">
+      {/* <div className="dateContainer ">
           <h1>{today}</h1>
           <p>
             "{qoute ? `${qoute.text} - ${qoute.author}` : "Getting Qoutes"}"
@@ -182,11 +256,12 @@ function Home({
         <div className="pieContainer">
           <Pie {...config} autoFit={true} />
           <Pie {...confige} autoFit={true} />
-        </div>
-      </section>
+        </div> */}
+
       <section className="home2">
-        <OnGoingCalendar goal={goal} />
+        <OnGoingCalendar goal={goal} ref={componentRef} appointment={appoint} />
       </section>
+
       <section className="sec3">
         <div className="inputContainer">
           <div className="cont">
@@ -204,17 +279,19 @@ function Home({
             >
               Search
             </Button>
-            <InsertGoal Owner={Owner} setGoal={setGoal} />
-            <Button
-              onClick={() => {
-                alert("Download Success");
-              }}
-            >
-              Download Calendar
-            </Button>
+            <InsertGoal
+              Owner={Owner}
+              setGoal={setGoal}
+              setGoalCount={setGoalCount}
+            />
+
+            <ReactToPrint
+              trigger={() => <Button>Print Current Calendar</Button>}
+              content={() => componentRef.current}
+            />
           </div>
         </div>
-        <h4 className="headers">Goals</h4>
+        <h5 className="headers">Goals</h5>
         {goal.length != 0 ? (
           <div className="cardContainer">
             {goal.map((g) => {
@@ -227,6 +304,63 @@ function Home({
           <Empty style={{ margin: "1px" }} />
         )}
       </section>
+      <h5 className="headers">Appointment Schedule List</h5>
+      <section className="apsec">
+        <div className="cardContainer">
+          {appoint.map((a) => {
+            return (
+              <div className="CardApp">
+                <h1 className="white">{new Date(a.Date).toDateString()}</h1>
+                <h4 className="white">
+                  From {moment(a.Time.From, "HH:mm:ss").format("h:mm A")} To{" "}
+                  {moment(a.Time.To, "HH:mm:ss").format("h:mm A")}
+                </h4>
+                <h4 className="white">Status : {a.Status}</h4>
+                <Button
+                  danger
+                  onClick={() => {
+                    handleDeleteAppoint(a._id);
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+      <div className="pForm">
+        <h5 className="headers"> Add Appointment Schedule</h5>
+        <label>Date</label>
+        <input
+          type="date"
+          onChange={appChange}
+          name="Date"
+          value={appointment.Date}
+        />
+        <label>Time To Begin</label>
+        <input
+          type="time"
+          onChange={appChange}
+          name="From"
+          value={appointment.From}
+        />
+        <label>Time To End</label>
+        <input
+          type="time"
+          onChange={appChange}
+          name="To"
+          value={appointment.To}
+        />
+        <button
+          type="submit"
+          onClick={() => {
+            appSubmit();
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 }

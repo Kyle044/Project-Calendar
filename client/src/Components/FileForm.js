@@ -3,7 +3,7 @@ import axios from "axios";
 import "../Css/form.css";
 import { Button, Input, Modal } from "antd";
 
-function FileForm() {
+function FileForm({ setStates }) {
   var initialState = {
     File: {},
     Description: ""
@@ -47,8 +47,17 @@ function FileForm() {
             Description: state.Description
           })
           .then((res) => {
-            alert(res.data.msg);
-            setState(initialState);
+            axios
+              .get(`${process.env.REACT_APP_KEY}/getForm`)
+              .then((res) => {
+                setStates(res.data.data);
+                   alert(res.data.msg);
+                   setState(initialState);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+         
           })
           .catch((err) => {
             console.log(err);
@@ -68,9 +77,7 @@ function FileForm() {
   }, [state]);
   return (
     <div>
-      <Button danger onClick={showModal}>
-        Add
-      </Button>
+      <Button onClick={showModal}>Add</Button>
       <Modal
         title="Form"
         visible={isModalVisible}

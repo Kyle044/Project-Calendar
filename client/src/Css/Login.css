@@ -211,4 +211,7 @@
 
 .termsContainer {
   text-align: justify;
+  border: 5px solid #ff5c58;
+  padding: 1rem;
+  border-radius: 10px;
 }

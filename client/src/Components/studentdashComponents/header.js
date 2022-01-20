@@ -1,24 +1,29 @@
 import React from "react";
 import "../../Css/header.css";
-function Header() {
+import { withRouter } from "react-router-dom";
+function Header({ history }) {
   return (
-    <div>
-       <div className="mHeader">
+    <div style={{ width: "100%" }}>
+      <div className="mHeader">
+        {/* <img src="./images/logotry.png" alt=""style={{height: "6%", width: "6%",objectFit:"contain"}}/>  */}
 
-
-     
-{/* <img src="./images/logotry.png" alt=""style={{height: "6%", width: "6%",objectFit:"contain"}}/>  */}
-
-<div className="CC2">
-    <p className="School">Eulogio "Amang" Rodriguez Institute of Science and Technology </p>      
-   <h2 className="title" style={{color:"#ffe431"}}>OFFICE OF THE REGISTRAR</h2>
-   <p className="address">General Mariano Alvarez, Cavite </p>      
-</div>
-
-</div>
-  
+        <div
+          className="CC2"
+          onClick={() => {
+            history.push("/StudentDash");
+          }}
+        >
+          <p className="School">
+            Eulogio "Amang" Rodriguez Institute of Science and Technology{" "}
+          </p>
+          <h2 className="titles" style={{ color: "#ffe431" }}>
+            OFFICE OF THE REGISTRAR
+          </h2>
+          <p className="address">General Mariano Alvarez, Cavite </p>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default Header;
+export default withRouter(Header);

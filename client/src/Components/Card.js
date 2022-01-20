@@ -67,7 +67,14 @@ function Card({ history }) {
           <h3>About the Registrar</h3>
         </div>
         <div className="cardBtn">
-          <Button danger>Read</Button>
+          <Button
+            danger
+            onClick={() => {
+              history.push("/AboutReg");
+            }}
+          >
+            Read
+          </Button>
         </div>
       </div>
 
@@ -87,10 +94,17 @@ function Card({ history }) {
           <img src="./images/cabinet.png" alt="" />
         </div>
         <div className="cardDescript">
-          <h3>Transaction History</h3>
+          <h3>Appointment History</h3>
         </div>
         <div className="cardBtn">
-          <Button danger>Read</Button>
+          <Button
+            danger
+            onClick={() => {
+              history.push("/appHistory");
+            }}
+          >
+            Preview
+          </Button>
         </div>
       </div>
     </div>

@@ -35,9 +35,7 @@ function FAQStud({ history }) {
 
       <div style={{ textAlign: "center" }}>
         <h2 className="header">
-          <span className="spanfaq">FAQ</span>
           <span style={{ color: "grey", fontWeight: "bold" }}>
-            {" "}
             Frequently asked questions to the Office of the Registrar
           </span>
           .

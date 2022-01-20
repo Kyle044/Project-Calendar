@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const reqSchema = new Schema(
   {
     Sender: {},
-    Title: String,
+    Title: [],
+    Appointment: { type: Schema.Types.ObjectId, ref: "Appointment" },
+    Program: String,
     Description: String,
     File: [{}],
     Status: String

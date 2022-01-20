@@ -7,6 +7,7 @@ import Footer from "../Components/studentdashComponents/Footer";
 import { Skeleton, Carousel, Button } from "antd";
 import { verifyToken } from "../Functions/api";
 import "../Css/student/StudentDash.css";
+import Header from "../Components/studentdashComponents/header";
 import axios from "axios";
 function StudentDash({ history }) {
   const [info, setInfo] = useState();
@@ -55,7 +56,7 @@ function StudentDash({ history }) {
            * This is the section 1
            */}
           <section className="section1">
-            <Nav />
+            <Header />
 
             <div className="container1">
               <div className="msg">
@@ -180,10 +181,17 @@ function StudentDash({ history }) {
                 <img src="./images/cabinet.png" alt="" />
               </div>
               <div className="cardDescript">
-                <h3>Transaction History</h3>
+                <h3>Appointment History</h3>
               </div>
               <div className="cardBtn">
-                <Button danger>Read</Button>
+                <Button
+                  danger
+                  onClick={() => {
+                    history.push("/appHistory");
+                  }}
+                >
+                  Read
+                </Button>
               </div>
             </div>
           </div>

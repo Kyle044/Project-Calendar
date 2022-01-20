@@ -32,3 +32,17 @@ exports.InsertAdvisory = (req, res) => {
       res.json({ msg: "There is some error", error: err });
     });
 };
+exports.searchAdvisory = (req, res, next) => {
+  var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
+  Advisory.find({ Description: regex })
+    .then((data) => {
+      if (data.length == 0) {
+        res.json({ msg: "No Data", data: data });
+      } else {
+        res.json({ msg: "Success for finding advisory", data: data });
+      }
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
+    });
+};

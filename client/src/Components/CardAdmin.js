@@ -1,6 +1,6 @@
 import React from "react";
 import FaqForm from "./FaqForm";
-import FileForm from "./FileForm";
+
 import ".././Css/CardAdmin.css";
 import { Button } from "antd";
 import { withRouter } from "react-router-dom";
@@ -78,7 +78,6 @@ function CardAdmin({ setGoalCount, setGoal, history }) {
             <h3>Post Form</h3>
           </div>
           <div className="cardBtn">
-            <FileForm />
             <Button
               onClick={() => {
                 history.push("/formTable");

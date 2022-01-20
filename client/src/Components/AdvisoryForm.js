@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Input, Modal, Button } from "antd";
 import axios from "axios";
-function AdvisoryForm() {
+function AdvisoryForm({ setStates }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -13,7 +13,15 @@ function AdvisoryForm() {
         data: state
       })
       .then((res) => {
-        alert(res.data.msg);
+        axios
+          .get(`${process.env.REACT_APP_KEY}/getAdvisory`)
+          .then((res) => {
+            setStates(res.data.data);
+            alert(res.data.msg);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         setIsModalVisible(false);
       })
       .catch((err) => {
@@ -39,9 +47,7 @@ function AdvisoryForm() {
   }, [state]);
   return (
     <div>
-      <Button danger onClick={showModal}>
-        Add
-      </Button>
+      <Button onClick={showModal}>Add</Button>
       <Modal
         title="Advisory"
         visible={isModalVisible}

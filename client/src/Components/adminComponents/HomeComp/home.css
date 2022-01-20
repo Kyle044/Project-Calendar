@@ -160,7 +160,14 @@
 }
 
 .home2 {
-  margin: 10px;
+  padding: 2rem;
+  background-color: #ff5c58;
+}
+
+.home2 > div {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
 }
 
 .dateContainer h1 {
@@ -174,4 +181,88 @@
 
 .sec3 {
   height: 24rem;
+}
+
+.appointmentContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+  padding: 1rem;
+}
+.appointmentContainer .appointmentCard {
+  height: auto;
+  width: 18%;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentContainer .appointmentCard h4 {
+  text-align: center;
+  height: 3rem;
+  padding-top: 1rem;
+}
+.appointmentContainer .appointmentCard .acard {
+  background-color: #ff5c58;
+  border-radius: 15px;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pForm {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 4rem;
+  margin-top: 2rem;
+  box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  margin-bottom: 2rem;
+}
+
+.pForm input {
+  width: 70%;
+}
+
+.pForm label {
+  width: 70%;
+}
+.pForm button {
+  width: 40% !important;
+  height: 2rem;
+}
+.apsec {
+  height: 48vh;
+}
+.CardApp {
+  height: auto;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(75, 75, 75, 1) 100%
+  );
+  -webkit-box-shadow: 1px 0px 12px 0px #787878;
+  -moz-box-shadow: 1px 0px 12px 0px #787878;
+  box-shadow: 1px 0px 12px 0px #787878;
+}
+
+.white {
+  color: white;
+  text-align: center;
 }

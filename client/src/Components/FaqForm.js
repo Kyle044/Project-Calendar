@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal, Button, Input } from "antd";
 import "../Css/Faq.css";
-function FaqForm() {
+function FaqForm({ setStates }) {
   var initialState = {
     Question: "",
     Answer: ""
@@ -18,8 +18,16 @@ function FaqForm() {
     axios
       .post(`${process.env.REACT_APP_KEY}/insertFAQ`, faq)
       .then((res) => {
-        alert(res.data.msg);
-        setFaq(initialState);
+        axios
+          .get(`${process.env.REACT_APP_KEY}/getFAQ`)
+          .then((res) => {
+            setStates(res.data.data);
+            alert(res.data.msg);
+            setFaq(initialState);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -42,9 +50,7 @@ function FaqForm() {
   }, [faq]);
   return (
     <div>
-      <Button danger onClick={showModal}>
-        Post FAQ
-      </Button>
+      <Button onClick={showModal}>Add</Button>
       <Modal
         title="Post a FAQ"
         visible={isModalVisible}
