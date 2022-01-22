@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../../Css/header.css";
 import { withRouter } from "react-router-dom";
 function Header({ history }) {
@@ -9,6 +9,15 @@ function Header({ history }) {
     } else {
     }
   };
+  const link = useRef(null);
+
+  const hideMenu = () => {
+    link.current.style.right = "-200px";
+  };
+  const showMenu = () => {
+    link.current.style.right = "0";
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <div className="mHeader">
@@ -28,14 +37,56 @@ function Header({ history }) {
           </h2>
           <p className="address">General Mariano Alvarez, Cavite </p>
         </div>
-        <h4
-          className="logout"
+        <label
+          className="burger"
           onClick={() => {
-            handleLogout();
+            showMenu();
           }}
         >
-          Log out
-        </h4>
+          &#9776;
+        </label>
+        <div className="headlinks" id="nav-links" ref={link}>
+          <label
+            className="burger"
+            onClick={() => {
+              hideMenu();
+            }}
+          >
+            &#9776;
+          </label>
+          <h4
+            className="logout"
+            onClick={() => {
+              history.push("/AboutReg");
+            }}
+          >
+            About
+          </h4>
+          <h4
+            className="logout"
+            onClick={() => {
+              history.push("/FAQStudPage");
+            }}
+          >
+            FAQ
+          </h4>
+          <h4
+            className="logout"
+            onClick={() => {
+              history.push("/studSettings");
+            }}
+          >
+            Settings
+          </h4>
+          <h4
+            className="logout"
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            Log out
+          </h4>
+        </div>
       </div>
     </div>
   );

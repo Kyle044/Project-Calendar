@@ -22,24 +22,7 @@ function Card({ history }) {
           </Button>
         </div>
       </div>
-      <div className="card">
-        <div className="cardHeader">
-          <img src="./images/light-bulb.png" alt="" />
-        </div>
-        <div className="cardDescript">
-          <h3>Frequently Asked Questions</h3>
-        </div>
-        <div className="cardBtn">
-          <Button
-            danger
-            onClick={() => {
-              history.push("/FAQStudPage");
-            }}
-          >
-            Read
-          </Button>
-        </div>
-      </div>
+
       <div className="card">
         <div className="cardHeader">
           <img src="./images/downloadfile.png" alt="" />
@@ -59,43 +42,6 @@ function Card({ history }) {
         </div>
       </div>
 
-      <div className="card">
-        <div className="cardHeader">
-          <img src="./images/school.png" alt="" />
-        </div>
-        <div className="cardDescript">
-          <h3>About the Registrar</h3>
-        </div>
-        <div className="cardBtn">
-          <Button
-            danger
-            onClick={() => {
-              history.push("/AboutReg");
-            }}
-          >
-            Read
-          </Button>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="cardHeader">
-          <img src="./images/guide.png" alt="" />
-        </div>
-        <div className="cardDescript">
-          <h3>Settings</h3>
-        </div>
-        <div className="cardBtn">
-          <Button
-            danger
-            onClick={() => {
-              history.push("/studSettings");
-            }}
-          >
-            Preview
-          </Button>
-        </div>
-      </div>
       <div className="card">
         <div className="cardHeader">
           <img src="./images/cabinet.png" alt="" />

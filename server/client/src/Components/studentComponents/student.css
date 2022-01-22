@@ -1,0 +1,124 @@
+.studHeader {
+  min-height: 80vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+    url(./eccIMG.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.text-box {
+  width: 90%;
+  color: #fff;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+  text-align: center;
+}
+
+.text-box h1 {
+  font-size: 62px;
+  color: white;
+}
+
+.text-box p {
+  margin: 10px 0 40px;
+  font-size: 14px;
+}
+
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  position: relative;
+}
+
+.hero-btn:hover {
+  border: 1px solid #f44336;
+  background: #f44336;
+  transition: 1s;
+}
+
+.masterNews {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+}
+
+.newsCard {
+  height: auto;
+  width: 83%;
+  margin-bottom: 4rem;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: rgb(240, 208, 208);
+  border: 4px solid #ff5c58;
+  box-shadow: 2px 5px 34px -1px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 2px 5px 34px -1px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 2px 5px 34px -1px rgba(0, 0, 0, 0.35);
+}
+
+.newsInnerCard {
+  display: flex;
+}
+
+.newsInnerCard .newsImg {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.newsInnerCard .newsImg img {
+  height: 30vh;
+  width: auto;
+
+  transition: 0.8s ease;
+}
+
+.newsInnerCard .newsImg img:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.newstextContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-left: 3px solid #ff5c58;
+}
+
+.newsDescription {
+  text-align: justify;
+}
+.newsSubject {
+  color: #ff5c58;
+}
+.newsDate {
+  color: #ff5c58;
+}
+
+@media (max-width: 700px) {
+  .text-box h1 {
+    font-size: 20px;
+    color: white;
+  }
+
+  .text-box p {
+    margin: 10px 0 40px;
+    font-size: 14px;
+  }
+
+  .newsInnerCard {
+    display: flex;
+    flex-direction: column;
+  }
+}
