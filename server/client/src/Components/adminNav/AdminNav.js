@@ -44,7 +44,7 @@ function AdminNav({ history, masterToggle }) {
             handleToggle("Advisory");
           }}
         >
-          Advisory
+          News
         </li>
         <li
           className={toggle.Requests ? "active" : null}

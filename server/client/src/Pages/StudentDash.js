@@ -6,9 +6,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Footer from "../Components/studentdashComponents/Footer";
 import { Skeleton, Carousel, Button } from "antd";
 import { verifyToken } from "../Functions/api";
+import Card from "../Components/Card";
 import "../Css/student/StudentDash.css";
 import Header from "../Components/studentdashComponents/header";
 import axios from "axios";
+import FirstSection from "../Components/studentComponents/FirstSection.js";
+import SecondSection from "../Components/studentComponents/SecondSection.js";
 function StudentDash({ history }) {
   const [info, setInfo] = useState();
 
@@ -19,6 +22,7 @@ function StudentDash({ history }) {
       .get(`${process.env.REACT_APP_KEY}/getAdvisory`)
       .then((res) => {
         setAnnounce(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -52,156 +56,10 @@ function StudentDash({ history }) {
     <div>
       {info ? (
         <div>
-          {/**
-           * This is the section 1
-           */}
-          <section className="section1">
-            <Header />
-
-            <div className="container1">
-              <div className="msg">
-                <h1>
-                  Hello and{" "}
-                  {curHr < 12
-                    ? "Good Morning"
-                    : curHr < 18
-                    ? "Good Afternoon"
-                    : "Good Evening"}{" "}
-                  {info.Fullname}
-                </h1>
-                <p>
-                  Here is where you can request to the registrar and receive the
-                  response from the registrar.
-                </p>
-              </div>
-              <img src="./images/logo.png" alt="" />
-            </div>
-          </section>
-          <section className="section2">
-            <Carousel autoplay>
-              {announce.map((a) => {
-                return (
-                  <div>
-                    <h3 style={contentStyle}>{a.Description}</h3>
-                    <p></p>
-                  </div>
-                );
-              })}
-            </Carousel>
-          </section>
-
-          <div className="section3">
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/document.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Online Request Student Records</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    request();
-                  }}
-                >
-                  Request
-                </Button>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/light-bulb.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Frequently Asked Questions</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/FAQStudPage");
-                  }}
-                >
-                  Read
-                </Button>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/downloadfile.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Forms To Download</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/FormStudPage");
-                  }}
-                >
-                  Preview
-                </Button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/school.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>About the Registrar</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/AboutReg");
-                  }}
-                >
-                  Read
-                </Button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/guide.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Settings</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/studSettings");
-                  }}
-                >
-                  Preview
-                </Button>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardHeader">
-                <img src="./images/cabinet.png" alt="" />
-              </div>
-              <div className="cardDescript">
-                <h3>Appointment History</h3>
-              </div>
-              <div className="cardBtn">
-                <Button
-                  danger
-                  onClick={() => {
-                    history.push("/appHistory");
-                  }}
-                >
-                  Preview
-                </Button>
-              </div>
-            </div>
-          </div>
+          <Header />
+          <FirstSection />
+          <Card />
+          <SecondSection announce={announce} />
           <Footer />
         </div>
       ) : (

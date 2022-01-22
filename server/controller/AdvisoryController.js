@@ -12,6 +12,7 @@ exports.deleteAdvisory = (req, res) => {
 
 exports.getAdvisory = (req, res) => {
   Advisory.find()
+    .sort({ createdAt: -1 })
     .then((result) => {
       res.json({ msg: "Success getting advisory", data: result });
     })
@@ -21,7 +22,7 @@ exports.getAdvisory = (req, res) => {
 };
 
 exports.InsertAdvisory = (req, res) => {
-  var newAdvisory = new Advisory(req.body.data);
+  var newAdvisory = new Advisory(req.body);
 
   newAdvisory
     .save()
@@ -34,7 +35,7 @@ exports.InsertAdvisory = (req, res) => {
 };
 exports.searchAdvisory = (req, res, next) => {
   var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
-  Advisory.find({ Description: regex })
+  Advisory.find({ Subject: regex })
     .then((data) => {
       if (data.length == 0) {
         res.json({ msg: "No Data", data: data });

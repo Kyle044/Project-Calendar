@@ -22,9 +22,9 @@ exports.InsertFile = (req, res, next) => {
         next();
       });
   });
-  console.log(fileArray);
+
   res.json({
-    msg: "Success",
+    msg: "Successzz",
     file: req.files,
     bool: true
   });

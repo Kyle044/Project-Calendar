@@ -37,7 +37,7 @@ function Advisory() {
   return (
     <div className="table">
       <div className="heads">
-        <h2>Advisory Table</h2>
+        <h2>News Table</h2>
         <div className="optionCont">
           <input
             type="text"
@@ -60,6 +60,7 @@ function Advisory() {
       <table className="content-table">
         <thead>
           <tr>
+            <th>Subject</th>
             <th>Description</th>
             <th>Options</th>
           </tr>
@@ -69,6 +70,7 @@ function Advisory() {
           {state.map((advisory) => {
             return (
               <tr>
+                <td>{advisory.Subject}</td>
                 <td>{advisory.Description}</td>
                 <td>
                   <Button

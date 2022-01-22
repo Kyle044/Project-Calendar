@@ -4,7 +4,13 @@ const Schema = mongoose.Schema;
 
 const advisorySchema = new Schema(
   {
-    Description: String
+    Subject: String,
+    Description: String,
+    Files: {
+      FileName: String,
+      Directory: String,
+      Size: Number
+    }
   },
   { timestamps: true }
 );
