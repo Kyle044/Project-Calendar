@@ -3,7 +3,7 @@ var _ = require("lodash");
 
 var fs = require("fs");
 exports.InsertFile = (req, res, next) => {
-  var fileArray = [];
+  let fileArray = [];
   _.forEach(req.files, (value, key) => {
     const newFile = new File({
       FileName: value.filename,
@@ -22,7 +22,7 @@ exports.InsertFile = (req, res, next) => {
         next();
       });
   });
-
+  console.log(fileArray);
   res.json({
     msg: "Success",
     file: req.files,

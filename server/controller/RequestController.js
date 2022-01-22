@@ -52,6 +52,45 @@ async function smtp(to, sub, mes, files) {
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
+async function smtpToRegistrar(to, from, sub, mes, program) {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "eccjournal560@gmail.com", // generated ethereal user
+      pass: "thesis123" // generated ethereal password
+    }
+  });
+
+  var option = {
+    from: from, // sender address
+    to: to, // list of receivers
+    subject: sub, // Subject line
+    text: mes, // plain text body
+    html: `<div >
+        <h4>From : ${from}</h4>
+        <p>${mes}</p> <br />
+        <h4>Graduate program : ${program}</h4>
+            </div>` // html body
+  };
+  let info;
+  // send mail with defined transport object
+  info = await transporter.sendMail(option);
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
 exports.InsertRequest = (req, res, next) => {
   const { sender, description, file, title, program, appointment } = req.body;
 
@@ -73,6 +112,18 @@ exports.InsertRequest = (req, res, next) => {
           newReq
             .save()
             .then((req) => {
+              smtpToRegistrar(
+                "registrar044@gmail.com",
+                sender.Email,
+                "Requesting for : " +
+                  title.map((t) => {
+                    return t;
+                  }) +
+                  " , ",
+                description,
+                program
+              );
+
               res.json({
                 msg: "The request is sent successfully",
                 requestInfo: req
@@ -117,19 +168,33 @@ exports.getCount = (req, res, next) => {
 exports.deleteRequest = (req, res, next) => {
   var error = false;
 
-  Request.findByIdAndDelete(req.body.id)
-    .then((reqs) => {
-      _.forEach(reqs.File, (file) => {
-        fs.unlink(file.path, (err) => {
-          if (err) {
-            error = true;
-          }
+  Request.findById(req.body.id)
+    .then((request) => {
+      Appointment.findByIdAndDelete(request.Appointment)
+        .then((data) => {
+          Request.findByIdAndDelete(req.body.id)
+            .then((reqs) => {
+              _.forEach(reqs.File, (file) => {
+                fs.unlink(file.path, (err) => {
+                  if (err) {
+                    error = true;
+                  }
+                });
+              });
+              res.json({ msg: "Success deleting the request" });
+            })
+            .catch((err) => {
+              res
+                .status(422)
+                .json({ msg: "first The request is not in the database" });
+            });
+        })
+        .catch((err) => {
+          res.json(err);
         });
-      });
-      res.json({ msg: "Success deleting the request" });
     })
     .catch((err) => {
-      res.status(422).json({ msg: "first The request is not in the database" });
+      res.json(err);
     });
 };
 

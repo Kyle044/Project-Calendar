@@ -1,5 +1,5 @@
 let Appointment = require("../model/Appointment");
-
+let Request = require("../model/Request");
 exports.insertAppointment = (req, res) => {
   const { Date, From, To } = req.body;
   var newAppointment = new Appointment({
@@ -30,9 +30,15 @@ exports.getAppointments = (req, res) => {
     });
 };
 exports.deleteAppointment = (req, res) => {
-  Appointment.findByIdAndDelete(req.body.id)
+  Request.findOneAndDelete({ Appointment: req.body.id })
     .then((app) => {
-      res.json(app);
+      Appointment.findByIdAndDelete(req.body.id)
+        .then((app) => {
+          res.json(app);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
     })
     .catch((err) => {
       res.json(err);

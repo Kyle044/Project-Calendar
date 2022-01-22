@@ -9,7 +9,11 @@ const {
   deleteGoal,
   searchGoal,
   markDone,
-  deleteTask
+  deleteTask,
+  editDescription,
+  deleteFileAttachment,
+  addFileAttachment,
+  addTask
 } = require("../controller/GoalController");
 
 router.post("/insertGoal", InsertGoal);
@@ -18,5 +22,9 @@ router.get("/getGoalCount", getCount);
 router.delete("/deleteGoal", deleteGoal);
 router.post("/searchGoal", searchGoal);
 router.post("/markDone", markDone);
+router.post("/editDescription", editDescription);
 router.post("/deleteTask", deleteTask);
+router.post("/deleteAttachment", deleteFileAttachment);
+router.post("/addAttachment", addFileAttachment);
+router.post("/addTask", addTask);
 module.exports = router;
