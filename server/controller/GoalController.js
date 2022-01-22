@@ -152,3 +152,91 @@ exports.deleteTask = (req, res, next) => {
       res.json(err);
     });
 };
+exports.editDescription = (req, res) => {
+  Goal.findById(req.body.id)
+    .then((goal) => {
+      goal.Description = req.body.description;
+      goal
+        .save()
+        .then((g) => {
+          res.json("Successfully Updated");
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
+exports.deleteFileAttachment = (req, res) => {
+  Goal.findOneAndUpdate(
+    { _id: req.body.id },
+    {
+      $pull: {
+        Files: { _id: req.body.file }
+      }
+    },
+    { safe: true }
+  )
+    .then((goal) => {
+      res.json("Success!");
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
+exports.addFileAttachment = (req, res) => {
+  Goal.findById(req.body.id)
+    .then((goal) => {
+      req.body.file.forEach((f) => {
+        goal.Files.push(f);
+      });
+      goal.save().then(() => {
+        res.json("Success");
+      });
+    })
+    .catch((err) => {
+      res.json(err);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+exports.addTask = (req, res) => {
+  const { Subject, Description, StartDate, DueDate } = req.body.data;
+  const { id } = req.body;
+  const newTask = new Task({
+    Subject: Subject,
+    Description: Description,
+    startDate: StartDate,
+    dueDate: DueDate,
+    Handler: "N/A",
+    Status: "On Going"
+  });
+  newTask
+    .save()
+    .then((task) => {
+      Goal.findById(id)
+        .then((goal) => {
+          goal.Tasks.push(task._id);
+
+          goal
+            .save()
+            .then((goal) => {
+              res.json("Success");
+            })
+            .catch((err) => {
+              res.json(err);
+            });
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};

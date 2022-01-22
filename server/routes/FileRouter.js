@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const path = require("path");
+
 const multer = require("multer");
 const {
   InsertFile,
@@ -10,7 +10,7 @@ const {
 } = require("../controller/FileController");
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../client/public/uploads");
+    cb(null, "./client/public/uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "--" + file.originalname);

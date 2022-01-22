@@ -1,0 +1,357 @@
+.homeContainer {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.homeContainer::-webkit-scrollbar {
+  width: 10px;
+}
+.homeContainer::-webkit-scrollbar-track {
+  background-color: darkgrey;
+}
+.homeContainer::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.cardContainer {
+  width: 300px;
+  overflow-y: auto;
+  height: 80vw;
+  overflow-x: auto;
+  position: relative;
+  top: -1.5rem;
+}
+.cardContainer > div {
+  width: 240px;
+  height: 240px;
+  margin: 50px;
+}
+
+.cardContainer {
+  transform: rotate(-90deg);
+  transform-origin: right top;
+}
+.cardContainer > div {
+  transform: rotate(90deg) translateY(10%);
+}
+
+.cardContainer {
+  transform: rotate(-90deg) translateY(-270px);
+  scroll-behavior: smooth;
+}
+.cardContainer::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.Card {
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+  -webkit-box-shadow: 1px 0px 12px 0px #787878;
+  -moz-box-shadow: 1px 0px 12px 0px #787878;
+  box-shadow: 1px 0px 12px 0px #787878;
+}
+
+.Card h4 {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.Card .date {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}
+
+.Card .cardBtn {
+  position: relative;
+  bottom: -30px;
+}
+
+.Card .contentCard {
+  position: relative;
+  width: 80%;
+  bottom: -15px;
+  right: -25px;
+}
+
+.ant-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.headers {
+  margin-left: 4%;
+  font-size: 1.2rem;
+}
+
+.notifIcon {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+
+.notifIcon:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-left: 8%;
+  margin-top: 4%;
+  margin-bottom: 3%;
+}
+.inputContainer .cont input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 3px;
+  width: 250px;
+  outline: none;
+}
+
+.inputContainer .cont input:focus::placeholder {
+  color: transparent;
+}
+.inputContainer .cont input::placeholder {
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.home1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 1rem;
+
+  background-color: #ff5c58;
+}
+
+.home1 .pieContainer {
+  display: flex;
+}
+.home1 .pieContainer div {
+  width: 15rem;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+}
+
+.complete {
+  color: green;
+}
+
+.home2 {
+  padding: 2rem;
+  background-color: #ff5c58;
+}
+
+.home2 > div {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.dateContainer h1 {
+  color: white;
+  font-size: 2rem;
+}
+.dateContainer p {
+  font-size: 0.8rem;
+  color: white;
+}
+
+.sec3 {
+  height: 24rem;
+}
+
+.appointmentContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+  padding: 1rem;
+}
+.appointmentContainer .appointmentCard {
+  height: auto;
+  width: 18%;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.appointmentContainer .appointmentCard h4 {
+  text-align: center;
+  height: 3rem;
+  padding-top: 1rem;
+}
+.appointmentContainer .appointmentCard .acard {
+  background-color: #ff5c58;
+  border-radius: 15px;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pForm {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 4rem;
+  margin-top: 2rem;
+  box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 5px 19px -2px rgba(0, 0, 0, 0.75);
+  margin-bottom: 2rem;
+}
+
+.pForm input {
+  width: 70%;
+}
+
+.pForm label {
+  width: 70%;
+}
+.pForm button {
+  width: 40% !important;
+  height: 2rem;
+}
+.apsec {
+  height: 48vh;
+}
+.CardApp {
+  height: auto;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(75, 75, 75, 1) 100%
+  );
+  -webkit-box-shadow: 1px 0px 12px 0px #787878;
+  -moz-box-shadow: 1px 0px 12px 0px #787878;
+  box-shadow: 1px 0px 12px 0px #787878;
+}
+
+.white {
+  color: white;
+  text-align: center;
+}
+
+.descriptContainer {
+  background-color: #ff5c58;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.descriptContainer button {
+  width: 100%;
+  overflow: hidden;
+}
+.w {
+  font-size: 1rem;
+}
+
+.anim {
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  top: -4.5px;
+  margin-left: 10px;
+}
+.anim:hover {
+  background-color: white;
+  border-radius: 2px;
+}
+.anima {
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  top: -4.5px;
+  margin-left: 10px;
+}
+.anima:hover {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.flexCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  margin: auto;
+}
+
+.flexConts {
+  display: flex;
+  align-items: center;
+}
+
+.formzskie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  height: 12rem;
+}
+
+.formzskie textarea {
+  height: 8rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(128, 120, 120);
+  margin: 10px;
+}
+
+.formzskie label {
+  font-size: 1.2rem;
+}
+
+.wataContainer {
+  border: 1px solid #ff5c58;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.wataeContainer {
+  border: 1px solid #ff5c58;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}

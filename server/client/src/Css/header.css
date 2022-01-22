@@ -1,0 +1,59 @@
+.CC2 {
+  line-height: 1rem;
+  margin-left: 1rem;
+  /* background-color: red; */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.School {
+  color: white;
+  font-size: 0.8em;
+  margin: auto;
+  padding-top: 0.8rem;
+}
+.address {
+  color: white;
+  font-size: 0.7em;
+}
+.mHeader {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(75, 75, 75, 1) 100%
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem;
+}
+.titles {
+  font-weight: 200;
+  color: #ffe431;
+}
+
+.logout {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 3rem;
+  margin-right: 3rem;
+  color: white;
+  border: 2px solid white;
+  transition: 0.3s ease;
+  border-radius: 10px;
+}
+
+.logout:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+
+  color: white;
+  border: 2px solid rgb(192, 197, 44);
+}

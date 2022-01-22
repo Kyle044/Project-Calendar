@@ -71,45 +71,48 @@ exports.Signin = (req, res) => {
     .catch((err) => res.status(400).json("The Error is : " + err));
 };
 exports.updateStudent = (req, res) => {
-  const { Email, Password, Fullname, schoolnum, id, Course, Year } = req.body;
+  const { Email, Password, Fullname, SchoolIDNumber, id, Course, Year } =
+    req.body;
   if (!id) {
     res.status(402).json("Please Input The Student ID to Search");
   }
-  Student.findById(id)
-    .then((admin) => {
-      if (!Email) {
-      } else {
-        admin.Email = Email;
-      }
-      if (!Password) {
-      } else {
-        admin.Password = Password;
-      }
-      if (!Fullname) {
-      } else {
-        admin.Fullname = Fullname;
-      }
-      if (!schoolnum) {
-      } else {
-        admin.SchoolIDNumber = schoolnum;
-      }
-      if (!Course) {
-      } else {
-        admin.Course = Course;
-      }
-      if (!Year) {
-      } else {
-        admin.Year = Year;
-      }
 
-      admin
-        .save()
-        .then((ad) => {
-          res.json({ msg: "Successfuly Updated", data: ad });
-        })
-        .catch((err) => res.status(400).json("Error : " + err));
-    })
-    .catch((err) => res.status(400).json("Error : " + err));
+  bcrypt.hash(Password, 12).then((hashedpassword) => {
+    Student.findById(id)
+      .then((admin) => {
+        if (!Email) {
+        } else {
+          admin.Email = Email;
+        }
+        if (!Password) {
+        } else {
+          admin.Password = hashedpassword;
+        }
+        if (!Fullname) {
+        } else {
+          admin.Fullname = Fullname;
+        }
+        if (!SchoolIDNumber) {
+        } else {
+          admin.SchoolIDNumber = SchoolIDNumber;
+        }
+        if (!Course) {
+        } else {
+          admin.Course = Course;
+        }
+        if (!Year) {
+        } else {
+          admin.Year = Year;
+        }
+        admin
+          .save()
+          .then((ad) => {
+            res.json({ msg: "Successfuly Updated", data: ad });
+          })
+          .catch((err) => res.status(400).json("Error : " + err));
+      })
+      .catch((err) => res.status(400).json("Error : " + err));
+  });
 };
 
 exports.getOneStudent = (req, res) => {
