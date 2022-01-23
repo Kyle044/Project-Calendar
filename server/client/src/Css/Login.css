@@ -184,13 +184,17 @@
   }
 }
 @media (max-width: 579px) {
+  .regDiv .termsContainer {
+    width: 90%;
+    height: 25vh;
+    overflow-y: scroll;
+  }
   .regDiv {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 53rem;
-
-    overflow: hidden;
+    height: auto;
+    padding: 20px;
   }
   .regDiv .form {
     width: 35rem;

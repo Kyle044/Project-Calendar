@@ -89,6 +89,15 @@ function Home({ history }) {
       alert("Please accept the EU Terms and Agreements.");
     } else if (regState.ConfrimPassword != regState.Password) {
       alert("The Password Does not Match");
+    } else if (
+      !regState.Email &&
+      !regState.FullName &&
+      !regState.Password &&
+      !regState.Year &&
+      !regState.schoolNum &&
+      !regState.Course
+    ) {
+      alert("Please Fill up all the fields");
     } else {
       const data = {
         Email: regState.Email,

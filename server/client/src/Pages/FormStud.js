@@ -23,34 +23,53 @@ function FormStud({ history }) {
   return (
     <div className="mainStud">
       <Header />
-      <h1 className="title">
-        The Forms to Download in The Office Of Registrar.
-      </h1>
-      {form ? (
-        <div className="formStudContainer">
-          {form.map((f) => {
-            return (
-              <div className="formStudCard">
-                <h4> {f.Description}</h4>
-                <Button
-                  danger
-                  onClick={() => {
-                    download(
-                      f.File.path.substr(14),
-                      f.File.filename.substr(15)
-                    );
-                  }}
-                >
-                  Download
-                </Button>
-              </div>
-            );
-          })}
+
+      <div className="formMasterContainer">
+        {form ? (
+          <table className="content-tables">
+            <thead>
+              <caption>
+                <caption className="table-title">
+                  <h4>The Forms to Download in The Office Of Registrar</h4>
+                </caption>
+              </caption>
+              <tr>
+                <th>Description</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {form.map((f) => {
+                return (
+                  <tr>
+                    <td>asdasd</td>
+                    <td>
+                      <Button
+                        danger
+                        onClick={() => {
+                          download(
+                            f.File.path.substr(14),
+                            f.File.filename.substr(15)
+                          );
+                        }}
+                      >
+                        Download
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <Skeleton />
+        )}
+        <div className="cardRightDiv">
+          <Cards />
         </div>
-      ) : (
-        <Skeleton />
-      )}
-      <Cards />
+      </div>
+
       <Footer />
     </div>
   );
