@@ -33,14 +33,9 @@ function FAQStud({ history }) {
         <Header />
       </div>
 
-      <div style={{ textAlign: "center" }}>
-        <h2 className="header">
-          <span style={{ color: "grey", fontWeight: "bold" }}>
-            Frequently asked questions to the Office of the Registrar
-          </span>
-          .
-        </h2>
-      </div>
+     <div className="hed">
+       <h1>Frequently asked questions to the Office of the registrar</h1>
+     </div>
       <div className="cd">
         {faq ? (
           <div className="FAQ">
@@ -70,54 +65,6 @@ function FAQStud({ history }) {
 
       <div className="mainContainer2">
         <Card />
-        {/* <div className="div1">
-           <div className="MD">
-        
-         <img src="./images/guide.png" alt="" style={{width:"50px"}}/>
-       
-         <h3 className="text">Request Guide</h3>
-        
-       
-         </div>
-         <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
-         <div>
-           <Button >Request now</Button>
-         </div>
-         </div>
-
-
-
-         <div className="div2">
-         <div className="MD">
-        
-        <img src="./images/document.png" alt="" style={{width:"50px"}} className="ddd"/>
-      
-        <h3 className="text">Request Student Records</h3>
-       
-      
-        </div>
-        <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
-        <div>
-          <Button  danger
-                  onClick={() => {
-                    history.push("/Request");
-                  }}>Request now</Button>
-        </div>
-         </div>
-         <div className="div3">
-         <div className="MD">
-        
-        <img src="./images/school.png" alt="" style={{width:"50px"}}/>
-      
-        <h3 className="text">About the registrar</h3>
-       
-      
-        </div>
-        <p className="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, saepe?</p>
-        <div>
-          <Button>Request now</Button>
-        </div>
-         </div> */}
       </div>
 
       <Footer />

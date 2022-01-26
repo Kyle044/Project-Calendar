@@ -1,12 +1,7 @@
 .editzForm {
   background-color: white;
-  width: 70%;
+  width: 90%;
   padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 10px;
 }
 
 .editzForm label {
@@ -19,7 +14,6 @@
   cursor: pointer;
 }
 .studEditContainer {
-  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,16 +26,9 @@
   padding: 1rem;
   font-weight: bold;
 }
-
+/* ------------------------------------------------------------ */
 .leftpards {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-}
-.rightpards {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
+  /* background-color: yellow; */
 }
 
 .leftpards input {
@@ -51,7 +38,11 @@
 .rightpards input {
   width: 90%;
 }
-
+.label {
+  font-weight: bold;
+}
+.head {
+}
 .rightpards button {
   width: 90%;
 }
@@ -62,4 +53,25 @@
   cursor: pointer;
   border: 2px;
   margin-top: 12px;
+}
+.textbox {
+  border: 1px solid rgb(194, 193, 193);
+}
+@media only screen and (max-width: 375px) {
+  .accinfo {
+    font-size: 1rem;
+  }
+}
+
+.accinfo {
+  font-weight: bold;
+}
+.ssubmit {
+  /* background-color: red; */
+  font-weight: bold;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.bbutton {
+  width: 150px;
 }

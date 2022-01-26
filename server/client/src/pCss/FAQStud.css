@@ -58,9 +58,14 @@
     flex-direction: column;
   }
 }
-@media only screen and (max-width: 360px) {
-  .header {
-    font-size: 1rem;
+@media only screen and (max-width: 375px) {
+  .hed {
+    font-size: 0.7rem;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .hed {
+    font-size: 0.7rem;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -74,11 +79,6 @@
 }
 
 .mainContainer2 {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 2rem;
-  flex: 1;
 }
 .div1 {
   background-color: #ff5c58;
@@ -104,4 +104,8 @@
 .text {
   margin-left: 1rem;
   font-weight: bold;
+}
+.hed {
+  text-align: center;
+  padding: 5px 10px;
 }
