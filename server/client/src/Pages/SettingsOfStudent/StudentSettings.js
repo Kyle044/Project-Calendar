@@ -52,53 +52,50 @@ function StudentSettings() {
       <Header />
 
       <div className="studEditContainer">
-        <h4 className="edl">Edit Account</h4>
-        <form action="" className="editzForm" onSubmit={handleSubmit}>
-          <div className="leftpards">
+     
+      <form action="" className="editzForm" onSubmit={handleSubmit}>
+      <div className="leftpards">
+        <h2 className="accinfo">ACCOUNT INFORMATION</h2>
             <div>
-              <label>FullName</label>
-              <input type="text" name="Fullname" onChange={handleChange} />
+              <p className="label">Full Name (Fname , Mi, Lname)</p>
+              <input type="text" name="Fullname" onChange={handleChange} className="textbox"/>
             </div>
             <div>
-              <label>Password</label>
-              <input type="password" name="Password" onChange={handleChange} />
+            <p className="label">Email</p>
+              <input type="email" name="Email" id="" onChange={handleChange} className="textbox"/>
+            </div>
+
+            <div>
+            <p className="label">Course</p>
+              <input type="text" name="Course" onChange={handleChange} className="textbox"/>
             </div>
             <div>
-              <label>Confirm Password</label>
+            <p className="label">Year</p>
+              <input type="text" name="Year" onChange={handleChange} className="textbox"/>
+            </div>
+
+            <h2 className="accinfo">CHANGE PASSWORD</h2>
+            <div>
+            <p className="label">Password</p>
+              <input type="password" name="Password" onChange={handleChange} className="textbox"/>
+            </div>
+            <div>
+            <p className="label">Confirm Password</p>
               <input
                 type="password"
                 name="ConfirmPassword"
                 onChange={handleChange}
+                className="textbox"
               />
             </div>
-            <div>
-              <label>SchoolIDNumber</label>
-              <input
-                type="text"
-                name="SchoolIDNumber"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="rightpards">
-            <div>
-              <label>Email</label>
-              <input type="email" name="Email" id="" onChange={handleChange} />
-            </div>
-
-            <div>
-              <label>Course</label>
-              <input type="text" name="Course" onChange={handleChange} />
-            </div>
-            <div>
-              <label>Year</label>
-              <input type="text" name="Year" onChange={handleChange} />
-            </div>
+          
+      </div>
+      <div className="bbutton">
             <button type="submit" className="ssubmit">
               Submit
             </button>
-          </div>
-        </form>
+            </div>
+      </form>
       </div>
       <Card />
       <Footer />
