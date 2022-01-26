@@ -8,7 +8,7 @@ const taskSchema = new Schema(
     Description: String,
     startDate: String,
     dueDate: String,
-    Handler: String,
+    Handler: { type: Schema.Types.ObjectId, ref: "Admin" },
     Status: String
   },
   { timestamps: true }

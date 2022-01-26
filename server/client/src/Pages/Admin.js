@@ -135,7 +135,7 @@ function Admin({ history }) {
       {admin ? (
         <div>
           <div className="admen">
-            <LeftPane masterToggle={handleToggle} />
+            <LeftPane masterToggle={handleToggle} Owner={admin} />
 
             <div className="rightPane">
               {/**
@@ -155,23 +155,23 @@ function Admin({ history }) {
               {/**
                * ADVISORYYYYYYYYYYYY
                */}
-              {toggle.Advisory ? <AdvisoryComp /> : null}
+              {toggle.Advisory ? <AdvisoryComp admin={admin} /> : null}
               {/**
                * FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ
                */}
-              {toggle.FAQ ? <FAQComp /> : null}
+              {toggle.FAQ ? <FAQComp admin={admin} /> : null}
               {/**
                * FORMSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
                */}
-              {toggle.Forms ? <FormComp /> : null}
+              {toggle.Forms ? <FormComp admin={admin} /> : null}
               {/**
                * REQUESTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
                */}
-              {toggle.Requests ? <RequestComp /> : null}
+              {toggle.Requests ? <RequestComp admin={admin} /> : null}
               {/**
                * SETTINGSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
                */}
-              {toggle.Settings ? <SettingsComp /> : null}
+              {toggle.Settings ? <SettingsComp admin={admin} /> : null}
             </div>
           </div>
         </div>

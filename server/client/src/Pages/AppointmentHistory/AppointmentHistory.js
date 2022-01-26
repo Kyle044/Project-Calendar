@@ -7,6 +7,7 @@ import { Skeleton } from "antd";
 import axios from "axios";
 import moment from "moment";
 import Card from "../../Components/Card";
+import VerticalCard from "../../Components/verticalCard/VerticalCard";
 function AppointmentHistory() {
   const [request, setRequest] = useState(null);
 
@@ -34,11 +35,14 @@ function AppointmentHistory() {
     <div className="appMaster">
       <Header />
       <div className="appBody">
-        <h4 className="appheader">History of Appointment</h4>
-
         {request ? (
-          <table className="content-table">
+          <table className="content-table ashzz">
             <thead>
+              <caption>
+                <caption className="table-title">
+                  <h4>The Appointment History</h4>
+                </caption>
+              </caption>
               <tr>
                 <th>Request</th>
                 <th>Appointment</th>
@@ -74,8 +78,11 @@ function AppointmentHistory() {
         ) : (
           <Skeleton />
         )}
+        <div className="cardRightDiv">
+          <VerticalCard />
+        </div>
       </div>
-      <Card />
+
       <Footer />
     </div>
   );

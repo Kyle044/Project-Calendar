@@ -31,6 +31,7 @@
   align-items: center;
   padding: 0.3rem;
   position: relative;
+  overflow: hidden;
 }
 .titles {
   font-weight: 200;
@@ -46,7 +47,7 @@
   height: 3rem;
 
   color: white;
-  border: 2px solid white;
+
   transition: 0.3s ease;
   border-radius: 10px;
 }

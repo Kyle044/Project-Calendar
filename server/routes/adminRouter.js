@@ -8,7 +8,9 @@ const {
   protected,
   updateAdmin,
   deleteAdmin,
-  getOneAdmin
+  getOneAdmin,
+  subAdmin,
+  getSubadmin
 } = require("../controller/Auth");
 
 router.post("/register", Register);
@@ -17,4 +19,7 @@ router.post("/login", Signin);
 router.post("/updateAdmin", updateAdmin);
 router.delete("/deleteAdmin", deleteAdmin);
 router.get("/oneAdmin", getOneAdmin);
+router.get("/getSubadmin", getSubadmin);
+
+router.post("/subAdmin", subAdmin);
 module.exports = router;

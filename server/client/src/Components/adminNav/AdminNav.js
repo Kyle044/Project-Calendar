@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./adminnav.css";
 import { withRouter } from "react-router-dom";
 import { HomeTwoTone } from "@ant-design/icons";
-function AdminNav({ history, masterToggle }) {
+function AdminNav({ history, masterToggle, Owner }) {
   var initialState = {
     Home: false,
     Advisory: false,
@@ -27,7 +27,8 @@ function AdminNav({ history, masterToggle }) {
           handleToggle("Home");
         }}
       >
-        <img src="./images/LOGO1.png" alt="" /> <h4>Admin</h4>
+        <img src="./images/LOGO1.png" alt="" />{" "}
+        <h4>{Owner.Auth == "subadmin" ? Owner.Fullname : "Master Admin"}</h4>
       </div>
       <ul>
         <li

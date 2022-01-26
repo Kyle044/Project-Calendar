@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Input } from "antd";
+import { Select } from "antd";
 
 import "../Css/Login.css";
 import axios from "axios";
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { login } from "../redux/actions/index";
 import validator from "validator";
-
+import { Alert } from "antd";
 function Home({ history }) {
   const dispatch = useDispatch();
   const [acc, setacc] = useState({ Email: "", Password: "" });
@@ -24,6 +25,7 @@ function Home({ history }) {
     schoolNum: "",
     FullName: ""
   });
+  const { Option } = Select;
   const loginRef = useRef();
   const regRef = useRef();
   /**
@@ -66,6 +68,8 @@ function Home({ history }) {
         .catch((err) => {
           if (err.response.status == 422) {
             alert("Invalid Email or Password");
+          } else {
+            alert("Invalid Email or Password");
           }
         });
     } else {
@@ -80,24 +84,105 @@ function Home({ history }) {
     loginRef.current.classList.toggle("goToRegister");
     regRef.current.classList.toggle("showReg");
   }
+  const [error, setError] = useState({
+    bool: false,
+    mes: "",
+    type: ""
+  });
+
+  function passwordStrength(pass) {
+    var pattern = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
+    );
+    if (!pattern.test(regState.Password)) {
+      setError({
+        bool: true,
+        mes: "Input password that has 6 character above atleast one Capital letter has numeric value and atleast one special character",
+        type: "error"
+      });
+      setTimeout(() => {
+        setError({
+          bool: false,
+          mes: "",
+          type: ""
+        });
+      }, 4000);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   /**
    * Handle Register
    */
   function handleRegisterr() {
     if (!terms) {
-      alert("Please accept the EU Terms and Agreements.");
-    } else if (regState.ConfrimPassword != regState.Password) {
-      alert("The Password Does not Match");
+      setError({
+        bool: true,
+        mes: "Please Accept the EU Terms and Agreements",
+        type: "error"
+      });
+      setTimeout(() => {
+        setError({
+          bool: false,
+          mes: "",
+          type: ""
+        });
+      }, 4000);
     } else if (
-      !regState.Email &&
-      !regState.FullName &&
-      !regState.Password &&
-      !regState.Year &&
-      !regState.schoolNum &&
-      !regState.Course
+      !regState.Email ||
+      !regState.FullName ||
+      !regState.Password ||
+      !regState.Year ||
+      !regState.schoolNum ||
+      !regState.Course ||
+      regState.Year == "" ||
+      regState.Course == "" ||
+      regState.schoolNum == "" ||
+      regState.Password == "" ||
+      regState.FullName == "" ||
+      regState.Email == ""
     ) {
-      alert("Please Fill up all the fields");
+      setError({
+        bool: true,
+        mes: "Please fill up all the fields",
+        type: "error"
+      });
+      setTimeout(() => {
+        setError({
+          bool: false,
+          mes: "",
+          type: ""
+        });
+      }, 4000);
+    } else if (passwordStrength(regState.Password)) {
+    } else if (!validator.isEmail(regState.Email)) {
+      setError({
+        bool: true,
+        mes: "The email is not valid",
+        type: "error"
+      });
+      setTimeout(() => {
+        setError({
+          bool: false,
+          mes: "",
+          type: ""
+        });
+      }, 4000);
+    } else if (regState.ConfrimPassword != regState.Password) {
+      setError({
+        bool: true,
+        mes: "Password does not match",
+        type: "error"
+      });
+      setTimeout(() => {
+        setError({
+          bool: false,
+          mes: "",
+          type: ""
+        });
+      }, 4000);
     } else {
       const data = {
         Email: regState.Email,
@@ -110,7 +195,18 @@ function Home({ history }) {
       axios
         .post(`http://localhost:5000/api/registerStud`, data)
         .then((res) => {
-          alert(res.data.msg);
+          setError({
+            bool: true,
+            mes: res.data,
+            type: "success"
+          });
+          setTimeout(() => {
+            setError({
+              bool: false,
+              mes: "",
+              type: ""
+            });
+          }, 4000);
           setRegState({
             Email: "",
             Password: "",
@@ -136,11 +232,23 @@ function Home({ history }) {
   function onChangeCheck(e) {
     setTerms(e.target.checked);
   }
+  function handleChange2select(value) {
+    setRegState((prev) => {
+      return { ...prev, Year: value };
+    });
+  }
+  function handleChange2select2(value) {
+    setRegState((prev) => {
+      return { ...prev, Course: value };
+    });
+  }
   return (
     <div className="mainDiv">
       <div ref={loginRef} className="loginDiv">
-        <h3>Sign In</h3>
-        <p>Welcome to Registrar</p>
+        <div className="howder">
+          <h3>Sign In</h3>
+          <p>Welcome to Registrar</p>
+        </div>
 
         <Input
           placeholder="Email"
@@ -192,6 +300,14 @@ function Home({ history }) {
         </div>
         <div className="form">
           <h3>Register</h3>
+          {error.bool ? (
+            <Alert
+              message={error.mes}
+              type={error.type}
+              showIcon
+              className="alertTo"
+            />
+          ) : null}
           <div className="cont">
             <div className="prof">
               <Input
@@ -212,24 +328,59 @@ function Home({ history }) {
                 value={regState.FullName}
                 placeholder="Full Name"
               />
-              <Input
-                onChange={(e) => {
-                  handleChange2(e);
-                }}
-                type="text"
+              <Select
                 name="Course"
+                defaultValue="wats"
+                onChange={handleChange2select2}
                 value={regState.Course}
-                placeholder="Course"
-              />
-              <Input
-                onChange={(e) => {
-                  handleChange2(e);
-                }}
-                type="text"
+                className="selectheheshet"
+              >
+                <Option value="" selected>
+                  Course
+                </Option>
+                <Option value="Bachelor of Science in Information Technology">
+                  BS in Information Technology
+                </Option>
+                <Option value="Bachelor of Science in Computer Science">
+                  BS in Science in Computer Science
+                </Option>
+                <Option value="Bachelor of Science in Business Administration">
+                  BS in Business Administration
+                </Option>
+                <Option value="Bachelor of Science in Entrepreneurship">
+                  BS in Entrepreneurship
+                </Option>
+                <Option value="Bachelor of Science in Office Administration">
+                  BS in Office Administration
+                </Option>
+                <Option value="Bachelor of Science in Mathematics">
+                  BS in Mathematics
+                </Option>
+                <Option value="Bachelor of Science in Industrial Technology">
+                  BS in Industrial Technology
+                </Option>
+                <Option value="Bachelor of Science in Criminology">
+                  BS in Criminology
+                </Option>
+                <Option value="Bachelor in Public Administration">
+                  Bachelor in Public Administration
+                </Option>
+              </Select>
+              <Select
                 name="Year"
-                placeholder="Year Level"
+                defaultValue="Year Level"
+                onChange={handleChange2select}
                 value={regState.Year}
-              />
+                className="selecthehe"
+              >
+                <Option value="" selected>
+                  Year Level
+                </Option>
+                <Option value="IV">IV</Option>
+                <Option value="III">III</Option>
+                <Option value="II">II</Option>
+                <Option value="I">I</Option>
+              </Select>
             </div>
             <div className="acc">
               <Input

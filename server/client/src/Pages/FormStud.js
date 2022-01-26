@@ -4,6 +4,7 @@ import axios from "axios";
 import download from "../Functions/download";
 import { withRouter } from "react-router-dom";
 import Cards from "../Components/Card";
+import VerticalCard from "../Components/verticalCard/VerticalCard";
 import "../Css/formDownloadPage/form.css";
 import Nav from "../Components/studentdashComponents/Nav";
 import Footer from "../Components/studentdashComponents/Footer";
@@ -26,7 +27,7 @@ function FormStud({ history }) {
 
       <div className="formMasterContainer">
         {form ? (
-          <table className="content-tables">
+          <table className="content-table ashz">
             <thead>
               <caption>
                 <caption className="table-title">
@@ -43,7 +44,7 @@ function FormStud({ history }) {
               {form.map((f) => {
                 return (
                   <tr>
-                    <td>asdasd</td>
+                    <td>{f.Description}</td>
                     <td>
                       <Button
                         danger
@@ -66,7 +67,7 @@ function FormStud({ history }) {
           <Skeleton />
         )}
         <div className="cardRightDiv">
-          <Cards />
+          <VerticalCard />
         </div>
       </div>
 

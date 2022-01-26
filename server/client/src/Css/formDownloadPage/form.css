@@ -101,12 +101,27 @@
   font-size: 1rem;
   font-weight: bold;
 }
+.formMasterContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 10px;
+}
+.ashz {
+  margin: 0px auto;
+}
 .cardRightDiv {
-  grid-row: 1/4;
+}
+@media (max-width: 750px) {
+  .formMasterContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 10px;
+  }
 }
 @media only screen and (max-width: 700px) {
-  .cardRightDiv {
-    grid-row: -1/4;
+  .ashz {
+    margin: 0px auto;
   }
   .table-title {
     width: auto;

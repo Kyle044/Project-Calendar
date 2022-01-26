@@ -1,65 +1,55 @@
-.editzForm {
-  background-color: white;
-  width: 70%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 10px;
-}
-
-.editzForm label {
-  font-weight: bold;
-  padding: 0.5rem;
-}
-
-.editzForm button {
-  height: 3.5rem;
-  cursor: pointer;
-}
 .studEditContainer {
-  height: 90vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  place-items: center;
+}
+
+.studEditContainer form {
+  width: 80%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ff5c58;
-  padding: 1.5rem;
-}
-.edl {
-  font-size: 1.5rem;
-  padding: 1rem;
-  font-weight: bold;
+  border: 2px solid #ff5c58;
+  padding: 50px;
+  border-radius: 12px;
 }
 
-.leftpards {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-}
-.rightpards {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
+.wat {
+  position: relative;
+  left: -10rem;
 }
 
-.leftpards input {
-  width: 80%;
+@media (max-width: 930px) {
+  .wat {
+    position: relative;
+    left: -6rem;
+  }
 }
 
-.rightpards input {
-  width: 90%;
+@media (max-width: 780px) {
+  .studEditContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1fr;
+    grid-gap: 20px;
+    place-items: center;
+  }
+  .studEditContainer form {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .wat {
+    position: relative;
+    left: -6rem;
+  }
 }
-
-.rightpards button {
-  width: 90%;
-}
-
-.studEditContainer > button {
-  width: 20%;
-  height: 10%;
-  cursor: pointer;
-  border: 2px;
-  margin-top: 12px;
+@media (max-width: 404px) {
+  .wat {
+    position: relative;
+    left: -4rem;
+  }
 }

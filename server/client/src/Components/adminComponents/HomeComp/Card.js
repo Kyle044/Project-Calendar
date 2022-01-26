@@ -13,7 +13,7 @@ import {
   notification
 } from "antd";
 import moment from "moment";
-function Card({ goal, setGoal, setGoalCount }) {
+function Card({ goal, setGoal, setGoalCount, admin }) {
   const [toggle, setToggle] = useState({
     task: false,
     description: false,
@@ -57,6 +57,7 @@ function Card({ goal, setGoal, setGoalCount }) {
       });
     // console.log(t);
   };
+
   const confirmDelete = (data) => {
     axios
       .delete(`${process.env.REACT_APP_KEY}/deleteGoal`, { data: { id: data } })
@@ -337,19 +338,21 @@ function Card({ goal, setGoal, setGoalCount }) {
           >
             Preview
           </Button>
-          <Popconfirm
-            title="Are you sure to delete this task?"
-            onConfirm={() => {
-              confirmDelete(goal._id);
-            }}
-            onCancel={() => {
-              console.log("the goal is not deleted");
-            }}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button danger>Delete</Button>
-          </Popconfirm>
+          {admin.Auth == "subadmin" ? null : (
+            <Popconfirm
+              title="Are you sure to delete this task?"
+              onConfirm={() => {
+                confirmDelete(goal._id);
+              }}
+              onCancel={() => {
+                console.log("the goal is not deleted");
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button danger>Delete</Button>
+            </Popconfirm>
+          )}
         </div>
         <Drawer
           title={goal.Subject}
@@ -361,12 +364,14 @@ function Card({ goal, setGoal, setGoalCount }) {
           <div className="descriptContainer">
             <div className="flexCont">
               <h4 className="white w ">Description</h4>
-              <i
-                class="far fa-edit anim"
-                onClick={() => {
-                  handleEditDescription();
-                }}
-              ></i>
+              {admin.Auth == "subadmin" ? null : (
+                <i
+                  class="far fa-edit anim"
+                  onClick={() => {
+                    handleEditDescription();
+                  }}
+                ></i>
+              )}
             </div>
             <p className="white">{goal.Description}</p>
           </div>
@@ -374,12 +379,14 @@ function Card({ goal, setGoal, setGoalCount }) {
           <div className="descriptContainer">
             <div className="flexCont">
               <h4 className="white w ">Attachments</h4>
-              <i
-                class="far fa-edit anim"
-                onClick={() => {
-                  handleEditAttachment();
-                }}
-              ></i>
+              {admin.Auth == "subadmin" ? null : (
+                <i
+                  class="far fa-edit anim"
+                  onClick={() => {
+                    handleEditAttachment();
+                  }}
+                ></i>
+              )}
             </div>
             {goal.Files.map((form) => {
               return (
@@ -399,12 +406,14 @@ function Card({ goal, setGoal, setGoalCount }) {
 
           <div className="flexConts">
             <h4 className="w ">Tasks</h4>
-            <i
-              class="fas fa-plus-square anima"
-              onClick={() => {
-                handleAddTask();
-              }}
-            ></i>
+            {admin.Auth == "subadmin" ? null : (
+              <i
+                class="fas fa-plus-square anima"
+                onClick={() => {
+                  handleAddTask();
+                }}
+              ></i>
+            )}
           </div>
 
           {goal.Tasks.map((t) => {
@@ -412,7 +421,7 @@ function Card({ goal, setGoal, setGoalCount }) {
               <div>
                 <Divider orientation="left">
                   <h4 className={t.Status == "Complete" ? "complete" : null}>
-                    {t.Subject}
+                    {t.Subject} ({t.Handler.Fullname})
                   </h4>
                 </Divider>
                 <p>{t.Description}</p>
@@ -425,20 +434,25 @@ function Card({ goal, setGoal, setGoalCount }) {
                       justifyContent: "center"
                     }}
                   >
-                    <Button
-                      onClick={() => {
-                        handleMark(t);
-                      }}
-                    >
-                      Mark as Done
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        handleDelete(t);
-                      }}
-                    >
-                      Delete
-                    </Button>
+                    {admin.Auth == "subadmin" ? null : (
+                      <div>
+                        {" "}
+                        <Button
+                          onClick={() => {
+                            handleMark(t);
+                          }}
+                        >
+                          Mark as Done
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            handleDelete(t);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <p className="complete">Complete</p>

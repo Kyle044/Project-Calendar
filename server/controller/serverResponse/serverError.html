@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        .body {
+            font-family: 'Poppins', sans-serif;
+            background: #FF416C;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            height: 97vh;
+            width: 98vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            background-color: aliceblue;
+            padding: 40px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        @media (max-width:400px) {
+            .body {
+                height: 94vh;
+                width: 94vw;
+            }
+
+            h1 {
+                font-size: 23px;
+                margin: auto;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .container h1,
+            a {
+
+                margin: 10px;
+            }
+        }
+    </style>
+    <title>Registrar</title>
+</head>
+
+<body class="body">
+
+    <div class="container">
+        <h1>Sorry.. the link has an error or the link already expired</h1>
+        <a href="https://earistregistrar.herokuapp.com/">Click me to redirect to the website.</a>
+    </div>
+</body>
+
+</html>

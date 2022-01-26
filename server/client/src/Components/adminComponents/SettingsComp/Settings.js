@@ -45,9 +45,9 @@ function Settings({ history }) {
           state.SchoolIDNumber
         ) {
           axios
-            .post(`${process.env.REACT_APP_KEY}/register`, state)
+            .post(`${process.env.REACT_APP_KEY}/subAdmin`, state)
             .then((res) => {
-              alert(res.data.msg);
+              alert(res.data);
             })
             .catch((err) => {
               console.log(err);

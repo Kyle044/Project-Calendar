@@ -24,6 +24,16 @@
 .loginDiv input {
   width: 16rem;
 }
+.howder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.howder h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .goToRegister {
   transform: translateX(100vw);
 }
@@ -65,6 +75,8 @@
 }
 .regDiv .form h3 {
   padding-left: 1em;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 .regDiv input {
   padding: 10px;
@@ -83,6 +95,7 @@
 
 .acc input {
   margin: 5px;
+  width: 325px;
 }
 .acc {
   display: flex;
@@ -99,6 +112,60 @@
 }
 .btnDiv button {
   margin: 5px;
+}
+.alertTo {
+  transition: ease-in;
+  width: 60%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.selecthehe {
+  width: 99%;
+  margin-left: 6px;
+}
+.selectheheshet {
+  width: 99%;
+
+  width: 325px;
+
+  margin-left: 6px;
+  margin-bottom: 6px;
+}
+.selecthehe .ant-select-selector {
+  height: 10px;
+}
+@media (max-width: 990px) {
+  .regDiv {
+    height: auto;
+  }
+  .alertTo {
+    transition: ease-in;
+    width: 60%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+}
+@media (max-width: 1120px) {
+  .selecthehe {
+    width: 99%;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 250px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 250px;
+  }
 }
 @media (max-width: 839px) {
   .loginDiv input {
@@ -119,6 +186,22 @@
   .btn {
     align-items: center;
     justify-content: center;
+  }
+  .selecthehe {
+    width: 99%;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 200px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 200px;
   }
 }
 @media (max-width: 442px) {
@@ -182,6 +265,22 @@
     align-items: center;
     justify-content: center;
   }
+  .selecthehe {
+    width: 220px;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 220px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 190px;
+  }
 }
 @media (max-width: 579px) {
   .regDiv .termsContainer {
@@ -195,9 +294,10 @@
     justify-content: center;
     height: auto;
     padding: 20px;
+    width: 66%;
   }
   .regDiv .form {
-    width: 35rem;
+    width: 20rem;
   }
   .regDiv .form h3 {
     text-align: center;
@@ -210,6 +310,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .btnDiv {
+    flex-direction: column;
+  }
+  .showReg {
+    left: 17vw;
   }
 }
 
