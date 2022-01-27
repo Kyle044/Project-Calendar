@@ -1,0 +1,21 @@
+.MainContainerzzz {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: auto;
+  grid-gap: 10px;
+}
+.MainContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr;
+}
+
+@media (max-width: 740px) {
+  .MainContainerzzz {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr;
+    height: auto;
+    grid-gap: 10px;
+  }
+}

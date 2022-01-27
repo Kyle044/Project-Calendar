@@ -1,0 +1,10 @@
+@media print {
+  @page {
+    size: landscape;
+  }
+  .calCont {
+    position: relative;
+    left: 100px;
+    top: 100px;
+  }
+}

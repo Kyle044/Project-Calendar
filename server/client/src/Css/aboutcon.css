@@ -1,0 +1,32 @@
+.registrarDivContent {
+  display: grid;
+  width: 80%;
+  margin: 2rem auto 2rem;
+  grid-gap: 10px;
+}
+
+.registrarDescript {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  grid-gap: 10px;
+  place-items: center;
+  border-bottom: 3px solid #ff5c58;
+}
+.registrarDescript img {
+  width: 100%;
+  height: auto;
+}
+.subDescript {
+}
+.subDescript h4 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+.missCard {
+  margin: 0 0 10px;
+  border-bottom: 3px solid #ff5c58;
+}
+.missCard h4 {
+  font-weight: bold;
+  font-size: 1rem;
+}

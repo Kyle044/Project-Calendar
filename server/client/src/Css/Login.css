@@ -1,0 +1,327 @@
+.mainDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ff5c58;
+}
+
+.loginDiv {
+  box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  -webkit-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  -moz-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  border-radius: 20px;
+  height: 60%;
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 0.5s ease;
+  background-color: #eeeeee;
+}
+.loginDiv input {
+  width: 16rem;
+}
+.howder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.howder h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.goToRegister {
+  transform: translateX(100vw);
+}
+.loginDiv input {
+  padding: 0.5rem;
+}
+.btn {
+  display: flex;
+  flex-wrap: wrap;
+}
+.btn button {
+  margin: 4px;
+}
+.regDiv {
+  position: absolute;
+  box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  -webkit-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  -moz-box-shadow: 6px 6px 16px 2px rgba(59, 55, 55, 0.75);
+  border-radius: 20px;
+  height: 90%;
+  width: 80%;
+  display: flex;
+
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 0.5s ease;
+  left: -100vw;
+  background-color: #eeeeee;
+}
+.regDiv .termsContainer {
+  width: 50%;
+  height: auto;
+}
+.regDiv .form {
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
+}
+.regDiv .form h3 {
+  padding-left: 1em;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.regDiv input {
+  padding: 10px;
+}
+.showReg {
+  left: 10vw;
+}
+.prof {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+}
+.prof input {
+  margin: 5px;
+}
+
+.acc input {
+  margin: 5px;
+  width: 325px;
+}
+.acc {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+}
+.cont {
+  display: flex;
+  flex-wrap: wrap;
+}
+.btnDiv {
+  display: flex;
+  padding-left: 0.5em;
+}
+.btnDiv button {
+  margin: 5px;
+}
+.alertTo {
+  transition: ease-in;
+  width: 60%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.selecthehe {
+  width: 99%;
+  margin-left: 6px;
+}
+.selectheheshet {
+  width: 99%;
+
+  width: 325px;
+
+  margin-left: 6px;
+  margin-bottom: 6px;
+}
+.selecthehe .ant-select-selector {
+  height: 10px;
+}
+@media (max-width: 990px) {
+  .regDiv {
+    height: auto;
+  }
+  .alertTo {
+    transition: ease-in;
+    width: 60%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+}
+@media (max-width: 1120px) {
+  .selecthehe {
+    width: 99%;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 250px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 250px;
+  }
+}
+@media (max-width: 839px) {
+  .loginDiv input {
+    width: 10rem;
+  }
+  .btn {
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 515px) {
+  .loginDiv input {
+    width: 7rem;
+  }
+  .loginDiv .p {
+    font-size: 5em;
+  }
+  .btn {
+    align-items: center;
+    justify-content: center;
+  }
+  .selecthehe {
+    width: 99%;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 200px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 200px;
+  }
+}
+@media (max-width: 442px) {
+  .loginDiv {
+    width: 25rem;
+  }
+  .loginDiv input {
+    width: 20rem;
+  }
+}
+@media (max-width: 1013px) {
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form {
+    width: 35rem;
+  }
+  .regDiv .form h3 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 483px) {
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50rem;
+  }
+  .regDiv .form {
+    width: 20rem;
+  }
+  .regDiv .form button {
+    width: 9rem;
+    font-size: 0.7em;
+  }
+  .regDiv .form input {
+    width: 17rem;
+  }
+  .regDiv .form h3 {
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .selecthehe {
+    width: 220px;
+    margin-left: 6px;
+  }
+  .selectheheshet {
+    width: 99%;
+
+    width: 220px;
+
+    margin-left: 6px;
+    margin-bottom: 6px;
+  }
+  .acc input {
+    margin: 5px;
+    width: 190px;
+  }
+}
+@media (max-width: 579px) {
+  .regDiv .termsContainer {
+    width: 90%;
+    height: 25vh;
+    overflow-y: scroll;
+  }
+  .regDiv {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 20px;
+    width: 66%;
+  }
+  .regDiv .form {
+    width: 20rem;
+  }
+  .regDiv .form h3 {
+    text-align: center;
+  }
+  .regDiv .form .btnDiv {
+    align-items: center;
+    justify-content: center;
+  }
+  .regDiv .form .cont {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .btnDiv {
+    flex-direction: column;
+  }
+  .showReg {
+    left: 17vw;
+  }
+}
+
+.termsContainer {
+  text-align: justify;
+  border: 5px solid #ff5c58;
+  padding: 1rem;
+  border-radius: 10px;
+}

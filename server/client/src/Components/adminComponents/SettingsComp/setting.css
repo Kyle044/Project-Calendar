@@ -1,0 +1,65 @@
+.masterSettings {
+  background-color: #202020;
+  height: 100vh;
+  display: flex;
+  width: 100%;
+}
+
+.optionContainer {
+  background-color: white;
+  width: 25%;
+  height: 35%;
+  margin: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.optionheader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background-color: #ff5c58;
+  height: 50%;
+}
+.adminoption {
+  height: 30%;
+  padding: 0.2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.adminoption h4 {
+  text-align: center;
+}
+
+.adminoption:hover {
+  background-color: #202020;
+  cursor: pointer;
+}
+.adminoption:hover h4 {
+  color: white;
+}
+.settingContainer {
+  width: 60%;
+  margin-top: 2rem;
+}
+.editForm {
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.editForm button {
+  height: 2rem;
+}

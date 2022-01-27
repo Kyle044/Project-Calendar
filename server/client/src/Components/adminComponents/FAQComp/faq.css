@@ -1,0 +1,69 @@
+.tablediv {
+  width: 90%;
+}
+.Classtable {
+  width: 90%;
+}
+.thName {
+  background-color: #ff5c58;
+}
+.thOpt {
+  width: 30px;
+  background-color: #ffe331;
+}
+
+.table {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+}
+
+.table h2 {
+  width: 90%;
+}
+
+.optionCont {
+  width: 90%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.optionCont input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 3px;
+  width: 50%;
+  outline: none;
+  margin: 10px;
+}
+
+.optionCont input:focus::placeholder {
+  color: transparent;
+}
+.optionCont input::placeholder {
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.heads {
+  width: 90%;
+  margin-top: 2rem;
+}
+
+.heads h2 {
+  margin: 10px;
+}
+
+.table table {
+  margin-top: 4rem;
+}

@@ -1,0 +1,29 @@
+.heads {
+  margin-left: 0rem;
+}
+
+.Opt {
+  display: flex;
+  flex-direction: column;
+}
+
+.mez input,
+textarea {
+  margin-bottom: 10px;
+}
+
+.Owshee {
+  width: 87%;
+}
+
+.yellowBtn {
+  transition: 0.7s ease;
+}
+
+.yellowBtn:hover {
+  background-color: #ff5c58;
+  cursor: pointer;
+}
+
+.userData {
+}

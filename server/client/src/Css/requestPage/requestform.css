@@ -1,0 +1,343 @@
+.formdiv {
+  width: 95%;
+  /* background-color: brown; */
+  margin: auto;
+  margin-top: 2rem;
+  /* border: 1px solid black; */
+}
+
+.mainContainer {
+  /* background-color: chartreuse; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+/* .name {
+  width: 95%;
+} */
+@media only screen and (max-width: 360px) {
+  .headerTitle {
+    font-size: 1rem;
+  }
+}
+
+.appointmentContainers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.appointmentContainers .appcard {
+  border: 2px solid gray;
+  background-color: silver;
+  padding: 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.appointmentContainers .appcard:hover {
+  background-color: rgb(255, 228, 49);
+}
+
+.labelz {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.resultContainer {
+  border: 2px solid gray;
+  width: 100%;
+  height: 50vh;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.resultContainer .appcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff5c58;
+  padding: 2rem;
+}
+.resultContainer .appcard h4 {
+  font-weight: bold;
+}
+
+.fileContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #ff5c58;
+}
+.fileContainer > h4 {
+  font-weight: bold;
+}
+.filecard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  width: 95%;
+  padding: 10px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.filecard > h4 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.proContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ff5c58;
+  width: 25%;
+}
+
+.proContainer h4 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.programDiv > select {
+  width: 50%;
+}
+
+.appDiv {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: #ff5c58;
+  height: auto;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.headerTitle {
+  font-size: 1rem;
+  margin: 20px;
+  padding: 10px;
+}
+.reqDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff5c58;
+  height: auto;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.stepsDiv {
+  width: 80%;
+  margin: auto;
+}
+
+.btnNextPreviousDone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.powerContainer {
+  margin: 3rem;
+}
+.container1 {
+  display: flex;
+  flex-direction: column;
+  transition: 0.8s ease;
+}
+.containersub1 {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.programDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff5c58;
+  height: auto;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+.idDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff5c58;
+  height: auto;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  width: 40%;
+}
+
+@media (max-width: 700px) {
+  .containersub1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+
+  .programDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #ff5c58;
+    height: auto;
+    width: 90%;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+  .idDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #ff5c58;
+    height: auto;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    width: 90%;
+  }
+  .stepsDiv {
+    width: 100%;
+    margin: auto;
+  }
+}
+.container2 {
+  display: flex;
+  justify-content: space-evenly;
+}
+.checkDiv {
+  display: flex;
+  flex-direction: column;
+}
+.checkDiv label {
+  margin-bottom: 15px;
+}
+.headerTitles {
+  font-size: 1rem;
+  margin: 1.5rem 1.5rem 1.5rem 0;
+}
+.nawala {
+  margin-left: 8px;
+}
+.container3 {
+  display: grid;
+  height: 90%;
+  width: 100%;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "appContainer comment"
+    "appContainer resolt";
+
+  grid-gap: 0.4rem;
+  margin: 1rem;
+}
+.appContz {
+  border-radius: 10px;
+  grid-area: appContainer;
+  overflow-y: auto;
+}
+.comment {
+  grid-area: comment;
+}
+.comment input {
+  height: 50%;
+}
+.resolt {
+  border-radius: 10px;
+  grid-area: resolt;
+}
+
+.appoCard {
+  background-color: rgb(29, 26, 26);
+  width: 70%;
+  padding: 6px;
+  margin: 7px 0px 0px 0px;
+  transition: 0.5s ease;
+}
+.appoCard:hover h4 {
+  color: rgb(255, 228, 42);
+  cursor: pointer;
+}
+.appoCard:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.appoCard h4 {
+  color: #fff;
+  transition: 0.8s ease;
+}
+.rezCon .subCon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.notAvailable {
+  opacity: 0.5;
+}
+
+@media (max-width: 700px) {
+  .container2 {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  .container3 {
+    display: grid;
+    height: 90%;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.6fr 0.3fr 1fr;
+    grid-template-areas:
+      "appContainer"
+      "comment"
+      "resolt";
+  }
+}
+
+@media (max-width: 573px) {
+  .powerContainer {
+    margin: 1rem;
+  }
+  .headerTitle {
+    font-size: 12px;
+    width: 120%;
+    margin-bottom: 10px;
+  }
+  .ant-steps-item-title {
+    font-size: 10px;
+  }
+  .comment input {
+    height: 50%;
+    width: 90%;
+  }
+}

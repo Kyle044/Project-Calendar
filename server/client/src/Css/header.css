@@ -1,0 +1,122 @@
+.CC2 {
+  line-height: 1rem;
+  margin-left: 1rem;
+  /* background-color: red; */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.School {
+  color: white;
+  font-size: 0.8em;
+  margin: auto;
+  padding-top: 0.8rem;
+}
+.address {
+  color: white;
+  font-size: 0.7em;
+}
+.mHeader {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(75, 75, 75, 1) 100%
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.titles {
+  font-weight: 200;
+  color: #ffe431;
+}
+
+.logout {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 3rem;
+
+  color: white;
+
+  transition: 0.3s ease;
+  border-radius: 10px;
+}
+
+.logout:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+
+  color: white;
+  border: 2px solid rgb(192, 197, 44);
+}
+
+.headlinks {
+  display: flex;
+  justify-content: space-evenly;
+  width: 30%;
+  transition: 1s ease;
+}
+
+.burger {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .headlinks h4 {
+    display: block;
+  }
+  .headlinks {
+    position: absolute;
+    background: #f44336;
+    height: 100vh;
+    width: 200px;
+    top: 0;
+    right: -200px;
+    text-align: left;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px;
+  }
+
+  .logout {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0);
+    transition: 0.3s ease;
+    border-radius: 10px;
+  }
+
+  .logout:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    color: white;
+    border: 2px solid rgba(192, 197, 44, 0);
+  }
+
+  .burger {
+    display: block;
+    color: #fff;
+    margin: 10px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+}

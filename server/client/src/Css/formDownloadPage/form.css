@@ -1,0 +1,134 @@
+.mainStud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+.mainStud .title {
+  margin: 1rem;
+}
+.formStudContainer {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  grid-template-columns: 40% 40%;
+  grid-template-rows: repeat(auto-fill, 100px);
+  width: 100vw;
+  height: auto;
+  min-height: 400px;
+  background-color: #ff5c58;
+}
+.title {
+  color: black;
+}
+.formStudCard {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem;
+  border-radius: 6px;
+  background-color: rgb(255, 255, 255);
+}
+.formStudCard h4 {
+  color: rgb(0, 0, 0);
+  transform: translateY(0.2em);
+}
+
+.card {
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  height: 13rem;
+  padding: 1rem;
+  background: #ff5c58;
+  width: 17rem;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 4px 4px 16px -1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 4px 16px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 16px -1px rgba(0, 0, 0, 0.75);
+}
+
+.cardHeader {
+  height: 5rem;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardHeader img {
+  height: 100%;
+  width: auto;
+}
+
+.cardBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.cardDescript h3 {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+
+  text-shadow: 1px 1px 2px black;
+  color: black;
+}
+
+.cardBtn button {
+  border-radius: 4px;
+  font-weight: bold;
+  color: black;
+
+  text-align: center;
+}
+
+.table-title {
+  width: auto;
+}
+.table-title h4 {
+  width: 25rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.formMasterContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 10px;
+}
+.ashz {
+  margin: 0px auto;
+}
+.cardRightDiv {
+}
+@media (max-width: 750px) {
+  .formMasterContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 10px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .ashz {
+    margin: 0px auto;
+  }
+  .table-title {
+    width: auto;
+  }
+  .table-title h4 {
+    width: 15rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
