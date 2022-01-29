@@ -3,7 +3,8 @@ import axios from "axios";
 import Header from "../../Components/studentdashComponents/header";
 import Footer from "../../Components/studentdashComponents/Footer";
 import { verifyToken } from "../../Functions/api";
-import Card from "../../Components/Card";
+import Card from "../../Components/verticalCard/VerticalCard";
+import { Input, Button } from "antd";
 import "./studentsettings.css";
 function StudentSettings() {
   const initialState = {
@@ -17,8 +18,9 @@ function StudentSettings() {
   };
   const [state, setState] = useState(initialState);
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (state.ConfirmPassword != state.Password) {
+    if (!state.Fullname || !state.Email || !state.Password) {
+      alert("Please fill up all the field.");
+    } else if (state.ConfirmPassword != state.Password) {
       alert("Password does not match");
     } else {
       verifyToken(localStorage.getItem("token"))
@@ -30,6 +32,7 @@ function StudentSettings() {
             })
             .then((res) => {
               alert(res.data.msg);
+              setState(initialState);
             })
             .catch((err) => {
               console.log(err.message);
@@ -50,54 +53,33 @@ function StudentSettings() {
   return (
     <div>
       <Header />
-
       <div className="studEditContainer">
-     
-      <form action="" className="editzForm" onSubmit={handleSubmit}>
-      <div className="leftpards">
-        <h2 className="accinfo">ACCOUNT INFORMATION</h2>
-            <div>
-              <p className="label">Full Name (Fname , Mi, Lname)</p>
-              <input type="text" name="Fullname" onChange={handleChange} className="textbox"/>
-            </div>
-            <div>
-            <p className="label">Email</p>
-              <input type="email" name="Email" id="" onChange={handleChange} className="textbox"/>
-            </div>
-
-            <div>
-            <p className="label">Course</p>
-              <input type="text" name="Course" onChange={handleChange} className="textbox"/>
-            </div>
-            <div>
-            <p className="label">Year</p>
-              <input type="text" name="Year" onChange={handleChange} className="textbox"/>
-            </div>
-
-            <h2 className="accinfo">CHANGE PASSWORD</h2>
-            <div>
-            <p className="label">Password</p>
-              <input type="password" name="Password" onChange={handleChange} className="textbox"/>
-            </div>
-            <div>
-            <p className="label">Confirm Password</p>
-              <input
-                type="password"
-                name="ConfirmPassword"
-                onChange={handleChange}
-                className="textbox"
-              />
-            </div>
-          
+        <form action="">
+          <h2 className="wat">Edit Profile</h2>
+          <label htmlFor="">Full Name</label>
+          <Input type="text" name="Fullname" onChange={handleChange} />
+          <label htmlFor="">Email</label>
+          <Input type="email" name="Email" id="" onChange={handleChange} />
+          <label htmlFor="">Password</label>
+          <Input type="password" name="Password" onChange={handleChange} />
+          <label htmlFor="">Confirm Password</label>
+          <Input
+            type="password"
+            name="ConfirmPassword"
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            Submit
+          </Button>
+        </form>
+        <Card />
       </div>
-      <div className="bbutton">
-            <button type="submit" className="ssubmit">
-              Submit
-            </button>
-            </div>
-      </form>
-      </div>
-      <Card />
+
       <Footer />
     </div>
   );

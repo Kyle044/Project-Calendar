@@ -355,3 +355,21 @@
   align-items: center;
   margin-bottom: 10px;
 }
+.todoContainer {
+  height: 50vh;
+}
+.cardTodo {
+  border: 1px solid rgb(80, 80, 182);
+  background-color: rgb(135, 135, 184);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardTodo h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.cardTodo p {
+}

@@ -72,7 +72,7 @@ function Form() {
                   <Button
                     onClick={() => {
                       download(
-                        form.File.path.substr(16),
+                        form.File.path.substr(14),
                         form.File.filename.substr(15)
                       );
                     }}

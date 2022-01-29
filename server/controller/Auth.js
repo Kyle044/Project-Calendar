@@ -129,3 +129,50 @@ exports.deleteAdmin = (req, res) => {
     })
     .catch((err) => res.status(400).json("Error : " + err));
 };
+
+exports.subAdmin = (req, res) => {
+  const { Email, Password, ConfirmPassword, FullName, SchoolIDNumber } =
+    req.body;
+  Admin.find({ $or: [{ Email: Email }, { SchoolIDNumber: SchoolIDNumber }] })
+    .then((admin) => {
+      if (admin.length) {
+        res.json("The Admin is Already in the Database.");
+      } else {
+        bcrypt
+          .hash(Password, 12)
+          .then((hashedpassword) => {
+            var newAdmin = new Admin({
+              Email: Email,
+              Password: hashedpassword,
+              Fullname: FullName,
+              SchoolIDNumber: SchoolIDNumber,
+              Auth: "subadmin"
+            });
+            newAdmin
+              .save()
+              .then(() => {
+                res.json("Success Creating a new Admin");
+              })
+              .catch((err) => {
+                res.json(err);
+              });
+          })
+          .catch((err) => {
+            res.json(err);
+          });
+      }
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
+exports.getSubadmin = (req, res) => {
+  Admin.find({ Auth: "subadmin" })
+    .then((admin) => {
+      res.json(admin);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};

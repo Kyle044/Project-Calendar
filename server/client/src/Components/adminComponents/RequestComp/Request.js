@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import "./request.css";
 import axios from "axios";
 import Message from "./Message";
@@ -88,6 +88,35 @@ function Request() {
         });
     }
   };
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [user, setUser] = useState({
+    Auth: "",
+    Course: "",
+    Year: "",
+    Email: "",
+    Fullname: "",
+    Password: "",
+    SchoolIDNumber: "",
+    createdAt: "",
+    updatedAt: "",
+    __v: 0,
+    _id: ""
+  });
+  const showModal = (data) => {
+    setUser(data);
+    setTimeout(() => {
+      setIsModalVisible(true);
+    }, 200);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <div className="table">
       <div className="heads">
@@ -103,6 +132,7 @@ function Request() {
             <th>Student #</th>
             <th>Request</th>
             <th>Description</th>
+            <th>Program</th>
             <th>ID</th>
             <th>Status</th>
             <th>Appointment</th>
@@ -114,13 +144,21 @@ function Request() {
             request.map((r) => {
               return (
                 <tr key={r._id}>
-                  <td>{r.Sender.SchoolIDNumber}</td>
+                  <td
+                    className="yellowBtn"
+                    onClick={() => {
+                      showModal(r.Sender);
+                    }}
+                  >
+                    {r.Sender.SchoolIDNumber}
+                  </td>
                   <td>
                     {r.Title.map((t) => {
                       return <p>{t},</p>;
                     })}
                   </td>
                   <td>{r.Description}</td>
+                  <td>{r.Program}</td>
                   <td>
                     <Button
                       onClick={() => {
@@ -171,6 +209,22 @@ function Request() {
           )}
         </tbody>
       </table>
+      <Modal
+        title="Student Description"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        {user ? (
+          <div className="userData">
+            <h4>School # : {user.SchoolIDNumber}</h4>
+            <h4>Full Name : {user.Fullname}</h4>
+            <h4>Email: {user.Email}</h4>
+            <h4>Course: {user.Course}</h4>
+            <h4>Year Level: {user.Year}</h4>
+          </div>
+        ) : null}
+      </Modal>
     </div>
   );
 }

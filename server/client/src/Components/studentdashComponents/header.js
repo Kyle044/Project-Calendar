@@ -10,17 +10,20 @@ function Header({ history }) {
     }
   };
   const link = useRef(null);
+  const header = useRef(null);
 
   const hideMenu = () => {
+    header.current.style.overflow = "hidden";
     link.current.style.right = "-200px";
   };
   const showMenu = () => {
+    header.current.style.overflow = "visible";
     link.current.style.right = "0";
   };
 
   return (
     <div style={{ width: "100%" }}>
-      <div className="mHeader">
+      <div className="mHeader" ref={header}>
         {/* <img src="./images/logotry.png" alt=""style={{height: "6%", width: "6%",objectFit:"contain"}}/>  */}
 
         <div
@@ -76,7 +79,7 @@ function Header({ history }) {
               history.push("/studSettings");
             }}
           >
-            Settings
+            Profile
           </h4>
           <h4
             className="logout"

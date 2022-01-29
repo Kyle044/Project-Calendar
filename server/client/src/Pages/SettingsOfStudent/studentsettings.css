@@ -75,3 +75,58 @@
 .bbutton {
   width: 150px;
 }
+.studEditContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  place-items: center;
+}
+
+.studEditContainer form {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ff5c58;
+  padding: 50px;
+  border-radius: 12px;
+}
+
+.wat {
+  position: relative;
+  left: -10rem;
+}
+
+@media (max-width: 930px) {
+  .wat {
+    position: relative;
+    left: -6rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .studEditContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1fr;
+    grid-gap: 20px;
+    place-items: center;
+  }
+  .studEditContainer form {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .wat {
+    position: relative;
+    left: -6rem;
+  }
+}
+@media (max-width: 404px) {
+  .wat {
+    position: relative;
+    left: -4rem;
+  }
+}

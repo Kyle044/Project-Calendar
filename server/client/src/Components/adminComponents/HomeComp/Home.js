@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
 import Card from "./Card";
-import { Button, Input, Badge, Empty } from "antd";
+import { Button, Input, Badge, Empty, message } from "antd";
 import { Pie } from "@ant-design/charts";
 import InsertGoal from "../../InsertGoal";
 import OnGoingCalendar from "../../OnGoingCalendar";
@@ -177,6 +177,18 @@ function Home({
     author: "",
     text: ""
   });
+  const [handler, setHandler] = useState();
+  const getHandler = () => {
+    axios
+      .post(`${process.env.REACT_APP_KEY}/getHandler`, { id: Owner._id })
+      .then((res) => {
+        console.log(res.data);
+        setHandler(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     axios
       .get("https://type.fit/api/quotes")
@@ -189,6 +201,7 @@ function Home({
   }, []);
   useEffect(() => {
     getAppointment();
+    getHandler();
   }, []);
   const [today, setToday] = useState(moment(new Date()).format("MMMM Do YYYY"));
   useEffect(() => {
@@ -245,6 +258,40 @@ function Home({
     } else {
     }
   };
+
+  //TODO:
+
+  const handleMarkDone = (task) => {
+    axios
+      .post(`${process.env.REACT_APP_KEY}/findGoal`, {
+        id: task._id,
+        task: task
+      })
+      .then((res) => {
+        axios
+          .post(`${process.env.REACT_APP_KEY}/markDone`, res.data)
+          .then((res) => {
+            axios
+              .get(`${process.env.REACT_APP_KEY}/getGoal`)
+              .then((res) => {
+                console.log(res.data);
+                message.success("Success");
+                setGoal(res.data.data);
+                getHandler();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="homeContainer">
       {/* <div className="dateContainer ">
@@ -279,11 +326,14 @@ function Home({
             >
               Search
             </Button>
-            <InsertGoal
-              Owner={Owner}
-              setGoal={setGoal}
-              setGoalCount={setGoalCount}
-            />
+            {Owner.Auth == "subadmin" ? null : (
+              <InsertGoal
+                Owner={Owner}
+                setGoal={setGoal}
+                setGoalCount={setGoalCount}
+                admin={Owner}
+              />
+            )}
 
             <ReactToPrint
               trigger={() => <Button>Print Current Calendar</Button>}
@@ -296,7 +346,12 @@ function Home({
           <div className="cardContainer">
             {goal.map((g) => {
               return (
-                <Card goal={g} setGoal={setGoal} setGoalCount={setGoalCount} />
+                <Card
+                  goal={g}
+                  setGoal={setGoal}
+                  setGoalCount={setGoalCount}
+                  admin={Owner}
+                />
               );
             })}
           </div>
@@ -304,8 +359,62 @@ function Home({
           <Empty style={{ margin: "1px" }} />
         )}
       </section>
-      <h5 className="headers">Appointment Schedule List</h5>
+
+      {
+        //TODO:
+        Owner.Auth == "subadmin" && handler ? (
+          <section className="todoContainer">
+            <h5 className="headers">To Do List</h5>
+            <div className="cardContainer">
+              {handler.map((h) => {
+                if (h.Status != "Complete") {
+                  return (
+                    <div className="cardTodo">
+                      <h4>{h.Subject}</h4>
+                      <p>{h.Description.substring(0, 16)}</p>
+                      {h.Status == "Complete" ? (
+                        <h4>Complete</h4>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            handleMarkDone(h);
+                          }}
+                        >
+                          Mark As Done
+                        </Button>
+                      )}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </section>
+        ) : null
+      }
+
+      {
+        //TODO:
+        Owner.Auth == "subadmin" && handler ? (
+          <section className="todoContainer">
+            <h5 className="headers">Complete Tasks</h5>
+            <div className="cardContainer">
+              {handler.map((h) => {
+                if (h.Status == "Complete") {
+                  return (
+                    <div className="cardTodo">
+                      <h4>{h.Subject}</h4>
+                      <p>{h.Description.substring(0, 16)}</p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </section>
+        ) : null
+      }
+
       <section className="apsec">
+        <h5 className="headers">Appointment Schedule List</h5>
         <div className="cardContainer">
           {appoint.map((a) => {
             return (
@@ -316,14 +425,16 @@ function Home({
                   {moment(a.Time.To, "HH:mm:ss").format("h:mm A")}
                 </h4>
                 <h4 className="white">Status : {a.Status}</h4>
-                <Button
-                  danger
-                  onClick={() => {
-                    handleDeleteAppoint(a._id);
-                  }}
-                >
-                  Delete
-                </Button>
+                {Owner.Auth == "subadmin" ? null : (
+                  <Button
+                    danger
+                    onClick={() => {
+                      handleDeleteAppoint(a._id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                )}
               </div>
             );
           })}

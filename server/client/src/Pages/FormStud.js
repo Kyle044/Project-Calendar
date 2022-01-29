@@ -4,6 +4,7 @@ import axios from "axios";
 import download from "../Functions/download";
 import { withRouter } from "react-router-dom";
 import Cards from "../Components/Card";
+import VerticalCard from "../Components/verticalCard/VerticalCard";
 import "../Css/formDownloadPage/form.css";
 import Nav from "../Components/studentdashComponents/Nav";
 import Footer from "../Components/studentdashComponents/Footer";
@@ -23,34 +24,53 @@ function FormStud({ history }) {
   return (
     <div className="mainStud">
       <Header />
-      <h1 className="title">
-        The Forms to Download in The Office Of Registrar.
-      </h1>
-      {form ? (
-        <div className="formStudContainer">
-          {form.map((f) => {
-            return (
-              <div className="formStudCard">
-                <h4> {f.Description}</h4>
-                <Button
-                  danger
-                  onClick={() => {
-                    download(
-                      f.File.path.substr(14),
-                      f.File.filename.substr(15)
-                    );
-                  }}
-                >
-                  Download
-                </Button>
-              </div>
-            );
-          })}
+
+      <div className="formMasterContainer">
+        {form ? (
+          <table className="content-table ashz">
+            <thead>
+              <caption>
+                <caption className="table-title">
+                  <h4>The Forms to Download in The Office Of Registrar</h4>
+                </caption>
+              </caption>
+              <tr>
+                <th>Description</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {form.map((f) => {
+                return (
+                  <tr>
+                    <td>{f.Description}</td>
+                    <td>
+                      <Button
+                        danger
+                        onClick={() => {
+                          download(
+                            f.File.path.substr(14),
+                            f.File.filename.substr(15)
+                          );
+                        }}
+                      >
+                        Download
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <Skeleton />
+        )}
+        <div className="cardRightDiv">
+          <VerticalCard />
         </div>
-      ) : (
-        <Skeleton />
-      )}
-      <Cards />
+      </div>
+
       <Footer />
     </div>
   );

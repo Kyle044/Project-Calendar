@@ -5,7 +5,7 @@ import { Collapse } from "antd";
 import { Button } from "antd";
 import { withRouter } from "react-router-dom";
 import "../pCss/FAQStud.css";
-import Card from "../Components/Card";
+import Card from "../Components/verticalCard/VerticalCard";
 import Header from "../Components/studentdashComponents/header";
 import Footer from "../Components/studentdashComponents/Footer";
 // import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -29,14 +29,9 @@ function FAQStud({ history }) {
   }
   return (
     <div className="MC">
-      <div>
-        <Header />
-      </div>
+      <Header />
 
-     <div className="hed">
-       <h1>Frequently asked questions to the Office of the registrar</h1>
-     </div>
-      <div className="cd">
+      <div className="contentFAQ">
         {faq ? (
           <div className="FAQ">
             <Collapse defaultActiveKey={["1"]} onChange={callback}>
@@ -61,12 +56,8 @@ function FAQStud({ history }) {
         ) : (
           <Skeleton />
         )}
-      </div>
-
-      <div className="mainContainer2">
         <Card />
       </div>
-
       <Footer />
     </div>
   );

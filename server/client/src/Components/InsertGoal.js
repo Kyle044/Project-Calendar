@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DatePicker, Space, Button, Modal, notification } from "antd";
+import { DatePicker, Space, Button, Modal, notification, message } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { Input, Select, Empty } from "antd";
 import validator from "validator";
 import Task from "../Components/TaskList";
 import axios, { Axios } from "axios";
@@ -13,6 +13,7 @@ function InsertGoal(props) {
   const fileRef = useRef();
   const [isGoalModalVisible, setIsGoalModalVisible] = useState(false);
   const [stateDate, setStateDate] = useState(null);
+  const [taskDate, setTaskDate] = useState(null);
   const [state, setState] = useState({
     Subject: "",
     Description: "",
@@ -29,29 +30,61 @@ function InsertGoal(props) {
     Description: "",
     startDate: "",
     dueDate: "",
-    Handler: "N/A",
+    Handler: "",
     Status: "On Going"
   });
+
+  //FIXME:
+
+  const [subAdmin, setSubAdmin] = useState(null);
+  const getAdmins = () => {
+    axios
+      .get(`${process.env.REACT_APP_KEY}/getSubadmin`)
+      .then((res) => {
+        setSubAdmin(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAdmins();
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
     setIsGoalModalVisible(false);
   };
-
+  //FIXME:
   const handleOk = () => {
-    setIsModalVisible(false);
-    setState((prev) => {
-      return { ...prev, Tasks: prev.Tasks.concat(task) };
-    });
-    setTask({
-      Subject: "",
-      Description: "",
-      startDate: "",
-      dueDate: "",
-      Handler: "N/A",
-      Status: "On Going"
-    });
-    setIsGoalModalVisible(true);
+    console.log(task);
+    if (
+      !task.Subject ||
+      !task.Description ||
+      !task.startDate ||
+      !task.dueDate ||
+      !task.Handler
+    ) {
+      message.error("Please Fill up All the fields");
+    } else {
+      setIsModalVisible(false);
+      setState((prev) => {
+        return { ...prev, Tasks: prev.Tasks.concat(task) };
+      });
+      setTaskDate(null);
+      setTask((prev) => {
+        return {
+          Subject: "",
+          Description: "",
+          startDate: "",
+          dueDate: "",
+          Handler: prev.Handler,
+          Status: "On Going"
+        };
+      });
+      setIsGoalModalVisible(true);
+    }
   };
 
   const handleCancel = () => {
@@ -65,46 +98,56 @@ function InsertGoal(props) {
 
   const handleOkGoal = (e) => {
     e.preventDefault();
-    submit().then((data) => {
-      const files = data.file.map((file) => {
-        return {
-          FileName: file.filename,
-          Directory: file.path,
-          Size: file.size
-        };
-      });
-
-      axios
-        .post(`${process.env.REACT_APP_KEY}/insertGoal`, {
-          Subject: state.Subject,
-          Description: state.Description,
-          StartDate: state.StartDate,
-          DueDate: state.DueDate,
+    if (
+      !state.Description ||
+      !state.StartDate ||
+      !state.DueDate ||
+      !state.Subject
+    ) {
+      message.error(
+        "Please fill up Description and Date and the Subject Section"
+      );
+    } else {
+      submit().then((data) => {
+        const files = data.file.map((file) => {
+          return {
+            FileName: file.filename,
+            Directory: file.path,
+            Size: file.size
+          };
+        });
+        axios
+          .post(`${process.env.REACT_APP_KEY}/insertGoal`, {
+            Subject: state.Subject,
+            Description: state.Description,
+            StartDate: state.StartDate,
+            DueDate: state.DueDate,
+            Status: "On Going",
+            File: files,
+            percentageComplete: state.percentageComplete,
+            Tasks: state.Tasks,
+            Owner: props.Owner
+          })
+          .then((res) => {
+            console.log(res.data);
+            fileRef.current.value = null;
+            setRefresh(!refresh);
+          })
+          .catch((err) => console.log(err));
+        setStateDate(null);
+        setState({
+          Subject: "",
+          Description: "",
+          StartDate: "",
+          DueDate: "",
           Status: "On Going",
-          File: files,
-          percentageComplete: state.percentageComplete,
-          Tasks: state.Tasks,
+          File: [],
+          percentageComplete: 0,
+          Tasks: [],
           Owner: props.Owner
-        })
-        .then((res) => {
-          console.log(res.data);
-          fileRef.current.value = null;
-          setRefresh(!refresh);
-        })
-        .catch((err) => console.log(err));
-
-      setState({
-        Subject: "",
-        Description: "",
-        StartDate: "",
-        DueDate: "",
-        Status: "On Going",
-        File: [],
-        percentageComplete: 0,
-        Tasks: [],
-        Owner: props.Owner
+        });
       });
-    });
+    }
 
     // setIsGoalModalVisible(!isGoalModalVisible);
   };
@@ -131,11 +174,26 @@ function InsertGoal(props) {
       }
     }
   }
+
   function onChangeTaskDate(date, dateString) {
-    setTask((prev) => {
-      return { ...prev, startDate: date[0]._d, dueDate: date[1]._d };
-    });
+    setTaskDate(date);
+    if (date) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (date[0]._d < today) {
+        openNotification(
+          "The Date is Invalid",
+          "the date must must be greater than or equal to the present date."
+        );
+        setTaskDate(null);
+      } else {
+        setTask((prev) => {
+          return { ...prev, startDate: date[0]._d, dueDate: date[1]._d };
+        });
+      }
+    }
   }
+
   function taskChange(e) {
     const { name, value } = e.target;
     setTask((prev) => {
@@ -164,25 +222,36 @@ function InsertGoal(props) {
     });
   }
   function submit() {
-    const formData = new FormData();
-    for (let i = 0; i < state.File.length; i++) {
-      formData.append("files", state.File[i]);
+    if (
+      !state.Description ||
+      !state.StartDate ||
+      !state.DueDate ||
+      !state.Subject
+    ) {
+      message.error(
+        "Please fill up Description and Date and the Subject Section"
+      );
+    } else {
+      const formData = new FormData();
+      for (let i = 0; i < state.File.length; i++) {
+        formData.append("files", state.File[i]);
+      }
+      var config = {
+        method: "post",
+        url: `${process.env.REACT_APP_KEY}/insertMultipleFile`,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        data: formData
+      };
+      return axios(config)
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    var config = {
-      method: "post",
-      url: `${process.env.REACT_APP_KEY}/insertMultipleFile`,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      data: formData
-    };
-    return axios(config)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
   useEffect(() => {
     console.log("refresh");
@@ -212,6 +281,15 @@ function InsertGoal(props) {
       }
     });
   };
+  const { Option } = Select;
+
+  // TODO:
+  function onChangeHandler(value) {
+    setTask((prev) => {
+      return { ...prev, Handler: value };
+    });
+  }
+  function onSearchHandler(val) {}
   return (
     <div>
       <Button onClick={showGoalModal}>Add Goal</Button>
@@ -237,9 +315,10 @@ function InsertGoal(props) {
               onChange={goalChange}
               value={state.Description}
             />
+            {/* {FIXME:} */}
             <RangePicker
               onChange={onChange}
-              allowClear={true}
+              allowClear={false}
               value={stateDate}
             />
             <input
@@ -286,7 +365,31 @@ function InsertGoal(props) {
             value={task.Description}
             onChange={taskChange}
           />
-          <RangePicker onChange={onChangeTaskDate} />
+          <RangePicker onChange={onChangeTaskDate} value={taskDate} />
+          {/* TODO: */}
+          <Select
+            showSearch
+            placeholder="Select a Task Handler"
+            optionFilterProp="children"
+            onChange={onChangeHandler}
+            onSearch={onSearchHandler}
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            {subAdmin ? (
+              subAdmin.map((a) => {
+                return (
+                  <Option value={a._id} key={a._id}>
+                    {a.Fullname}
+                  </Option>
+                );
+              })
+            ) : (
+              <Empty />
+            )}
+          </Select>
+          ,
         </Space>
         <br />
       </Modal>
