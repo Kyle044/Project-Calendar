@@ -258,3 +258,18 @@ exports.Reject = (req, res) => {
       res.json(err);
     });
 };
+
+exports.searchRequest = (req, res, next) => {
+  var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
+  Request.find({ "Sender.SchoolIDNumber": regex })
+    .then((data) => {
+      if (data.length == 0) {
+        res.json({ msg: "No Data", data: data });
+      } else {
+        res.json({ msg: "Success for finding form", data: data });
+      }
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
+    });
+};

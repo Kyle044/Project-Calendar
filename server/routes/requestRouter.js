@@ -10,7 +10,8 @@ const {
   markDone,
   emailReq,
   getUserRequest,
-  Reject
+  Reject,
+  searchRequest
 } = require("../controller/RequestController");
 
 router.post("/insertRequest", InsertRequest);
@@ -21,4 +22,7 @@ router.post("/markRequestDone", markDone);
 router.post("/emailRequest", emailReq);
 router.post("/getUserRequest", getUserRequest);
 router.post("/rejectRequest", Reject);
+
+router.post("/searchRequest", searchRequest);
+
 module.exports = router;

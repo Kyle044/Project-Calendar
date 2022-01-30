@@ -16,7 +16,9 @@ const {
   addTask,
   getHandler,
   findGoal,
-  getFullHandler
+  getFullHandler,
+  testPercentage,
+  getGoalTask
 } = require("../controller/GoalController");
 
 router.post("/insertGoal", InsertGoal);
@@ -32,6 +34,7 @@ router.post("/addAttachment", addFileAttachment);
 router.post("/addTask", addTask);
 router.post("/getHandler", getHandler);
 router.post("/findGoal", findGoal);
-
 router.post("/oneHandler", getFullHandler);
+router.post("/testPercentage", testPercentage);
+router.post("/getGoalTask", getGoalTask);
 module.exports = router;

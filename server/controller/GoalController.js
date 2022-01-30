@@ -193,6 +193,45 @@ exports.markDone = (req, res, next) => {
     });
 };
 
+exports.testPercentage = (req, res, next) => {
+  console.log(req.body);
+};
+
+exports.getGoalTask = (req, res) => {
+  var complete = 0;
+  var ongoing = 0;
+  var counter = 0;
+  req.body.goal.Tasks.forEach((t) => {
+    if (t.Status == "Complete") {
+      complete++;
+    }
+    if (t.Status == "On Going") {
+      ongoing++;
+    }
+    counter++;
+  });
+  Goal.findById(req.body.goal._id)
+    .then((goal) => {
+      goal.percentageComplete = (complete / (counter - 1)) * 100;
+      if (Math.round(goal.percentageComplete) == 100) {
+        goal.Status = "Complete";
+      }
+
+      goal
+        .save()
+        .then((g) => {
+          console.log(g.percentageComplete);
+          res.json("success");
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
 exports.deleteTask = (req, res, next) => {
   const { task, goal } = req.body;
   Goal.findOneAndUpdate(
@@ -204,6 +243,7 @@ exports.deleteTask = (req, res, next) => {
     },
     { safe: true }
   )
+    .populate({ path: "Tasks", model: "Task" })
     .then((goal) => {
       Task.findByIdAndDelete(task._id)
         .then((task) => {

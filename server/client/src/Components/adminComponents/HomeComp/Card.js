@@ -110,6 +110,24 @@ function Card({ goal, setGoal, setGoalCount, admin }) {
           axios
             .get(`${process.env.REACT_APP_KEY}/getGoalCount`)
             .then((res) => {
+              axios
+                .post(`${process.env.REACT_APP_KEY}/getGoalTask`, {
+                  goal: goal
+                })
+                .then((res) => {
+                  console.log(res.data);
+                  axios
+                    .get(`${process.env.REACT_APP_KEY}/getGoal`)
+                    .then((res) => {
+                      setGoal(res.data.data);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
               setGoalCount(res.data.data);
             })
             .catch((err) => {
