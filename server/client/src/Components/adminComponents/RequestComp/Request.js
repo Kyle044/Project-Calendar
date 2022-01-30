@@ -5,10 +5,26 @@ import axios from "axios";
 import Message from "./Message";
 import { Empty } from "antd";
 import download from "../../../Functions/download";
-function Request() {
+function Request({ admin }) {
   const [request, setRequest] = useState(null);
 
   const [toggleLoad, setToggleLoad] = useState({ mark: false, id: 0 });
+  const [search, setSearch] = useState("");
+
+  const handleSearch = () => {
+    axios
+      .post(`${process.env.REACT_APP_KEY}/searchRequest`, { search: search })
+      .then((res) => {
+        setRequest(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const searchChange = (e) => {
+    setSearch(e.target.value);
+  };
   const getRequest = () => {
     axios
       .get(`${process.env.REACT_APP_KEY}/getRequest`)
@@ -120,10 +136,22 @@ function Request() {
   return (
     <div className="table">
       <div className="heads">
-        <h2>Request Table</h2>
+        <h2>Pending Request</h2>
         <div className="optionCont">
-          <input type="text" name="Search" placeholder="Search Here" />
-          <Button>Search</Button>
+          <input
+            type="text"
+            name="Search"
+            placeholder="Search Student #"
+            value={search}
+            onChange={searchChange}
+          />
+          <Button
+            onClick={() => {
+              handleSearch();
+            }}
+          >
+            Search
+          </Button>
         </div>
       </div>
       <table className="content-table">
@@ -142,68 +170,273 @@ function Request() {
         <tbody>
           {request ? (
             request.map((r) => {
-              return (
-                <tr key={r._id}>
-                  <td
-                    className="yellowBtn"
-                    onClick={() => {
-                      showModal(r.Sender);
-                    }}
-                  >
-                    {r.Sender.SchoolIDNumber}
-                  </td>
-                  <td>
-                    {r.Title.map((t) => {
-                      return <p>{t},</p>;
-                    })}
-                  </td>
-                  <td>{r.Description}</td>
-                  <td>{r.Program}</td>
-                  <td>
-                    <Button
+              if (r.Status == "On Going") {
+                return (
+                  <tr key={r._id}>
+                    <td
+                      className="yellowBtn"
                       onClick={() => {
-                        download(r.File[0].path.substr(14), r.File[0].filename);
+                        showModal(r.Sender);
                       }}
                     >
-                      File
-                    </Button>
-                  </td>
+                      {r.Sender.SchoolIDNumber}
+                    </td>
+                    <td>
+                      {r.Title.map((t) => {
+                        return <p>{t},</p>;
+                      })}
+                    </td>
+                    <td>{r.Description}</td>
+                    <td>{r.Program}</td>
+                    <td>
+                      <Button
+                        onClick={() => {
+                          download(
+                            r.File[0].path.substr(14),
+                            r.File[0].filename
+                          );
+                        }}
+                      >
+                        File
+                      </Button>
+                    </td>
 
-                  <td>{r.Status}</td>
-                  <td>{new Date(r.Appointment.Date).toDateString()}</td>
-                  <td className="Opt">
-                    <Button
-                      id="shet"
+                    <td>{r.Status}</td>
+                    <td>{new Date(r.Appointment.Date).toDateString()}</td>
+                    <td className="Opt">
+                      <Button
+                        id="shet"
+                        onClick={() => {
+                          setToggleLoad((prev) => {
+                            return { ...prev, id: r._id };
+                          });
+                          handleMark(r._id);
+                        }}
+                        loading={
+                          toggleLoad.id == r._id ? toggleLoad.mark : false
+                        }
+                      >
+                        Mark As Done
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleRejection(r._id);
+                        }}
+                      >
+                        Reject
+                      </Button>
+                      <Message id={r._id} Sender={r.Sender} id="shet" />
+                      {admin.Auth == "subadmin" ? null : (
+                        <Button
+                          id="shet"
+                          danger
+                          onClick={() => {
+                            handleReject(r._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              }
+            })
+          ) : (
+            <Empty />
+          )}
+        </tbody>
+      </table>
+      <hr />
+      <div className="heads">
+        <h2>Rejected Requests</h2>
+      </div>
+
+      <table className="content-table">
+        <thead>
+          <tr>
+            <th>Student #</th>
+            <th>Request</th>
+            <th>Description</th>
+
+            <th>ID</th>
+            <th>Status</th>
+            <th>Appointment</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {request ? (
+            request.map((r) => {
+              if (r.Status == "Rejected") {
+                return (
+                  <tr key={r._id}>
+                    <td
+                      className="yellowBtn"
                       onClick={() => {
-                        setToggleLoad((prev) => {
-                          return { ...prev, id: r._id };
-                        });
-                        handleMark(r._id);
+                        showModal(r.Sender);
                       }}
-                      loading={toggleLoad.id == r._id ? toggleLoad.mark : false}
                     >
-                      Mark As Done
-                    </Button>
-                    <Button
+                      {r.Sender.SchoolIDNumber}
+                    </td>
+                    <td>
+                      {r.Title.map((t) => {
+                        return <p>{t},</p>;
+                      })}
+                    </td>
+                    <td>{r.Description}</td>
+
+                    <td>
+                      <Button
+                        onClick={() => {
+                          download(
+                            r.File[0].path.substr(14),
+                            r.File[0].filename
+                          );
+                        }}
+                      >
+                        File
+                      </Button>
+                    </td>
+
+                    <td>{r.Status}</td>
+                    <td>{new Date(r.Appointment.Date).toDateString()}</td>
+                    <td className="Opt">
+                      <Button
+                        id="shet"
+                        onClick={() => {
+                          setToggleLoad((prev) => {
+                            return { ...prev, id: r._id };
+                          });
+                          handleMark(r._id);
+                        }}
+                        loading={
+                          toggleLoad.id == r._id ? toggleLoad.mark : false
+                        }
+                      >
+                        Mark As Done
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleRejection(r._id);
+                        }}
+                      >
+                        Reject
+                      </Button>
+                      <Message id={r._id} Sender={r.Sender} id="shet" />
+                      {admin.Auth == "subadmin" ? null : (
+                        <Button
+                          id="shet"
+                          danger
+                          onClick={() => {
+                            handleReject(r._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              }
+            })
+          ) : (
+            <Empty />
+          )}
+        </tbody>
+      </table>
+
+      <div className="heads">
+        <h2>Complete Requests</h2>
+      </div>
+
+      <table className="content-table">
+        <thead>
+          <tr>
+            <th>Student #</th>
+            <th>Request</th>
+            <th>Description</th>
+
+            <th>ID</th>
+            <th>Status</th>
+            <th>Appointment</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {request ? (
+            request.map((r) => {
+              if (r.Status == "Done") {
+                return (
+                  <tr key={r._id}>
+                    <td
+                      className="yellowBtn"
                       onClick={() => {
-                        handleRejection(r._id);
+                        showModal(r.Sender);
                       }}
                     >
-                      Reject
-                    </Button>
-                    <Message id={r._id} Sender={r.Sender} id="shet" />
-                    <Button
-                      id="shet"
-                      danger
-                      onClick={() => {
-                        handleReject(r._id);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              );
+                      {r.Sender.SchoolIDNumber}
+                    </td>
+                    <td>
+                      {r.Title.map((t) => {
+                        return <p>{t},</p>;
+                      })}
+                    </td>
+                    <td>{r.Description}</td>
+
+                    <td>
+                      <Button
+                        onClick={() => {
+                          download(
+                            r.File[0].path.substr(14),
+                            r.File[0].filename
+                          );
+                        }}
+                      >
+                        File
+                      </Button>
+                    </td>
+
+                    <td>{r.Status}</td>
+                    <td>{new Date(r.Appointment.Date).toDateString()}</td>
+                    <td className="Opt">
+                      <Button
+                        id="shet"
+                        onClick={() => {
+                          setToggleLoad((prev) => {
+                            return { ...prev, id: r._id };
+                          });
+                          handleMark(r._id);
+                        }}
+                        loading={
+                          toggleLoad.id == r._id ? toggleLoad.mark : false
+                        }
+                      >
+                        Mark As Done
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleRejection(r._id);
+                        }}
+                      >
+                        Reject
+                      </Button>
+                      <Message id={r._id} Sender={r.Sender} id="shet" />
+                      {admin.Auth == "subadmin" ? null : (
+                        <Button
+                          id="shet"
+                          danger
+                          onClick={() => {
+                            handleReject(r._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              }
             })
           ) : (
             <Empty />
@@ -222,7 +455,7 @@ function Request() {
             <h4>Full Name : {user.Fullname}</h4>
             <h4>Email: {user.Email}</h4>
             <h4>Course: {user.Course}</h4>
-            <h4>Year Level: {user.Year}</h4>
+            <h4>Year Level/Program: {user.Year}</h4>
           </div>
         ) : null}
       </Modal>

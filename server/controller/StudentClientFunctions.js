@@ -94,7 +94,8 @@ exports.createAStudent = (req, res) => {
 
         Student.find({ $or: [{ Email: Email }, { SchoolIDNumber: schoolnum }] })
           .then((stud) => {
-            if (stud) {
+            if (stud.length) {
+              console.log("There is a student na");
               return res.sendFile(
                 __dirname + "/serverResponse/serverError.html"
               );
@@ -115,6 +116,7 @@ exports.createAStudent = (req, res) => {
                     res.sendFile(__dirname + "/serverResponse/server.html");
                   })
                   .catch((err) => {
+                    console.log("Error");
                     res.sendFile(
                       __dirname + "/serverResponse/serverError.html"
                     );

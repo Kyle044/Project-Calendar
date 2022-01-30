@@ -374,12 +374,14 @@ function Home({ history }) {
                 className="selecthehe"
               >
                 <Option value="" selected>
-                  Year Level
+                  Student Program
                 </Option>
-                <Option value="IV">IV</Option>
-                <Option value="III">III</Option>
-                <Option value="II">II</Option>
-                <Option value="I">I</Option>
+                <Option value="Alumni">Alumni</Option>
+                <Option value="Graduate">Graduate</Option>
+                <Option value="IV">IV YEAR</Option>
+                <Option value="III">III YEAR</Option>
+                <Option value="II">II YEAR</Option>
+                <Option value="I">I YEAR</Option>
               </Select>
             </div>
             <div className="acc">

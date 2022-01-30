@@ -7,10 +7,11 @@ import TaskViewer from "./TaskViewer/TaskViewer";
 import "../Css/calendar.css";
 const OnGoingCalendar = React.forwardRef(({ goal, appointment }, ref) => {
   var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  var events = [];
+
   const [toggle, setToggle] = useState({
     taskModalVisible: false
   });
+  var events = [];
   const [selectedGoal, setSelectedGoal] = useState();
   function taskhandleOk(params) {
     setSelectedGoal(null);
@@ -29,6 +30,7 @@ const OnGoingCalendar = React.forwardRef(({ goal, appointment }, ref) => {
       return { taskModalVisible: true };
     });
   }
+
   if (goal) {
     var goalArray = goal.map((g) => {
       return {
@@ -50,9 +52,10 @@ const OnGoingCalendar = React.forwardRef(({ goal, appointment }, ref) => {
     });
     events = [...goalArray, ...appointmentArray];
   }
+
   return (
     <div ref={ref}>
-      {goal ? (
+      {events ? (
         <FullCalendar
           className="cal"
           plugins={[dayGridPlugin, interactionPlugin]}

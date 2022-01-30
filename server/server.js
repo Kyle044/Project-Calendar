@@ -30,6 +30,7 @@ const faqRouter = require("./routes/faqRouter");
 const formRouter = require("./routes/formRouter");
 const advisoryRouter = require("./routes/advisoryRouter");
 const appointmentRouter = require("./routes/appointmentRouter");
+const appointmentTemplateRouter = require("./routes/appointmentTemplateRouter");
 app.use("/api", formRouter);
 app.use("/api", adminRouter);
 app.use("/api", studentRouter);
@@ -41,6 +42,7 @@ app.use("/api", messRouter);
 app.use("/api", faqRouter);
 app.use("/api", advisoryRouter);
 app.use("/api", appointmentRouter);
+app.use("/api", appointmentTemplateRouter);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 

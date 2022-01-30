@@ -12,6 +12,7 @@ import moment from "moment";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import ReactToPrint from "react-to-print";
+import { Tabs } from "antd";
 
 function Home({
   goal,
@@ -29,15 +30,28 @@ function Home({
     To: ""
   });
   const [appoint, setAppoint] = useState([]);
+  const [appointTemplatez, setAppointTemplatez] = useState([]);
+  const { TabPane } = Tabs;
   const getAppointment = () => {
     axios
       .get(`${process.env.REACT_APP_KEY}/getAppointment`)
       .then((res) => {
         setAppoint(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const getAppointmentTemplate = () => {
+    axios
+      .get(`${process.env.REACT_APP_KEY}/getAppointmentTemplate`)
+      .then((res) => {
+        console.log(res.data);
+        setAppointTemplatez(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   };
   var completeCount = 0;
@@ -200,6 +214,7 @@ function Home({
       });
   }, []);
   useEffect(() => {
+    getAppointmentTemplate();
     getAppointment();
     getHandler();
   }, []);
@@ -216,14 +231,25 @@ function Home({
 
   const appChange = (e) => {
     const { value, name } = e.target;
-    console.log(name + " : " + value);
+
     setAppointment((prev) => {
       return { ...prev, [name]: value };
     });
   };
   const appSubmit = () => {
-    if (moment(appointment.Date).isBefore(new Date())) {
+    if (!appointment.Date || !appointment.From || !appointment.To) {
+      message.error("Please Fill up all the fields");
+    } else if (moment(appointment.Date).isBefore(new Date())) {
       alert("The input date is from the past");
+    } else if (
+      parseInt(appointment.From.substr(0, 2)) < 7 ||
+      parseInt(appointment.From.substr(0, 2)) > 17 ||
+      parseInt(appointment.To.substr(0, 2)) < 7 ||
+      parseInt(appointment.To.substr(0, 2)) > 17 ||
+      parseInt(appointment.From.substr(0, 2)) >
+        parseInt(appointment.To.substr(0, 2))
+    ) {
+      message.error("The Appointment must be in working hours");
     } else {
       axios
         .post(`${process.env.REACT_APP_KEY}/insertAppointment`, appointment)
@@ -258,9 +284,22 @@ function Home({
     } else {
     }
   };
-
-  //TODO:
-
+  const handleDeleteTemplate = (id) => {
+    axios
+      .delete(`${process.env.REACT_APP_KEY}/deleteAppointmentTemplate`, {
+        data: {
+          id: id
+        }
+      })
+      .then((res) => {
+        console.log(res.data);
+        getAppointment();
+        getAppointmentTemplate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleMarkDone = (task) => {
     axios
       .post(`${process.env.REACT_APP_KEY}/findGoal`, {
@@ -290,6 +329,156 @@ function Home({
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const [template, setTemplate] = useState(null);
+  const handlePostTemplate = () => {
+    if (template) {
+      axios
+        .post(`${process.env.REACT_APP_KEY}/postAppointmentTemplate`, template)
+        .then((res) => {
+          message.success(res.data);
+          getAppointment();
+          getAppointmentTemplate();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      message.error("Please select a template before posting");
+    }
+  };
+
+  const getTheDate = (day) => {
+    const d = new Date();
+    d.setDate(d.getDate() + ((day - d.getDay()) % 7) + 1);
+    return d;
+  };
+  function callback(key) {}
+
+  const [name, setName] = useState("");
+
+  const [subApp, setSubApp] = useState({ Date: "", From: "", To: "" });
+  const [appointTemplate, setAppointTemplate] = useState([]);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleSubChange = (e) => {
+    const { name, value } = e.target;
+
+    setSubApp((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+  const handleFromTo = (e) => {
+    const { name, value } = e.target;
+
+    setSubApp((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+  const handleAddTemplate = () => {
+    if (!subApp.Date || !subApp.From || !subApp.To) {
+      message.error("Please Fill up all the fields");
+    } else if (
+      parseInt(subApp.From.substr(0, 2)) < 7 ||
+      parseInt(subApp.From.substr(0, 2)) > 17 ||
+      parseInt(subApp.To.substr(0, 2)) < 7 ||
+      parseInt(subApp.To.substr(0, 2)) > 17 ||
+      parseInt(subApp.From.substr(0, 2)) > parseInt(subApp.To.substr(0, 2))
+    ) {
+      message.error("The Appointment must be in working hours");
+    } else {
+      setAppointTemplate((prev) => {
+        return [...prev, subApp];
+      });
+
+      setSubApp({
+        Date: "",
+        From: "",
+        To: ""
+      });
+
+      getAppointment();
+    }
+  };
+
+  const handleSubmitTemplate = () => {
+    if (appointTemplate === undefined || appointTemplate.length == 0) {
+      message.error("There is no input in the template");
+    } else if (appointTemplate.length < 2) {
+      message.error("Template must be above one appointment.");
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_KEY}/insertAppointmentTemplate`, {
+          Name: name,
+          Appointment: appointTemplate
+        })
+        .then((res) => {
+          message.success(res.data);
+          setAppointTemplate([]);
+          setName("");
+          getAppointment();
+          getAppointmentTemplate();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleDeleteTemp = (a) => {
+    setAppointTemplate((prev) => {
+      return prev.filter((b) => b != a);
+    });
+  };
+
+  //TODO:
+  const [editDate, setEditDate] = useState({ From: "", To: "" });
+
+  const handleRejectAppointmentAll = () => {
+    if (moment(editDate.To).isBefore(new Date())) {
+      message.error("The Date must be greater than the date now.");
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_KEY}/RejectAppointMany`, editDate)
+        .then((res) => {
+          console.log(res.data);
+          getAppointmentTemplate();
+          getAppointment();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleEditAppointmentAll = () => {
+    if (moment(editDate.To).isBefore(editDate.From)) {
+      message.error(
+        "The Date that you want to change must be greater than the date on the past"
+      );
+    } else if (moment(editDate.To).isBefore(new Date())) {
+      message.error("The Date must be greater than the date now.");
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_KEY}/editAppointMany`, editDate)
+        .then((res) => {
+          console.log(res.data);
+          getAppointmentTemplate();
+          getAppointment();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+  const handleDateEdit = (e) => {
+    const { name, value } = e.target;
+
+    setEditDate((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   return (
@@ -360,58 +549,52 @@ function Home({
         )}
       </section>
 
-      {
-        //TODO:
-        Owner.Auth == "subadmin" && handler ? (
-          <section className="todoContainer">
-            <h5 className="headers">To Do List</h5>
-            <div className="cardContainer">
-              {handler.map((h) => {
-                if (h.Status != "Complete") {
-                  return (
-                    <div className="cardTodo">
-                      <h4>{h.Subject}</h4>
-                      <p>{h.Description.substring(0, 16)}</p>
-                      {h.Status == "Complete" ? (
-                        <h4>Complete</h4>
-                      ) : (
-                        <Button
-                          onClick={() => {
-                            handleMarkDone(h);
-                          }}
-                        >
-                          Mark As Done
-                        </Button>
-                      )}
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          </section>
-        ) : null
-      }
+      {Owner.Auth == "subadmin" && handler ? (
+        <section className="todoContainer">
+          <h5 className="headers">To Do List</h5>
+          <div className="cardContainer">
+            {handler.map((h) => {
+              if (h.Status != "Complete") {
+                return (
+                  <div className="cardTodo">
+                    <h4>{h.Subject}</h4>
+                    <p>{h.Description.substring(0, 16)}</p>
+                    {h.Status == "Complete" ? (
+                      <h4>Complete</h4>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          handleMarkDone(h);
+                        }}
+                      >
+                        Mark As Done
+                      </Button>
+                    )}
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </section>
+      ) : null}
 
-      {
-        //TODO:
-        Owner.Auth == "subadmin" && handler ? (
-          <section className="todoContainer">
-            <h5 className="headers">Complete Tasks</h5>
-            <div className="cardContainer">
-              {handler.map((h) => {
-                if (h.Status == "Complete") {
-                  return (
-                    <div className="cardTodo">
-                      <h4>{h.Subject}</h4>
-                      <p>{h.Description.substring(0, 16)}</p>
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          </section>
-        ) : null
-      }
+      {Owner.Auth == "subadmin" && handler ? (
+        <section className="todoContainer">
+          <h5 className="headers">Complete Tasks</h5>
+          <div className="cardContainer">
+            {handler.map((h) => {
+              if (h.Status == "Complete") {
+                return (
+                  <div className="cardTodo">
+                    <h4>{h.Subject}</h4>
+                    <p>{h.Description.substring(0, 16)}</p>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <section className="apsec">
         <h5 className="headers">Appointment Schedule List</h5>
@@ -440,37 +623,217 @@ function Home({
           })}
         </div>
       </section>
-      <div className="pForm">
-        <h5 className="headers"> Add Appointment Schedule</h5>
-        <label>Date</label>
-        <input
-          type="date"
-          onChange={appChange}
-          name="Date"
-          value={appointment.Date}
-        />
-        <label>Time To Begin</label>
-        <input
-          type="time"
-          onChange={appChange}
-          name="From"
-          value={appointment.From}
-        />
-        <label>Time To End</label>
-        <input
-          type="time"
-          onChange={appChange}
-          name="To"
-          value={appointment.To}
-        />
-        <button
-          type="submit"
-          onClick={() => {
-            appSubmit();
-          }}
-        >
-          Submit
-        </button>
+
+      <div className="tabCont">
+        <Tabs defaultActiveKey="1" onChange={callback}>
+          <TabPane tab="Post Individual Appointment" key="1">
+            <div className="pForm">
+              <h5 className="headers"> Add Indvidual Appointment Schedule</h5>
+              <label>Date</label>
+              <input
+                type="date"
+                onChange={appChange}
+                name="Date"
+                value={appointment.Date}
+              />
+              <label>Time To Begin</label>
+              <input
+                type="time"
+                onChange={appChange}
+                name="From"
+                value={appointment.From}
+              />
+              <label>Time To End</label>
+              <input
+                type="time"
+                onChange={appChange}
+                name="To"
+                value={appointment.To}
+              />
+              <button
+                type="submit"
+                onClick={() => {
+                  appSubmit();
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          </TabPane>
+          <TabPane tab="Post Template Appointment" key="2">
+            <div className="temptemp">
+              <div className="templateContainerzz">
+                {appointTemplatez ? (
+                  appointTemplatez.map((at) => {
+                    return (
+                      <div
+                        className="templateCard"
+                        onClick={() => {
+                          setTemplate(at);
+                        }}
+                        style={{
+                          border: template == at ? "2px solid green" : null
+                        }}
+                      >
+                        <h4>{at.Name}</h4>
+                        <ul>
+                          {at.Appointment.map((a) => {
+                            return (
+                              <li>
+                                Date: {getTheDate(a.Date).toDateString()} From:{" "}
+                                {moment(a.From, "HH:mm:ss").format("h:mm A")}{" "}
+                                To: {moment(a.To, "HH:mm:ss").format("h:mm A")}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                        <Button
+                          danger
+                          onClick={() => {
+                            handleDeleteTemplate(at._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <Empty />
+                )}
+              </div>
+              <Button type="primary" onClick={handlePostTemplate}>
+                Post Template
+              </Button>
+            </div>
+          </TabPane>
+          <TabPane tab="Add Appointment Template" key="3">
+            <div className="templateContainer">
+              <div className="templateForm">
+                <h5 className="headers"> Add Template Appointment Schedule</h5>
+                <label>Template Name</label>
+                <input type="text" onChange={handleNameChange} value={name} />
+                <label>Day</label>
+                <select
+                  name="Date"
+                  id=""
+                  value={subApp.Date}
+                  onChange={handleSubChange}
+                >
+                  <option>Select Day</option>
+                  <option value={7}>Monday</option>
+                  <option value={8}>Tuesday</option>
+                  <option value={9}>Wednesday</option>
+                  <option value={10}>Thursday</option>
+                  <option value={11}>Friday</option>
+                </select>
+                <label>Time To Begin</label>
+                <input
+                  type="time"
+                  name="From"
+                  value={subApp.From}
+                  onChange={handleFromTo}
+                />
+                <label>Time To End</label>
+                <input
+                  type="time"
+                  name="To"
+                  value={subApp.To}
+                  onChange={handleFromTo}
+                />
+                <div className="pot">
+                  <button
+                    onClick={() => {
+                      handleAddTemplate();
+                    }}
+                  >
+                    Add Appointment
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleSubmitTemplate();
+                    }}
+                  >
+                    Submit Template
+                  </button>
+                </div>
+              </div>
+              <div className="templateVisuals">
+                {appointTemplate ? (
+                  appointTemplate.map((a) => {
+                    return (
+                      <div className="apptcard">
+                        <h4>Date : {getTheDate(a.Date).toDateString()}</h4>
+                        <h4>
+                          From : {moment(a.From, "HH:mm:ss").format("h:mm A")}
+                        </h4>
+                        <h4>
+                          To : {moment(a.To, "HH:mm:ss").format("h:mm A")}
+                        </h4>
+                        <Button
+                          danger
+                          onClick={() => {
+                            handleDeleteTemp(a);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <Empty />
+                )}
+              </div>
+            </div>
+          </TabPane>
+          {/* FIXME: */}
+          <TabPane tab="Edit Appointment" key="4">
+            <div className="editzContainerz">
+              <h4 htmlFor="">Move the Appointment to a specific date.</h4>
+              <label htmlFor="">From</label>
+              <input
+                type="date"
+                name="From"
+                onChange={handleDateEdit}
+                value={editDate.From}
+              />
+              <label htmlFor="">To</label>
+              <input
+                type="date"
+                name="To"
+                onChange={handleDateEdit}
+                value={editDate.To}
+              />
+              <Button
+                onClick={() => {
+                  handleEditAppointmentAll();
+                }}
+              >
+                Submit
+              </Button>
+            </div>
+
+            <div className="editzContainerz">
+              <h4 htmlFor="">Reject the Appointment to a specific date.</h4>
+              <label htmlFor="">From</label>
+              <input
+                type="date"
+                name="From"
+                onChange={handleDateEdit}
+                value={editDate.From}
+              />
+
+              <Button
+                onClick={() => {
+                  handleRejectAppointmentAll();
+                }}
+              >
+                Submit
+              </Button>
+            </div>
+          </TabPane>
+        </Tabs>
       </div>
     </div>
   );
