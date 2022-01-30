@@ -24,9 +24,19 @@ function Header({ history }) {
   return (
     <div style={{ width: "100%" }}>
       <div className="mHeader" ref={header}>
-        {/* <img src="./images/logotry.png" alt=""style={{height: "6%", width: "6%",objectFit:"contain"}}/>  */}
-
+        {/* <img src="./images/logoV2.png" alt=""style={{height: "6%", width: "6%",objectFit:"contain"}}/>  */}
         <div
+          className="CC2"
+          onClick={() => {
+            history.push("/StudentDash");
+          }}
+        >
+          <img src="./images/logoV3.png" alt="" style={{ width: "280px", height:"auto"
+          
+        }}/> 
+        </div>
+
+        {/* <div
           className="CC2"
           onClick={() => {
             history.push("/StudentDash");
@@ -39,7 +49,7 @@ function Header({ history }) {
             OFFICE OF THE REGISTRAR
           </h2>
           <p className="address">General Mariano Alvarez, Cavite </p>
-        </div>
+        </div> */}
         <label
           className="burger"
           onClick={() => {

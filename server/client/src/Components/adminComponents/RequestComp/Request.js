@@ -170,11 +170,42 @@ function Request({ admin }) {
         <tbody>
           {request ? (
             request.map((r) => {
+
               if (r.Status == "On Going") {
                 return (
                   <tr key={r._id}>
                     <td
                       className="yellowBtn"
+
+              
+                    onClick={() => {
+                      showModal(r.Sender);
+                    }}
+                  >
+                    {r.Sender.SchoolIDNumber}
+                  </td>
+                  <td>
+                    {r.Title.map((t) => {
+                      return <p>{t},</p>;
+                    })}
+                  </td>
+                  <td>{r.Description}</td>
+                  <td>{r.Program}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        download(r.File[0].path.substr(14), r.File[0].filename);
+                      }}
+                    >
+                      File
+                    </Button>
+                  </td>
+                  <td>{r.Status}</td>
+                  <td>{new Date(r.Appointment.Date).toDateString()}</td>
+                  <td className="Opt">
+                    <Button
+                      id="shet"
+
                       onClick={() => {
                         showModal(r.Sender);
                       }}

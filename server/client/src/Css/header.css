@@ -47,9 +47,8 @@
   height: 3rem;
 
   color: white;
-
   transition: 0.3s ease;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .logout:hover {
@@ -57,7 +56,8 @@
   cursor: pointer;
 
   color: white;
-  border: 2px solid rgb(192, 197, 44);
+  /* border: 2px solid rgb(192, 197, 44); */
+  background-color: #9e1d1b;
 }
 
 .headlinks {
@@ -102,14 +102,14 @@
     color: white;
     border: 2px solid rgba(255, 255, 255, 0);
     transition: 0.3s ease;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
 
   .logout:hover {
     transform: scale(1.1);
     cursor: pointer;
     color: white;
-    border: 2px solid rgba(192, 197, 44, 0);
+    /* border: 2px solid rgba(192, 197, 44, 0); */
   }
 
   .burger {
@@ -119,4 +119,10 @@
     font-size: 22px;
     cursor: pointer;
   }
+}
+img {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
 }

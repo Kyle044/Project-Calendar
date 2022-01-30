@@ -24,14 +24,15 @@ function FormStud({ history }) {
   return (
     <div className="mainStud">
       <Header />
-
+ <h2 className="formsto">The Forms to Download in The Office Of Registrar</h2>
       <div className="formMasterContainer">
+     
         {form ? (
           <table className="content-table ashz">
             <thead>
               <caption>
                 <caption className="table-title">
-                  <h4>The Forms to Download in The Office Of Registrar</h4>
+                {/* <h4 className="t-title">The Forms to Download in The Office Of Registrar</h4> */}
                 </caption>
               </caption>
               <tr>

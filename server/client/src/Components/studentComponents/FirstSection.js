@@ -14,7 +14,7 @@ function FirstSection() {
           the economic, social and moral development of self-actualized and
           productive citizenry.
         </p>
-        <a href="https://earist.edu.ph/" className="hero-btn">
+        <a href="https://earist.edu.ph/" className="hero-btn" target="_blank">
           Visit Us To know More
         </a>
       </div>
