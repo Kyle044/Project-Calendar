@@ -236,3 +236,13 @@ exports.deleteStudent = (req, res) => {
     })
     .catch((err) => res.status(400).json("Error : " + err));
 };
+
+exports.getAllStudent = (req, res) => {
+  Student.find()
+    .then((stud) => {
+      res.json(stud);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

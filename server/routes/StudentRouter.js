@@ -9,7 +9,8 @@ const {
   getOneStudent,
   Signin,
   protected,
-  createAStudent
+  createAStudent,
+  getAllStudent
 } = require("../controller/StudentClientFunctions");
 
 router.post("/registerStud", Register);
@@ -19,4 +20,5 @@ router.get("/getOneStudent", getOneStudent);
 router.post("/loginStud", Signin);
 router.get("/protectedStud", requireStudLogin, protected);
 router.get("/activate", createAStudent);
+router.get("/getAllStudent", getAllStudent);
 module.exports = router;
