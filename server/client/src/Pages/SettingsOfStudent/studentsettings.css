@@ -18,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ff5c58;
+  background-color: #ffffff;
   padding: 1.5rem;
 }
 .edl {
@@ -93,15 +93,7 @@
 }
 
 .wat {
-  position: relative;
-  left: -10rem;
-}
-
-@media (max-width: 930px) {
-  .wat {
-    position: relative;
-    left: -6rem;
-  }
+  text-align: center;
 }
 
 @media (max-width: 780px) {
@@ -119,14 +111,8 @@
     align-items: center;
     margin-top: 2rem;
   }
-  .wat {
-    position: relative;
-    left: -6rem;
-  }
 }
-@media (max-width: 404px) {
-  .wat {
-    position: relative;
-    left: -4rem;
-  }
+
+.bttn {
+  background-color: #40a9ff;
 }

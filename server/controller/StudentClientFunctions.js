@@ -65,11 +65,14 @@ exports.Register = (req, res) => {
             process.env.JWT_ACC_ACTIVATE,
             { expiresIn: "20m" }
           );
-          smtp(Email, "Account Activation", token).catch(() => {
-            res.json("Email is invalid");
+          smtp(Email, "Account Activation", token).then(()=>{
+            return res.json("Email has been sent, kindly activate your account.");
+          }).catch((err) => {
+            console.log(err);
+            return res.json("Email is invalid");
           });
 
-          return res.json("Email has been sent, kindly activate your account.");
+        
         }
       })
       .catch((err) => {
@@ -87,6 +90,7 @@ exports.createAStudent = (req, res) => {
       process.env.JWT_ACC_ACTIVATE,
       function (err, decodedToken) {
         if (err) {
+          console.log(err)
           return res.sendFile(__dirname + "/serverResponse/serverError.html");
         }
         const { Email, Password, FullName, schoolnum, course, Year } =
@@ -94,7 +98,7 @@ exports.createAStudent = (req, res) => {
 
         Student.find({ $or: [{ Email: Email }, { SchoolIDNumber: schoolnum }] })
           .then((stud) => {
-            if (stud) {
+            if (stud.length) {
               return res.sendFile(
                 __dirname + "/serverResponse/serverError.html"
               );
@@ -115,6 +119,7 @@ exports.createAStudent = (req, res) => {
                     res.sendFile(__dirname + "/serverResponse/server.html");
                   })
                   .catch((err) => {
+                    console.log(err)
                     res.sendFile(
                       __dirname + "/serverResponse/serverError.html"
                     );
