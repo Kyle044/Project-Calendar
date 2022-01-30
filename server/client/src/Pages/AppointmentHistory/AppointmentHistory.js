@@ -34,13 +34,14 @@ function AppointmentHistory() {
   return (
     <div className="appMaster">
       <Header />
+      <h2 className="formsto">The Appointment History</h2>
       <div className="appBody">
         {request ? (
           <table className="content-table ashzz">
             <thead>
               <caption>
                 <caption className="table-title">
-                  <h4>The Appointment History</h4>
+                  {/* <h4>The Appointment History</h4> */}
                 </caption>
               </caption>
               <tr>

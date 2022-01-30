@@ -1,3 +1,80 @@
+.editzForm {
+  background-color: white;
+  width: 90%;
+  padding: 2rem;
+}
+
+.editzForm label {
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.editzForm button {
+  height: 3.5rem;
+  cursor: pointer;
+}
+.studEditContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1.5rem;
+}
+.edl {
+  font-size: 1.5rem;
+  padding: 1rem;
+  font-weight: bold;
+}
+/* ------------------------------------------------------------ */
+.leftpards {
+  /* background-color: yellow; */
+}
+
+.leftpards input {
+  width: 80%;
+}
+
+.rightpards input {
+  width: 90%;
+}
+.label {
+  font-weight: bold;
+}
+.head {
+}
+.rightpards button {
+  width: 90%;
+}
+
+.studEditContainer > button {
+  width: 20%;
+  height: 10%;
+  cursor: pointer;
+  border: 2px;
+  margin-top: 12px;
+}
+.textbox {
+  border: 1px solid rgb(194, 193, 193);
+}
+@media only screen and (max-width: 375px) {
+  .accinfo {
+    font-size: 1rem;
+  }
+}
+
+.accinfo {
+  font-weight: bold;
+}
+.ssubmit {
+  /* background-color: red; */
+  font-weight: bold;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.bbutton {
+  width: 150px;
+}
 .studEditContainer {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -16,15 +93,7 @@
 }
 
 .wat {
-  position: relative;
-  left: -10rem;
-}
-
-@media (max-width: 930px) {
-  .wat {
-    position: relative;
-    left: -6rem;
-  }
+  text-align: center;
 }
 
 @media (max-width: 780px) {
@@ -42,14 +111,8 @@
     align-items: center;
     margin-top: 2rem;
   }
-  .wat {
-    position: relative;
-    left: -6rem;
-  }
 }
-@media (max-width: 404px) {
-  .wat {
-    position: relative;
-    left: -4rem;
-  }
+
+.bttn {
+  background-color: #40a9ff;
 }

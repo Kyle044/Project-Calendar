@@ -168,7 +168,6 @@ function Request() {
                       File
                     </Button>
                   </td>
-
                   <td>{r.Status}</td>
                   <td>{new Date(r.Appointment.Date).toDateString()}</td>
                   <td className="Opt">

@@ -57,7 +57,6 @@ function Card({ goal, setGoal, setGoalCount, admin }) {
       });
     // console.log(t);
   };
-
   const confirmDelete = (data) => {
     axios
       .delete(`${process.env.REACT_APP_KEY}/deleteGoal`, { data: { id: data } })

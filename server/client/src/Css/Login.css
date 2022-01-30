@@ -325,3 +325,7 @@
   padding: 1rem;
   border-radius: 10px;
 }
+::selection {
+  color: rgb(255, 255, 255);
+  background: #9e1d1b;
+}
