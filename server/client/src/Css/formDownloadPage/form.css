@@ -9,6 +9,7 @@
 .mainStud .title {
   margin: 1rem;
 }
+
 .formStudContainer {
   display: grid;
   justify-content: center;
@@ -100,11 +101,14 @@
   width: 25rem;
   font-size: 1rem;
   font-weight: bold;
+  align-self: center;
+  margin: auto;
 }
 .formMasterContainer {
   display: grid;
   grid-template-columns: 2fr 1fr;
   margin: 10px;
+  padding: 5px 10px;
 }
 .ashz {
   margin: 0px auto;
@@ -131,4 +135,7 @@
     font-size: 1rem;
     font-weight: bold;
   }
+}
+.formsto {
+  padding: 3px 5px;
 }

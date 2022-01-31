@@ -49,7 +49,12 @@ html {
 }
 
 .content-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background: rgb(230, 230, 230);
+  background: linear-gradient(
+    135deg,
+    rgba(230, 230, 230, 1) 7%,
+    rgba(250, 250, 250, 1) 7%
+  );
 }
 
 .content-table tbody tr:last-of-type {

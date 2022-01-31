@@ -68,7 +68,7 @@ function StudentSettings() {
             name="ConfirmPassword"
             onChange={handleChange}
           />
-          <Button
+          <Button className="bttn"
             type="submit"
             onClick={() => {
               handleSubmit();
