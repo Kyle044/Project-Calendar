@@ -22,6 +22,7 @@ exports.insertAppointment = (req, res) => {
 
 exports.getAppointments = (req, res) => {
   Appointment.find()
+    .sort({ createdAt: -1 })
     .then((app) => {
       res.json(app);
     })

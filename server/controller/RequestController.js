@@ -146,6 +146,7 @@ exports.InsertRequest = (req, res, next) => {
 
 exports.getRequest = (req, res, next) => {
   Request.find()
+    .sort({ createdAt: -1 })
     .populate({ path: "Appointment", model: "Appointment" })
     .then((req) => {
       res.json({ msg: "request success!", data: req });

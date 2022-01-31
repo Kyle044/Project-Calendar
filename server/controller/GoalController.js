@@ -84,6 +84,7 @@ exports.InsertGoal = (req, res) => {
 
 exports.getGoal = (req, res, next) => {
   Goal.find()
+    .sort({ createdAt: -1 })
     .populate({ path: "Tasks", model: "Task" })
     .populate({ path: "Tasks", populate: { path: "Handler" } })
     .then((goal) => {

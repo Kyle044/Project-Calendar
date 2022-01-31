@@ -105,3 +105,18 @@
 .aaa {
   margin-left: 5%;
 }
+
+.addContainer input {
+  margin: 10px;
+}
+.EmployeeContainer {
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+}
+.StudentContain {
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+  margin-top: 1rem;
+}
