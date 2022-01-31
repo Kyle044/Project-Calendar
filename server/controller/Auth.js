@@ -90,7 +90,7 @@ exports.updateAdmin = (req, res) => {
         admin
           .save()
           .then((ad) => {
-            res.json({ msg: "Successfuly Updated", data: ad });
+            res.json("Successfuly Updated");
           })
           .catch((err) => res.status(400).json("Error : " + err));
       })
@@ -122,10 +122,7 @@ exports.deleteAdmin = (req, res) => {
   }
   Admin.findByIdAndDelete(id)
     .then((ad) => {
-      res.json({
-        msg: "An Admin Account Was Successfully Deleted..",
-        data: ad
-      });
+      res.json("An Admin Account Was Successfully Deleted..");
     })
     .catch((err) => res.status(400).json("Error : " + err));
 };
@@ -174,5 +171,23 @@ exports.getSubadmin = (req, res) => {
     })
     .catch((err) => {
       res.json(err);
+    });
+};
+
+exports.searchAdmin = (req, res, next) => {
+  var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
+
+  Admin.find({
+    $or: [{ Email: regex }, { Fullname: regex }, { SchoolIDNumber: regex }]
+  })
+    .then((data) => {
+      if (data.length == 0) {
+        res.json({ msg: "No Data", data: data });
+      } else {
+        res.json({ msg: "Success for finding form", data: data });
+      }
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
     });
 };

@@ -13,6 +13,7 @@ exports.insertFAQ = (req, res) => {
 };
 exports.getFAQ = (req, res) => {
   FAQ.find()
+    .sort({ createdAt: -1 })
     .then((result) => {
       res.json({ msg: "Sucess getting faq", data: result });
     })

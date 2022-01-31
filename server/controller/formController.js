@@ -16,6 +16,7 @@ exports.InsertFile = (req, res, next) => {
 };
 exports.getForm = (req, res, next) => {
   Form.find()
+    .sort({ createdAt: -1 })
     .then((result) => {
       res.json({ msg: "Success Getting Data", data: result });
     })

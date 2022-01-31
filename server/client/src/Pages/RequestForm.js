@@ -261,7 +261,8 @@ function Request({ history }) {
           <div className="container1">
             <h2 className="headerTitle">
               Request includes the validation of school number so it is required
-              to send a picture of an Identification Card.
+              to send a picture of an Identification Card or Certification of
+              Registration.
             </h2>
             <div className="containersub1">
               <div className="programDiv">

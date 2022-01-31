@@ -235,10 +235,7 @@ exports.deleteStudent = (req, res) => {
   }
   Student.findByIdAndDelete(id)
     .then((ad) => {
-      res.json({
-        msg: "An Student Account Was Successfully Deleted..",
-        data: ad
-      });
+      res.json("An Student Account Was Successfully Deleted..");
     })
     .catch((err) => res.status(400).json("Error : " + err));
 };
@@ -250,5 +247,29 @@ exports.getAllStudent = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+exports.searchStudent = (req, res, next) => {
+  var regex = new RegExp(req.body.search, "i"); // 'i' makes it case insensitive
+
+  Student.find({
+    $or: [
+      { Email: regex },
+      { Fullname: regex },
+      { SchoolIDNumber: regex },
+      { Course: regex },
+      { Year: regex }
+    ]
+  })
+    .then((data) => {
+      if (data.length == 0) {
+        res.json({ msg: "No Data", data: data });
+      } else {
+        res.json({ msg: "Success for finding form", data: data });
+      }
+    })
+    .catch((err) => {
+      res.status(422).json({ msg: "There was an error", error: err });
     });
 };
